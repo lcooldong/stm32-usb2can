@@ -195,8 +195,11 @@
  {
 
    I2C_HandleTypeDef *p_handle = i2c_tbl[ch].p_hi2c;
- 
+#ifdef _USE_HW_RTOS
    LOCK_BEGIN_SCAN(ch);  // 여기서 timeout 시간이 좀 걸림
+#else
+  LOCK_BEGIN(x)
+#endif
    if (HAL_I2C_IsDeviceReady(p_handle, dev_addr << 1, 10, 10) == HAL_OK)
    {
      return true;

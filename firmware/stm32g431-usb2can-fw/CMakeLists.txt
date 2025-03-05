@@ -39,12 +39,13 @@ set(EXECUTABLE                      ${CMAKE_PROJECT_NAME})
 file(GLOB SRC_FILES CONFIGURE_DEPENDS
     src/*.cpp
     src/*.c
-    src/ap/*.cpp
-    src/ap/*.c
+    # src/ap/*.cpp
+    # src/ap/*.c
     src/bsp/*.c
     src/bsp/device/*.c
     
-    
+    src/lib/EEPROM_Emul/Core/*.c
+    src/lib/EEPROM_Emul/Porting/STM32G4/*.c
 )
 
 file(GLOB_RECURSE SRC_FILES_RECURSE CONFIGURE_DEPENDS
@@ -55,17 +56,17 @@ file(GLOB_RECURSE SRC_FILES_RECURSE CONFIGURE_DEPENDS
   src/hw/*.c
   src/lib/STM32G4xx_HAL_Driver/Src/*.c
   src/lib/STM32_USB_Device_Library/Core/Src/*.c
-  src/bsp/FreeRTOS/Source/*.c
+#   src/bsp/FreeRTOS/Source/*.c
 #   src/lib/littlefs/*.c
 )
 
 file(GLOB SRC_FILES_EXCLUDE CONFIGURE_DEPENDS
     src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_timebase_tim_template.c
     src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_msp_template.c
-    src/bsp/FreeRTOS/Source/portable/MemMang/heap_1.c
-    src/bsp/FreeRTOS/Source/portable/MemMang/heap_2.c
-    src/bsp/FreeRTOS/Source/portable/MemMang/heap_3.c
-    src/bsp/FreeRTOS/Source/portable/MemMang/heap_5.c
+    # src/bsp/FreeRTOS/Source/portable/MemMang/heap_1.c
+    # src/bsp/FreeRTOS/Source/portable/MemMang/heap_2.c
+    # src/bsp/FreeRTOS/Source/portable/MemMang/heap_3.c
+    # src/bsp/FreeRTOS/Source/portable/MemMang/heap_5.c
     # src/lib/STM32_USB_Device_LibraryCore/Src/usbd_conf_template.c
     # src/lib/STM32_USB_Device_LibraryCore/Src/usbd_desc_template.c
 )
@@ -88,26 +89,38 @@ endforeach(TMP_PATH)
 set(include_path_DIRS
     ${PROJ_PATH}/src
     ${PROJ_PATH}/src/ap
-    ${PROJ_PATH}/src/ap/mode
-    # ${PROJ_PATH}/src/ap/thread
+    # ${PROJ_PATH}/src/ap/mode
+    ${PROJ_PATH}/src/ap/thread
+    # ${PROJ_PATH}/src/ap/thread/cmd
+    # ${PROJ_PATH}/src/ap/thread/cmd/driver
+    # ${PROJ_PATH}/src/ap/thread/cmd/process
+    # ${PROJ_PATH}/src/ap/thread/common
+    # ${PROJ_PATH}/src/ap/thread/manage
     ${PROJ_PATH}/src/bsp
     ${PROJ_PATH}/src/bsp/device
-    ${PROJ_PATH}/src/bsp/FreeRTOS
-    ${PROJ_PATH}/src/bsp/FreeRTOS/Source/CMSIS_RTOS
-    ${PROJ_PATH}/src/bsp/FreeRTOS/Source/include
-    ${PROJ_PATH}/src/bsp/FreeRTOS/Source/portable/GCC/ARM_CM4F
+    # ${PROJ_PATH}/src/bsp/FreeRTOS
+    # ${PROJ_PATH}/src/bsp/FreeRTOS/Source/CMSIS_RTOS
+    # ${PROJ_PATH}/src/bsp/FreeRTOS/Source/include
+    # ${PROJ_PATH}/src/bsp/FreeRTOS/Source/portable/GCC/ARM_CM4F
     ${PROJ_PATH}/src/common
     ${PROJ_PATH}/src/common/core
     ${PROJ_PATH}/src/common/hw/inc
+    # ${PROJ_PATH}/src/common/hw/inc/qspi
+
     ${PROJ_PATH}/src/hw
     ${PROJ_PATH}/src/hw/driver
+    ${PROJ_PATH}/src/hw/driver/eeprom
     ${PROJ_PATH}/src/hw/driver/usb
     ${PROJ_PATH}/src/hw/driver/usb/usb_cdc
+
     ${PROJ_PATH}/src/lib
     ${PROJ_PATH}/src/lib/CMSIS/Include
     ${PROJ_PATH}/src/lib/CMSIS/Device/ST/STM32G4xx/Include
     ${PROJ_PATH}/src/lib/STM32G4xx_HAL_Driver/Inc
     ${PROJ_PATH}/src/lib/STM32_USB_Device_Library/Core/Inc
+
+    ${PROJ_PATH}/src/lib/EEPROM_Emul/Core
+    ${PROJ_PATH}/src/lib/EEPROM_Emul/Porting/STM32G4
     # Put here your include dirs, one in each line, relative to CMakeLists.txt file location
 )
 
@@ -142,6 +155,9 @@ target_compile_options(${EXECUTABLE} PRIVATE
     -Wno-unused-parameter
     # Full debug configuration
     -Og -g3 -ggdb
+
+    -fdata-sections
+    -ffunction-sections
 )
 
 # Linker options
@@ -158,6 +174,9 @@ target_link_options(${EXECUTABLE} PRIVATE
     -lsupc++
     -Wl,--end-group
     -Wl,--print-memory-usage
+
+    -Wl,--gc-sections
+    -Xlinker -print-memory-usage -Xlinker
 )
 
 # Execute post-build to print size

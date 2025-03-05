@@ -2,7 +2,7 @@
 /**
   ******************************************************************************
   * @file           : usbd_cdc_if.h
-  * @version        : v3.0_Cube
+  * @version        : v1.0_Cube
   * @brief          : Header for usbd_cdc_if.c file.
   ******************************************************************************
   * @attention
@@ -30,15 +30,82 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_cdc.h"
 
-#define APP_RX_DATA_SIZE  1000
-#define APP_TX_DATA_SIZE  1000
+/* USER CODE BEGIN INCLUDE */
 
+/* USER CODE END INCLUDE */
 
-extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+  * @brief For Usb device.
+  * @{
+  */
 
+/** @defgroup USBD_CDC_IF USBD_CDC_IF
+  * @brief Usb VCP device module
+  * @{
+  */
 
+/** @defgroup USBD_CDC_IF_Exported_Defines USBD_CDC_IF_Exported_Defines
+  * @brief Defines.
+  * @{
+  */
+/* Define size for the receive and transmit buffer over CDC */
+#define APP_RX_DATA_SIZE  1024
+#define APP_TX_DATA_SIZE  1024
+/* USER CODE BEGIN EXPORTED_DEFINES */
 
-uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
+/* USER CODE END EXPORTED_DEFINES */
+
+/**
+  * @}
+  */
+
+/** @defgroup USBD_CDC_IF_Exported_Types USBD_CDC_IF_Exported_Types
+  * @brief Types.
+  * @{
+  */
+
+/* USER CODE BEGIN EXPORTED_TYPES */
+
+/* USER CODE END EXPORTED_TYPES */
+
+/**
+  * @}
+  */
+
+/** @defgroup USBD_CDC_IF_Exported_Macros USBD_CDC_IF_Exported_Macros
+  * @brief Aliases.
+  * @{
+  */
+
+/* USER CODE BEGIN EXPORTED_MACRO */
+
+/* USER CODE END EXPORTED_MACRO */
+
+/**
+  * @}
+  */
+
+/** @defgroup USBD_CDC_IF_Exported_Variables USBD_CDC_IF_Exported_Variables
+  * @brief Public variables.
+  * @{
+  */
+
+/** CDC Interface callback. */
+extern USBD_CDC_ItfTypeDef USBD_CDC_fops;
+
+/* USER CODE BEGIN EXPORTED_VARIABLES */
+
+/* USER CODE END EXPORTED_VARIABLES */
+
+/**
+  * @}
+  */
+
+/** @defgroup USBD_CDC_IF_Exported_FunctionsPrototype USBD_CDC_IF_Exported_FunctionsPrototype
+  * @brief Public functions declaration.
+  * @{
+  */
+
 
 
 bool     cdcIfInit(void);
@@ -47,7 +114,20 @@ uint8_t  cdcIfRead(void);
 uint32_t cdcIfGetBaud(void);
 uint32_t cdcIfWrite(uint8_t *p_data, uint32_t length);
 bool     cdcIfIsConnected(void);
+uint8_t  cdcIfGetType(void);
 
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 #ifdef __cplusplus
 }

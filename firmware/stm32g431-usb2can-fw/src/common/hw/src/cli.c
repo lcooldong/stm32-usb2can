@@ -1,9 +1,11 @@
 /*
  * cli.c
  *
- *  Created on: 2021. 6. 21.
+ *  Created on: Nov 12, 2021
  *      Author: baram
  */
+
+
 
 
  #include "cli.h"
@@ -101,7 +103,7 @@
  static int32_t  cliArgsGetData(uint8_t index);
  static float    cliArgsGetFloat(uint8_t index);
  static char    *cliArgsGetStr(uint8_t index);
- static bool     cliArgsIsStr(uint8_t index, char *p_str);
+ static bool     cliArgsIsStr(uint8_t index, const char *p_str);
  
  
  void cliShowList(cli_args_t *args);
@@ -136,9 +138,16 @@
  bool cliOpen(uint8_t ch, uint32_t baud)
  {
    cli_node.ch = ch;
-   cli_node.baud = baud;
  
-   cli_node.is_open = uartOpen(ch, baud);
+ 
+   if (cli_node.is_open == false || cli_node.baud != baud)
+   {
+     if (baud > 0)
+     {
+       cli_node.baud = baud;
+       cli_node.is_open = uartOpen(ch, baud);
+     }
+   }
  
    return cli_node.is_open;
  }
@@ -159,6 +168,11 @@
    return ret;
  }
  
+ uint8_t cliGetPort(void)
+ {
+   return cli_node.ch;
+ }
+ 
  bool cliLogClose(void)
  {
    cli_node.is_log = false;
@@ -169,25 +183,25 @@
  {
    if (cli_node.is_log == true)
    {
-     uartPrintf(p_cli->log_ch, "Cursor  : %d\r\n", p_cli->line.cursor);
-     uartPrintf(p_cli->log_ch, "Count   : %d\r\n", p_cli->line.count);
-     uartPrintf(p_cli->log_ch, "buf_len : %d\r\n", p_cli->line.buf_len);
-     uartPrintf(p_cli->log_ch, "buf     : %s\r\n", p_cli->line.buf);
-     uartPrintf(p_cli->log_ch, "line_i  : %d\r\n", p_cli->hist_line_i);
-     uartPrintf(p_cli->log_ch, "line_lt : %d\r\n", p_cli->hist_line_last);
-     uartPrintf(p_cli->log_ch, "line_c  : %d\r\n", p_cli->hist_line_count);
+     uartPrintf(p_cli->log_ch, "Cursor  : %d\n", p_cli->line.cursor);
+     uartPrintf(p_cli->log_ch, "Count   : %d\n", p_cli->line.count);
+     uartPrintf(p_cli->log_ch, "buf_len : %d\n", p_cli->line.buf_len);
+     uartPrintf(p_cli->log_ch, "buf     : %s\n", p_cli->line.buf);
+     uartPrintf(p_cli->log_ch, "line_i  : %d\n", p_cli->hist_line_i);
+     uartPrintf(p_cli->log_ch, "line_lt : %d\n", p_cli->hist_line_last);
+     uartPrintf(p_cli->log_ch, "line_c  : %d\n", p_cli->hist_line_count);
  
      for (int i=0; i<p_cli->hist_line_count; i++)
      {
-       uartPrintf(p_cli->log_ch, "buf %d   : %s\r\n", i, p_cli->line_buf[i].buf);
+       uartPrintf(p_cli->log_ch, "buf %d   : %s\n", i, p_cli->line_buf[i].buf);
      }
-     uartPrintf(p_cli->log_ch, "\r\n");
+     uartPrintf(p_cli->log_ch, "\n");
    }
  }
  
  void cliShowPrompt(cli_t *p_cli)
  {
-   uartPrintf(p_cli->ch, "\r\n");
+   uartPrintf(p_cli->ch, "\n\r");
    uartPrintf(p_cli->ch, CLI_PROMPT_STR);
  }
  
@@ -556,6 +570,21 @@
    return ret;
  }
  
+ bool cliRunStr(const char *fmt, ...)
+ {
+   bool ret;
+   va_list arg;
+   va_start (arg, fmt);  
+   cli_t *p_cli = &cli_node;
+ 
+   vsnprintf((char *)p_cli->line.buf, CLI_LINE_BUF_MAX, fmt, arg);
+   va_end (arg);
+   
+   ret = cliRunCmd(p_cli);
+   
+   return ret;
+ }
+ 
  void cliPrintf(const char *fmt, ...)
  {
    va_list arg;
@@ -568,6 +597,13 @@
    va_end (arg);
  
    uartWrite(p_cli->ch, (uint8_t *)p_cli->print_buffer, len);
+ }
+ 
+ void cliPutch(uint8_t data)
+ {
+   cli_t *p_cli = &cli_node;
+   
+   uartWrite(p_cli->ch, &data, 1);
  }
  
  void cliToUpper(char *str)
@@ -645,7 +681,7 @@
    return ret;
  }
  
- bool cliArgsIsStr(uint8_t index, char *p_str)
+ bool cliArgsIsStr(uint8_t index, const char *p_str)
  {
    bool ret = false;
    cli_t *p_cli = &cli_node;
@@ -733,7 +769,7 @@
  
    if(args->argc < 1)
    {
-     cliPrintf(">> md addr [size] \r\n");
+     cliPrintf(">> md addr [size] \n");
      return;
    }
  
@@ -744,7 +780,7 @@
    addr   = (unsigned int *)strtoul((const char * ) argv[0], (char **)NULL, (int) 0);
    ascptr = (unsigned int *)addr;
  
-   cliPrintf("\r\n   ");
+   cliPrintf("\n   ");
    for (idx = 0; idx<size; idx++)
    {
      if((idx%4) == 0)
@@ -772,7 +808,8 @@
          }
          ascptr+=1;
        }
-       cliPrintf("|\r\n   ");
+       cliPrintf("|\n   ");
+       delay(1);
      }
      addr++;
    }

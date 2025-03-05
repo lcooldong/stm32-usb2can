@@ -324,7 +324,7 @@ bool spiFlashGetID(uint8_t *p_id_tbl, uint32_t length)
     {
       length = 4;
     }
-    for (int i=0; i<length; i++)
+    for (uint32_t i=0; i<length; i++)
     {
       p_id_tbl[i] = rx_buf[i];
     }

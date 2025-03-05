@@ -1,120 +1,182 @@
-/*
- * reset.c
- *
- *  Created on: 2021. 6. 16.
- *      Author: baram
- */
+#include "reset.h"
+#include "rtc.h"
+#include "cli.h"
+
+#ifdef _USE_HW_RESET
 
 
- #include "reset.h"
- #include "rtc.h"
- 
- 
- #ifdef _USE_HW_RESET
- 
- static uint32_t reset_count = 0;
- static uint32_t run_timeout_count = 0;
- 
- static void resetToRunBoot(void);
- 
- 
- 
- void resetISR(void)
- {
-   if (run_timeout_count > 0)
-   {
-     run_timeout_count--;
- 
-     if (run_timeout_count == 0)
-     {
-       resetToRunBoot();
-     }
-   }
- }
- 
- 
- bool resetInit(void)
- {
-   bool ret = true;
-   bool is_debug = false;
- 
- 
- #if 1
- 
-   // 만약 디버거가 연결된 경우
-   //
-   if (CoreDebug->DHCSR & CoreDebug_DHCSR_C_DEBUGEN_Msk)
-   {
-     is_debug = true;
-   }
- 
-   // 만약 Reset 핀이 눌렸다면
-   //
-   if (RCC->CSR & (1<<26) && is_debug != true)
-   {
-     rtcBackupRegWrite(RESET_REG_COUNT, rtcBackupRegRead(RESET_REG_COUNT) + 1);
-     delay(500);
-     reset_count = rtcBackupRegRead(RESET_REG_COUNT);
-   }
- 
-   rtcBackupRegWrite(RESET_REG_COUNT, 0);
- #endif
- 
-   return ret;
- }
- 
- uint32_t resetGetCount(void)
- {
-   return reset_count;
- }
- 
- void resetToBoot(uint32_t timeout)
- {
-   if (timeout == 0)
-   {
-     resetToRunBoot();
-   }
-   else
-   {
-     run_timeout_count = timeout;
-   }
- }
- 
- void resetToSysBoot(void)
- {
-   void (*SysMemBootJump)(void);
-   volatile uint32_t addr = 0x1FFF0000;
- 
- 
-   HAL_RCC_DeInit();
- 
-   SysTick->CTRL = 0;
-   SysTick->LOAD = 0;
-   SysTick->VAL  = 0;
- 
-   for (int i=0;i<8;i++)
-   {
-     NVIC->ICER[i]=0xFFFFFFFF;
-     NVIC->ICPR[i]=0xFFFFFFFF;
-     __DSB();
-     __ISB();
-   }
- 
-   SysMemBootJump = (void (*)(void)) (*((uint32_t *)(addr + 4)));
- 
-   __set_MSP(*(uint32_t *)addr);
-   SysMemBootJump();
- }
- 
- void resetToRunBoot(void)
- {
-   uint32_t reg;
- 
-   reg = rtcBackupRegRead(RESET_REG_PARAM);
- 
-   reg |= (1<<0);
-   rtcBackupRegWrite(RESET_REG_PARAM, reg);
-   NVIC_SystemReset();
- }
- 
- #endif
+#ifdef _USE_HW_CLI
+static void cliReset(cli_args_t *args);
+#endif
+
+static bool is_init = false;
+static uint32_t reset_bits = 0;
+static uint32_t boot_mode = 0;
+
+
+static const char *reset_bit_str[] = 
+  {
+    "RESET_BIT_POWER",
+    "RESET_BIT_PIN",
+    "RESET_BIT_WDG",
+    "RESET_BIT_SOFT",
+  };
+
+static const char *mode_bit_str[] = 
+  {
+    "MODE_BIT_BOOT",
+    "MODE_BIT_UPDATE",
+  };
+
+
+
+bool resetInit(void)
+{
+  bool ret;
+
+
+#if defined(HW_RESET_BOOT) && HW_RESET_BOOT > 0
+  if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET)
+  {
+   reset_bits |= (1<<RESET_BIT_PIN);
+  }
+  if (__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST) != RESET)
+  {
+   reset_bits |= (1<<RESET_BIT_POWER);
+  }
+  if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST) != RESET)
+  {
+   reset_bits |= (1<<RESET_BIT_WDG);
+  }
+  if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDGRST) != RESET)
+  {
+   reset_bits |= (1<<RESET_BIT_WDG);
+  }
+  if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET)
+  {
+   reset_bits |= (1<<RESET_BIT_SOFT);
+  }
+
+  __HAL_RCC_CLEAR_RESET_FLAGS();
+
+  rtcSetReg(HW_RTC_RESET_BITS, reset_bits);
+#else
+  rtcGetReg(HW_RTC_RESET_BITS, &reset_bits);
+#endif
+
+  rtcGetReg(HW_RTC_BOOT_MODE, &boot_mode);
+  rtcSetReg(HW_RTC_BOOT_MODE, 0);  
+
+
+  logPrintf("[OK] resetInit()\n");
+  for (int i=0; i<RESET_BIT_MAX; i++)
+  {
+    if (reset_bits & (1<<i))
+    {
+      logPrintf("     %s\n", reset_bit_str[i]);
+    }
+  }
+  for (int i=0; i<RESET_BIT_MAX; i++)
+  {
+    if (boot_mode & (1<<i))
+    {
+      logPrintf("     %s\n", mode_bit_str[i]);
+    }
+  }  
+
+  is_init = true;
+  #ifdef _USE_HW_CLI
+  cliAdd("reset", cliReset);
+  #endif
+  ret = is_init;
+  return ret;
+}
+
+void resetLog(void)
+{
+
+}
+
+void resetToBoot(void)
+{
+  resetSetBootMode(1<<MODE_BIT_BOOT);
+  resetToReset();
+}
+
+void resetToReset(void)
+{
+  HAL_NVIC_SystemReset();
+}
+
+uint32_t resetGetBits(void)
+{
+  return reset_bits;
+}
+
+void resetSetBits(uint32_t data)
+{
+  reset_bits = data;
+}
+
+void resetSetBootMode(uint32_t data)
+{
+  boot_mode = data;
+  rtcSetReg(HW_RTC_BOOT_MODE, data);
+}
+
+uint32_t resetGetBootMode(void)
+{
+  return boot_mode;
+}
+
+
+#ifdef _USE_HW_CLI
+void cliReset(cli_args_t *args)
+{
+  bool ret = false;
+
+
+  if (args->argc == 1 && args->isStr(0, "info"))
+  {
+    cliPrintf("Reset Bits\n");
+    for (int i=0; i<RESET_BIT_MAX; i++)
+    {
+      if (reset_bits & (1<<i))
+      {
+        cliPrintf("      %s\n", reset_bit_str[i]);
+      }
+    }
+    ret = true;
+  }
+
+  if (args->argc == 1 && args->isStr(0, "boot"))
+  {
+    resetSetBootMode(1<<MODE_BIT_BOOT);
+    resetToReset();
+    ret = true;
+  }
+
+  if (args->argc == 1 && args->isStr(0, "update"))
+  {
+    resetSetBootMode(1<<MODE_BIT_UPDATE);
+    resetToReset();
+    ret = true;
+  }
+
+  if (args->argc == 1 && args->isStr(0, "reset"))
+  {
+    resetToReset();
+    ret = true;
+  }
+
+  if (ret == false)
+  {
+    cliPrintf("reset info\n");
+    cliPrintf("reset boot\n");
+    cliPrintf("reset update\n");
+    cliPrintf("reset reset\n");
+  }
+}
+#endif
+
+#endif

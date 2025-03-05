@@ -24,6 +24,13 @@ typedef struct
   bool repeat_event[BUTTON_MAX_CH];
 } button_event_t;
 
+typedef struct
+{
+  GPIO_TypeDef *port;
+  uint32_t      pin;
+  GPIO_PinState on_state;
+} button_pin_t;
+
 
 bool     buttonInit(void);
 bool     buttonGetPressed(uint8_t ch);
@@ -46,6 +53,8 @@ bool     buttonEventGetPressed(button_event_t *p_event, uint8_t ch);
 bool     buttonEventGetReleased(button_event_t *p_event, uint8_t ch);
 uint32_t buttonEventGetRepeat(button_event_t *p_event, uint8_t ch);
 
+char*    getButtonPort(button_pin_t button);
+uint8_t  getButtonPin(uint32_t num);
 
 #endif
 

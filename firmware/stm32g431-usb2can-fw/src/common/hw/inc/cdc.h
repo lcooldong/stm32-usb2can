@@ -1,6 +1,7 @@
 #ifndef CDC_H_
 #define CDC_H_
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -28,4 +29,5 @@ uint8_t  cdcGetType(void);
 }
 #endif
 
-#endif
+
+#endif /* SRC_COMMON_HW_INCLUDE_CDC_H_ */

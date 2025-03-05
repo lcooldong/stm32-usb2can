@@ -1,11 +1,13 @@
-#ifndef __AP_DEF_H__
-#define __AP_DEF_H__
+#ifndef AP_DEF_H_
+#define AP_DEF_H_
+
 
 #include "hw.h"
 
 
-// typedef struct thread_t_      thread_t;
-// typedef struct cmd_process_t_ cmd_process_t;
+
+typedef struct thread_t_      thread_t;
+typedef struct cmd_process_t_ cmd_process_t;
 
 
 typedef enum
@@ -15,10 +17,6 @@ typedef enum
   EVENT_MAX,
 } EventCode_t;
 
-typedef struct 
-{
-  bool (*keepLoop)(void);
-}mode_args_t;
 
 
 #define AP_EVENT_NODE_MAX           16        

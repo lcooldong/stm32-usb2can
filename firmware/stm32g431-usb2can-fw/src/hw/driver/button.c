@@ -31,12 +31,12 @@ typedef struct
   uint32_t    repeat_time;
 } button_t;
 
-typedef struct
-{
-  GPIO_TypeDef *port;
-  uint32_t      pin;
-  GPIO_PinState on_state;
-} button_pin_t;
+// typedef struct
+// {
+//   GPIO_TypeDef *port;
+//   uint32_t      pin;
+//   GPIO_PinState on_state;
+// } button_pin_t;
 
 
 
@@ -50,16 +50,16 @@ static bool buttonGetPin(uint8_t ch);
 static const button_pin_t button_pin[BUTTON_MAX_CH] =
     {
         {GPIOB, GPIO_PIN_12, GPIO_PIN_RESET},  // 0. BOOT
-        {GPIOB, GPIO_PIN_3,  GPIO_PIN_RESET},  // 1. S1
-        {GPIOB, GPIO_PIN_4,  GPIO_PIN_RESET},  // 2. S2
+        {GPIOC, GPIO_PIN_13, GPIO_PIN_RESET},  // 1. TEST
+        {GPIOB, GPIO_PIN_11, GPIO_PIN_RESET},  // 2. KEY
     };
 
 static const char *button_name[BUTTON_MAX_CH+1] = 
 {
-  "0_BOOT",   
-  "1_S1",
-  "2_S2",
-  "Unknown",
+  "0_BOOT",
+  "1_TEST",
+  "2_KEY",
+  "Unknown"
 };
 
 static button_t button_tbl[BUTTON_MAX_CH];
@@ -120,7 +120,7 @@ bool buttonInit(void)
   }
   else
   {
-    logPrintf("[NG] buttonInit()\n     swtimerGetHandle()\n");
+    logPrintf("[NG] buttonInit()\r\n     swtimerGetHandle()\r\n");
   }
 
 #ifdef _USE_HW_CLI
@@ -450,7 +450,11 @@ void cliButton(cli_args_t *args)
   {
     for (int i=0; i<BUTTON_MAX_CH; i++)
     {
-      cliPrintf("%-12s pin %d\n", buttonGetName(i), button_pin[i].pin);
+      
+      cliPrintf("%-12s :", buttonGetName(i)  );
+      cliPrintf("%s " ,getButtonPort(button_pin[i]));
+      cliPrintf("PIN %d \r\n", getButtonPin(button_pin[i].pin));
+      
     }
     ret = true;
   }
@@ -482,7 +486,7 @@ void cliButton(cli_args_t *args)
       {
         if(buttonGetPressed(i))
         {
-          cliPrintf("%-12s, Time :  %d ms\n", buttonGetName(i), buttonGetPressedTime(i));
+          cliPrintf("%-12s, Time :  %d ms\r\n", buttonGetName(i), buttonGetPressedTime(i));
         }
       }
       delay(10);
@@ -492,11 +496,85 @@ void cliButton(cli_args_t *args)
 
   if (ret == false)
   {
-    cliPrintf("button info\n");
-    cliPrintf("button show\n");
-    cliPrintf("button time\n", BUTTON_MAX_CH);
+    cliPrintf("button info\r\n");
+    cliPrintf("button show\r\n");
+    cliPrintf("button time\r\n", BUTTON_MAX_CH);
   }
 }
+
+
+char* getButtonPort(button_pin_t button)
+{
+  int buttonPort = (int)button.port;
+  char* targetName = "";
+
+  switch (buttonPort)
+  {
+  case GPIOA_BASE:
+    targetName = "GPIOA";
+    break;
+  case GPIOB_BASE:
+    targetName = "GPIOB";
+    break;
+  case GPIOC_BASE:
+    targetName = "GPIOC";
+    break;
+  case GPIOD_BASE:
+    targetName = "GPIOD";
+    break;
+  case GPIOE_BASE:
+    targetName = "GPIOE";
+    break;
+  case GPIOF_BASE:
+    targetName = "GPIOF";
+    break;
+  default:
+  targetName = "Unknown port";
+    break;
+  }
+
+  return targetName;
+}
+
+uint8_t getButtonPin(uint32_t num)
+{
+  // int count = 0, quotient, remainder, i, digit;
+
+  int arr[16] = {0,};
+  int count = 0, quotient, remainder, digit;
+  do
+  {
+    quotient = num/2;
+    remainder = num - quotient * 2;
+    arr[count++] = remainder;
+    num = quotient;
+  }while(quotient != 0);
+  // cliPrintf(" %d \r\n", count);
+  if(count % 4 == 0)
+  {
+    digit = count / 4;
+  }
+  else
+  {
+    digit = count / 4 + 1;
+  }
+
+  // // for (int i = digit * 4 - 1; i >= 0; i--)
+  // for (int i = sizeof(arr)/sizeof(arr[0]) - 1; i >= 0; i--)
+  // {
+  //   if (i % 4 == 0)
+  //   {
+  //     cliPrintf("%d ", arr[i]);
+  //   }
+  //   else
+  //   {
+  //     cliPrintf("%d", arr[i]);
+  //   }
+  // }
+  
+  return count - 1;
+}
+
 #endif
 
 

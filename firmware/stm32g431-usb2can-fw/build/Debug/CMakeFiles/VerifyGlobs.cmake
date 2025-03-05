@@ -22,69 +22,9 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
 endif()
 
 # SRC_FILES at CMakeLists.txt:39 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/*.c")
-set(OLD_GLOB
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES at CMakeLists.txt:39 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/*.cpp")
-set(OLD_GLOB
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/ap.cpp"
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES at CMakeLists.txt:39 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/*.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/bsp.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/rtos.c"
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES_EXCLUDE at CMakeLists.txt:62 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_1.c")
-set(OLD_GLOB
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_1.c"
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES_EXCLUDE at CMakeLists.txt:62 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_2.c")
-set(OLD_GLOB
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_2.c"
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES_EXCLUDE at CMakeLists.txt:62 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_3.c")
-set(OLD_GLOB
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_3.c"
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES_EXCLUDE at CMakeLists.txt:62 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_5.c")
-set(OLD_GLOB
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_5.c"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -105,7 +45,27 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_EXCLUDE at CMakeLists.txt:62 (file)
+# SRC_FILES at CMakeLists.txt:39 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/EEPROM_Emul/Core/*.c")
+set(OLD_GLOB
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/EEPROM_Emul/Core/eeprom_emul.c"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SRC_FILES at CMakeLists.txt:39 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/EEPROM_Emul/Porting/STM32G4/*.c")
+set(OLD_GLOB
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/EEPROM_Emul/Porting/STM32G4/flash_interface.c"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SRC_FILES_EXCLUDE at CMakeLists.txt:63 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_msp_template.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_msp_template.c"
@@ -115,7 +75,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_EXCLUDE at CMakeLists.txt:62 (file)
+# SRC_FILES_EXCLUDE at CMakeLists.txt:63 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_timebase_tim_template.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_timebase_tim_template.c"
@@ -125,7 +85,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/*.c")
 set(OLD_GLOB
   )
@@ -134,19 +94,27 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/*.cpp")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/ap.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/mode/can_mode.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/mode/cli_mode.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/cmd_thread.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/driver/cmd_uart.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/process/cmd_boot.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/cli.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/event.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/led.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/can.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/mode.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/rs485.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/thread.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/*.s")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/startup/startup_stm32g431cbux.s"
@@ -156,33 +124,11 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/*.c")
-set(OLD_GLOB
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/croutine.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/event_groups.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/list.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_1.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_2.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_3.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_4.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/portable/MemMang/heap_5.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/queue.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/stream_buffer.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/tasks.c"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/bsp/FreeRTOS/Source/timers.c"
-  )
-if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
-  message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
-endif()
-
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/common/*.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/common/core/qbuffer.c"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/common/core/util.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/common/hw/src/cli.c"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
@@ -190,13 +136,15 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/*.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/button.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/can.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/cdc.c"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/cmd.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/eeprom.c"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/fault.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/flash.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/gpio.c"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/hw/driver/i2c.c"
@@ -220,7 +168,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32G4xx_HAL_Driver/Src/*.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c"
@@ -315,7 +263,7 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
-# SRC_FILES_RECURSE at CMakeLists.txt:50 (file)
+# SRC_FILES_RECURSE at CMakeLists.txt:51 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32_USB_Device_Library/Core/Src/*.c")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/lib/STM32_USB_Device_Library/Core/Src/usbd_core.c"

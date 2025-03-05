@@ -1,9 +1,11 @@
 /*
  * cdc.c
  *
- *  Created on: 2021. 6. 18.
+ *  Created on: 2021. 11. 14.
  *      Author: baram
  */
+
+
 
 
  #include "cdc.h"
@@ -59,4 +61,10 @@
    return cdcIfGetBaud();
  }
  
+ uint8_t cdcGetType(void)
+ {
+   return cdcIfGetType();
+ }
+ 
  #endif
+ 

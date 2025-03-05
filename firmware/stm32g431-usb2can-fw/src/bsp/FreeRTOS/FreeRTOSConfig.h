@@ -29,6 +29,7 @@
 #define FREERTOS_CONFIG_H
 
 
+
 /*-----------------------------------------------------------
  * this is a template configuration files
  *
@@ -152,7 +153,7 @@ header file. */
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
    standard names. */
 
-#if 1
+#if 0
 #define vPortSVCHandler    SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
 
@@ -162,6 +163,7 @@ header file. */
 
 #define xPortSysTickHandler SysTick_Handler
 #endif
+
 
 
 #endif /* FREERTOS_CONFIG_H */

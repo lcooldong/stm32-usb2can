@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : usbd_conf.h
-  * @version        : v3.0_Cube
-  * @brief          : Header for usbd_conf.c file.
+  * @file           USB_Device/CDC_Standalone/USB_Device/Target/usbd_conf.h
+  * @author         MCD Application Team
+  * @brief          Header for usbd_conf.c file.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -30,8 +30,6 @@
 #include "bsp.h"
 #include "stm32g4xx.h"
 #include "stm32g4xx_hal.h"
-
-//#include "hw_def.h"
 
 /* USER CODE BEGIN INCLUDE */
 
@@ -65,17 +63,17 @@
   */
 
 /*---------- -----------*/
-#define USBD_MAX_NUM_INTERFACES     1U
+#define USBD_MAX_NUM_INTERFACES         1U
 /*---------- -----------*/
-#define USBD_MAX_NUM_CONFIGURATION     1U
+#define USBD_MAX_NUM_CONFIGURATION      1U
 /*---------- -----------*/
-#define USBD_MAX_STR_DESC_SIZ     512U
+#define USBD_MAX_STR_DESC_SIZ           100U
 /*---------- -----------*/
-#define USBD_DEBUG_LEVEL     0U
+#define USBD_DEBUG_LEVEL                0U
 /*---------- -----------*/
-#define USBD_LPM_ENABLED     1U
+#define USBD_LPM_ENABLED                0U
 /*---------- -----------*/
-#define USBD_SELF_POWERED     1U
+#define USBD_SELF_POWERED               1U
 
 /****************************************/
 /* #define for FS and HS identification */
@@ -155,6 +153,7 @@
 void *USBD_static_malloc(uint32_t size);
 void USBD_static_free(void *p);
 bool USBD_is_connected(void);
+
 /**
   * @}
   */
@@ -172,4 +171,3 @@ bool USBD_is_connected(void);
 #endif
 
 #endif /* __USBD_CONF__H__ */
-

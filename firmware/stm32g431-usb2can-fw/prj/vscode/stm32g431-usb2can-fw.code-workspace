@@ -7,7 +7,15 @@
 	"settings": {
 		"files.associations": {
 			"compare": "cpp",
-			"stm32g4xx_ll_spi.h": "c"
+			"stm32g4xx_ll_spi.h": "c",
+			"ratio": "cpp",
+			"system_error": "cpp",
+			"array": "cpp",
+			"functional": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"random": "cpp"
 		}
 	}
 }
