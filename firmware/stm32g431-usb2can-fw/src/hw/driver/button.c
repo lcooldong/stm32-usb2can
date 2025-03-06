@@ -51,7 +51,7 @@ static const button_pin_t button_pin[BUTTON_MAX_CH] =
     {
         {GPIOB, GPIO_PIN_12, GPIO_PIN_RESET},  // 0. BOOT
         {GPIOC, GPIO_PIN_13, GPIO_PIN_RESET},  // 1. TEST
-        {GPIOB, GPIO_PIN_11, GPIO_PIN_RESET},  // 2. KEY
+        {GPIOB, GPIO_PIN_1,  GPIO_PIN_RESET},  // 2. KEY
     };
 
 static const char *button_name[BUTTON_MAX_CH+1] = 
@@ -80,6 +80,7 @@ bool buttonInit(void)
 
 
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
 
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -88,7 +89,17 @@ bool buttonInit(void)
   for (int i=0; i<BUTTON_MAX_CH; i++)
   {
     GPIO_InitStruct.Pin = button_pin[i].pin;
+    // if(i == 1) // Weact G431
+    // {
+    //   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    // }
+    // else
+    // {
+    //   GPIO_InitStruct.Pull = GPIO_PULLUP;
+    // }
+    
     HAL_GPIO_Init(button_pin[i].port, &GPIO_InitStruct);
+    
   }
 
   for (int i=0; i<BUTTON_MAX_CH; i++)
@@ -453,7 +464,7 @@ void cliButton(cli_args_t *args)
       
       cliPrintf("%-12s :", buttonGetName(i)  );
       cliPrintf("%s " ,getButtonPort(button_pin[i]));
-      cliPrintf("PIN %d \r\n", getButtonPin(button_pin[i].pin));
+      cliPrintf("%2d \r\n", getButtonPin(button_pin[i].pin));
       
     }
     ret = true;

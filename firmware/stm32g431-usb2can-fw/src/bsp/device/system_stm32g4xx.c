@@ -175,6 +175,7 @@
   * @param  None
   * @retval None
   */
+extern uint32_t _fw_flash_begin;
 
 void SystemInit(void)
 {
@@ -187,6 +188,7 @@ void SystemInit(void)
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
 #endif /* USER_VECT_TAB_ADDRESS */
+  SCB->VTOR = (__IOM uint32_t)&_fw_flash_begin;
 }
 
 /**

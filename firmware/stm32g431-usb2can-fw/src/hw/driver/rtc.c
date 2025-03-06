@@ -33,7 +33,7 @@ bool rtcInit(void)
   }
 
 
-  logPrintf("[%s] rtcInit()\n", ret ? "OK":"NG");
+  logPrintf("[%s] rtcInit()\r\n", ret ? "OK":"NG");
   is_init = ret;
 
 #ifdef _USE_HW_CLI
@@ -225,7 +225,7 @@ void cliRtc(cli_args_t *args)
 
   if (args->argc == 1 && args->isStr(0, "info"))
   {
-    cliPrintf("is_init : %d\n", is_init);
+    cliPrintf("is_init : %d\r\n", is_init);
     ret = true;
   }
 
@@ -237,7 +237,7 @@ void cliRtc(cli_args_t *args)
     {
       rtcGetInfo(&rtc_info);
 
-      cliPrintf("Y:%02d M:%02d D:%02d, H:%02d M:%02d S:%02d\n",
+      cliPrintf("Y:%02d M:%02d D:%02d, H:%02d M:%02d S:%02d\r\n",
                 rtc_info.date.year,
                 rtc_info.date.month,
                 rtc_info.date.day,
@@ -258,7 +258,7 @@ void cliRtc(cli_args_t *args)
     rtc_time.seconds = args->getData(4);
 
     rtcSetTime(&rtc_time);
-    cliPrintf("H:%02d M:%02d S:%02d\n",
+    cliPrintf("H:%02d M:%02d S:%02d\r\n",
               rtc_time.hours,
               rtc_time.minutes,
               rtc_time.seconds);
@@ -274,7 +274,7 @@ void cliRtc(cli_args_t *args)
     rtc_date.day = args->getData(4);
 
     rtcSetDate(&rtc_date);
-    cliPrintf("Y:%02d M:%02d D:%02d\n",
+    cliPrintf("Y:%02d M:%02d D:%02d\r\n",
               rtc_date.year,
               rtc_date.month,
               rtc_date.day);
@@ -284,10 +284,10 @@ void cliRtc(cli_args_t *args)
 
   if (ret == false)
   {
-    cliPrintf("rtc info\n");
-    cliPrintf("rtc get info\n");
-    cliPrintf("rtc set time [h] [m] [s]\n");
-    cliPrintf("rtc set date [y] [m] [d]\n");
+    cliPrintf("rtc info\r\n");
+    cliPrintf("rtc get info\r\n");
+    cliPrintf("rtc set time [h] [m] [s]\r\n");
+    cliPrintf("rtc set date [y] [m] [d]\r\n");
   }
 }
 #endif

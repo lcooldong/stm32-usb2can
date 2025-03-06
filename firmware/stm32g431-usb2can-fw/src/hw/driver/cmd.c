@@ -226,13 +226,13 @@ bool cmdSend(cmd_t *p_cmd, CmdType_t type, uint16_t cmd, uint16_t err_code, uint
   p_cmd->packet.buffer[index++] = (data_len >> 0) & 0xFF;
   p_cmd->packet.buffer[index++] = (data_len >> 8) & 0xFF;
 
-  for (int i=0; i<data_len; i++)
+  for (uint32_t i=0; i<data_len; i++)
   {
     p_cmd->packet.buffer[index++] = p_data[i];
   }
 
   uint8_t check_sum = 0;
-  for (int i=0; i<index; i++)
+  for (uint32_t i=0; i<index; i++)
   {
     check_sum += p_cmd->packet.buffer[i];
   }
@@ -326,7 +326,7 @@ void cliCmd(cli_args_t *args)
 
   if (ret != true)
   {
-    cliPrintf("cmd show\n");
+    cliPrintf("cmd show\r\n");
   }
 }
 #endif

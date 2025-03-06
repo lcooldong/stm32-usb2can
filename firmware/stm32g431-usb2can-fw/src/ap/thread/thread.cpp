@@ -33,12 +33,12 @@ bool threadInit(void)
   info.count = ((int)&_ethread - (int)&_sthread)/sizeof(thread_t);
   info.p_thread = (thread_t *)&_sthread;
 
-  logPrintf("[ ] threadInit()\n");
-  logPrintf("    count : %d\n", info.count);
+  logPrintf("[ ] threadInit()\r\n");
+  logPrintf("    count : %d\r\n", info.count);
   
   for (int i=0; i<info.count; i++)
   {
-    logPrintf("    %d %s\n", i, info.p_thread[i].name);
+    logPrintf("    %d %s\r\n", i, info.p_thread[i].name);
   }
 
   eventInit();
@@ -58,7 +58,7 @@ bool threadBegin(void)
   }
   info.is_begin = ret;
 
-  logPrintf("[%s] threadBegin()\n", ret ? "OK":"NG");
+  logPrintf("[%s] threadBegin()\r\n", ret ? "OK":"NG");
   return ret;
 }
 

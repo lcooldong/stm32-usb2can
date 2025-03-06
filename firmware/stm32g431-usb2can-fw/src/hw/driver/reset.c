@@ -68,19 +68,19 @@ bool resetInit(void)
   rtcSetReg(HW_RTC_BOOT_MODE, 0);  
 
 
-  logPrintf("[OK] resetInit()\n");
+  logPrintf("[OK] resetInit()\r\n");
   for (int i=0; i<RESET_BIT_MAX; i++)
   {
     if (reset_bits & (1<<i))
     {
-      logPrintf("     %s\n", reset_bit_str[i]);
+      logPrintf("     %s\r\n", reset_bit_str[i]);
     }
   }
   for (int i=0; i<RESET_BIT_MAX; i++)
   {
     if (boot_mode & (1<<i))
     {
-      logPrintf("     %s\n", mode_bit_str[i]);
+      logPrintf("     %s\r\n", mode_bit_str[i]);
     }
   }  
 
@@ -138,12 +138,12 @@ void cliReset(cli_args_t *args)
 
   if (args->argc == 1 && args->isStr(0, "info"))
   {
-    cliPrintf("Reset Bits\n");
+    cliPrintf("Reset Bits\r\n");
     for (int i=0; i<RESET_BIT_MAX; i++)
     {
       if (reset_bits & (1<<i))
       {
-        cliPrintf("      %s\n", reset_bit_str[i]);
+        cliPrintf("      %s\r\n", reset_bit_str[i]);
       }
     }
     ret = true;
@@ -171,10 +171,10 @@ void cliReset(cli_args_t *args)
 
   if (ret == false)
   {
-    cliPrintf("reset info\n");
-    cliPrintf("reset boot\n");
-    cliPrintf("reset update\n");
-    cliPrintf("reset reset\n");
+    cliPrintf("reset info\r\n");
+    cliPrintf("reset boot\r\n");
+    cliPrintf("reset update\r\n");
+    cliPrintf("reset reset\r\n");
   }
 }
 #endif

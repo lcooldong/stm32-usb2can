@@ -101,7 +101,7 @@ set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/cmd_thread.cpp"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/driver/cmd_uart.cpp"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/process/cmd_boot.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/cli.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/cli_thread.cpp"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/event.cpp"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/led.cpp"
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/can.cpp"

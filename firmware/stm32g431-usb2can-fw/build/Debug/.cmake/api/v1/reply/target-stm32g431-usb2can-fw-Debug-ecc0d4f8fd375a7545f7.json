@@ -1022,7 +1022,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/common/cli.cpp",
+			"path" : "src/ap/thread/common/cli_thread.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

@@ -27,8 +27,8 @@
 #define      HW_UART_MAX_CH         4
 #define      HW_UART_CH_DEBUG       _DEF_UART1
 #define      HW_UART_CH_RS485       _DEF_UART2
-#define      HW_UART_CH_USB         _DEF_UART3
-#define      HW_UART_CH_EXT         _DEF_UART4
+#define      HW_UART_CH_EXT         _DEF_UART3
+#define      HW_UART_CH_USB         _DEF_UART4
 
 #define _USE_HW_CLI
 #define      HW_CLI_CMD_LIST_MAX    32
@@ -92,15 +92,12 @@
 #define      HW_I2C_MAX_CH          1
 
 
-
-  
 #define FLASH_SIZE_TAG              0x400
 #define FLASH_SIZE_VER              0x400
-#define FLASH_SIZE_FIRM             (98*1024)
 
+#define FLASH_SIZE_FIRM             (98*1024)
 #define FLASH_ADDR_BOOT             0x08000000
 #define FLASH_ADDR_FIRM             0x08006000
-
 #define FLASH_ADDR_UPDATE           0x90000000
 
 

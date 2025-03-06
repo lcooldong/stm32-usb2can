@@ -183,25 +183,25 @@
  {
    if (cli_node.is_log == true)
    {
-     uartPrintf(p_cli->log_ch, "Cursor  : %d\n", p_cli->line.cursor);
-     uartPrintf(p_cli->log_ch, "Count   : %d\n", p_cli->line.count);
-     uartPrintf(p_cli->log_ch, "buf_len : %d\n", p_cli->line.buf_len);
-     uartPrintf(p_cli->log_ch, "buf     : %s\n", p_cli->line.buf);
-     uartPrintf(p_cli->log_ch, "line_i  : %d\n", p_cli->hist_line_i);
-     uartPrintf(p_cli->log_ch, "line_lt : %d\n", p_cli->hist_line_last);
-     uartPrintf(p_cli->log_ch, "line_c  : %d\n", p_cli->hist_line_count);
+     uartPrintf(p_cli->log_ch, "Cursor  : %d\r\n", p_cli->line.cursor);
+     uartPrintf(p_cli->log_ch, "Count   : %d\r\n", p_cli->line.count);
+     uartPrintf(p_cli->log_ch, "buf_len : %d\r\n", p_cli->line.buf_len);
+     uartPrintf(p_cli->log_ch, "buf     : %s\r\n", p_cli->line.buf);
+     uartPrintf(p_cli->log_ch, "line_i  : %d\r\n", p_cli->hist_line_i);
+     uartPrintf(p_cli->log_ch, "line_lt : %d\r\n", p_cli->hist_line_last);
+     uartPrintf(p_cli->log_ch, "line_c  : %d\r\n", p_cli->hist_line_count);
  
      for (int i=0; i<p_cli->hist_line_count; i++)
      {
-       uartPrintf(p_cli->log_ch, "buf %d   : %s\n", i, p_cli->line_buf[i].buf);
+       uartPrintf(p_cli->log_ch, "buf %d   : %s\r\n", i, p_cli->line_buf[i].buf);
      }
-     uartPrintf(p_cli->log_ch, "\n");
+     uartPrintf(p_cli->log_ch, "\r\n");
    }
  }
  
  void cliShowPrompt(cli_t *p_cli)
  {
-   uartPrintf(p_cli->ch, "\n\r");
+   uartPrintf(p_cli->ch, "\r\n\r");
    uartPrintf(p_cli->ch, CLI_PROMPT_STR);
  }
  
@@ -519,7 +519,7 @@
  
    if (cliParseArgs(p_cli) == true)
    {
-     cliPrintf("\r\n");
+     cliPrintf("\r\r\n");
  
      cliToUpper(p_cli->argv[0]);
  
@@ -544,7 +544,7 @@
    char *tok;
    char *next_ptr;
    uint16_t argc = 0;
-   static const char *delim = " \f\n\r\t\v";
+   static const char *delim = " \f\r\n\r\t\v";
    char *cmdline;
    char **argv;
  
@@ -743,16 +743,16 @@
    cli_t *p_cli = &cli_node;
  
  
-   cliPrintf("\r\n");
-   cliPrintf("---------- cmd list ---------\r\n");
+   cliPrintf("\r\r\n");
+   cliPrintf("---------- cmd list ---------\r\r\n");
  
    for (int i=0; i<p_cli->cmd_count; i++)
    {
      cliPrintf(p_cli->cmd_list[i].cmd_str);
-     cliPrintf("\r\n");
+     cliPrintf("\r\r\n");
    }
  
-   cliPrintf("-----------------------------\r\n");
+   cliPrintf("-----------------------------\r\r\n");
  }
  
  void cliMemoryDump(cli_args_t *args)
@@ -769,7 +769,7 @@
  
    if(args->argc < 1)
    {
-     cliPrintf(">> md addr [size] \n");
+     cliPrintf(">> md addr [size] \r\n");
      return;
    }
  
@@ -780,7 +780,7 @@
    addr   = (unsigned int *)strtoul((const char * ) argv[0], (char **)NULL, (int) 0);
    ascptr = (unsigned int *)addr;
  
-   cliPrintf("\n   ");
+   cliPrintf("\r\n   ");
    for (idx = 0; idx<size; idx++)
    {
      if((idx%4) == 0)
@@ -808,7 +808,7 @@
          }
          ascptr+=1;
        }
-       cliPrintf("|\n   ");
+       cliPrintf("|\r\n   ");
        delay(1);
      }
      addr++;

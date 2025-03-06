@@ -1,4 +1,4 @@
-#include "cli.h"
+#include "cli_thread.h"
 
 #include "thread.h"
 #include "common/event.h"

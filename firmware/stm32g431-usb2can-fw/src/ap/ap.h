@@ -8,7 +8,7 @@
 
 #include "cmd/cmd_thread.h"
 #include "manage/mode.h"
-#include "common/cli.h"
+#include "common/cli_thread.h"
 #include "common/led.h"
 
 

@@ -17,22 +17,22 @@ bool faultInit(void)
   {
     fault_log.magic_number = 0;
 
-    logPrintf("Fault Message\n");
-    logPrintf("  Type : %d\n",     fault_log.type);
-    logPrintf("  Msg  : %s\n",     fault_log.msg);
+    logPrintf("Fault Message\r\n");
+    logPrintf("  Type : %d\r\n",     fault_log.type);
+    logPrintf("  Msg  : %s\r\n",     fault_log.msg);
 
     if (fault_log.is_reg == true)
     {
-      logPrintf("  R0   : 0x%08X\n", fault_log.REG_R0);
-      logPrintf("  R1   : 0x%08X\n", fault_log.REG_R1);
-      logPrintf("  R2   : 0x%08X\n", fault_log.REG_R2);
-      logPrintf("  R3   : 0x%08X\n", fault_log.REG_R3);
-      logPrintf("  R12  : 0x%08X\n", fault_log.REG_R12);
-      logPrintf("  LR   : 0x%08X\n", fault_log.REG_LR);
-      logPrintf("  PC   : 0x%08X\n", fault_log.REG_PC);
-      logPrintf("  PSR  : 0x%08X\n", fault_log.REG_PSR);
+      logPrintf("  R0   : 0x%08X\r\n", fault_log.REG_R0);
+      logPrintf("  R1   : 0x%08X\r\n", fault_log.REG_R1);
+      logPrintf("  R2   : 0x%08X\r\n", fault_log.REG_R2);
+      logPrintf("  R3   : 0x%08X\r\n", fault_log.REG_R3);
+      logPrintf("  R12  : 0x%08X\r\n", fault_log.REG_R12);
+      logPrintf("  LR   : 0x%08X\r\n", fault_log.REG_LR);
+      logPrintf("  PC   : 0x%08X\r\n", fault_log.REG_PC);
+      logPrintf("  PSR  : 0x%08X\r\n", fault_log.REG_PSR);
     }
-    logPrintf("\n");
+    logPrintf("\r\n");
 
     is_fault = true;
   }

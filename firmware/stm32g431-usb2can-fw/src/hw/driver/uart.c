@@ -55,7 +55,7 @@ static const uart_hw_t uart_hw_tbl[UART_MAX_CH] =
 {
   {"USART1 DEBUG  ", USART1, &huart1, &hdma_usart1_rx, NULL, false},
   {"USART2 RS485  ", USART2, &huart2, &hdma_usart2_rx, NULL, true},
-  {"USART3 EXT    ", USART3, &huart3, &hdma_usart3_rx, NULL, true},
+  {"USART3 EXT    ", USART3, &huart3, &hdma_usart3_rx, NULL, false},
   {"USB    USB    ", NULL, NULL, NULL, NULL, true},  
 };
 
@@ -380,12 +380,12 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     /* USART1 clock enable */
     __HAL_RCC_USART1_CLK_ENABLE();
 
-    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     /**USART1 GPIO Configuration
     PB6     ------> USART1_TX
     PB7     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+   GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -562,7 +562,7 @@ void cliUart(cli_args_t *args)
   {
     for (int i=0; i<UART_MAX_CH; i++)
     {
-      cliPrintf("_DEF_UART%d : %s, %d bps\n", i+1, uart_hw_tbl[i].p_msg, uartGetBaud(i));
+      cliPrintf("_DEF_UART%d : %s, %d bps\r\n", i+1, uart_hw_tbl[i].p_msg, uartGetBaud(i));
     }
     ret = true;
   }
@@ -582,7 +582,7 @@ void cliUart(cli_args_t *args)
         if (uartAvailable(uart_ch) > 0)
         {
           rx_data = uartRead(uart_ch);
-          cliPrintf("<- _DEF_UART%d RX : 0x%X\n", uart_ch + 1, rx_data);
+          cliPrintf("<- _DEF_UART%d RX : 0x%X\r\n", uart_ch + 1, rx_data);
         }
 
         if (cliAvailable() > 0)
@@ -595,22 +595,22 @@ void cliUart(cli_args_t *args)
           else
           {
             uartWrite(uart_ch, &rx_data, 1);
-            cliPrintf("-> _DEF_UART%d TX : 0x%X\n", uart_ch + 1, rx_data);            
+            cliPrintf("-> _DEF_UART%d TX : 0x%X\r\n", uart_ch + 1, rx_data);            
           }
         }
       }
     }
     else
     {
-      cliPrintf("This is cliPort\n");
+      cliPrintf("This is cliPort\r\n");
     }
     ret = true;
   }
 
   if (ret == false)
   {
-    cliPrintf("uart info\n");
-    cliPrintf("uart test ch[1~%d]\n", HW_UART_MAX_CH);
+    cliPrintf("uart info\r\n");
+    cliPrintf("uart test ch[1~%d]\r\n", HW_UART_MAX_CH);
   }
 }
 #endif
