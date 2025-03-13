@@ -627,7 +627,8 @@ void canRxFifoCallback(uint8_t ch, FDCAN_HandleTypeDef *hfdcan)
       rx_buf->id      = rx_header.Identifier;
       rx_buf->id_type = CAN_EXT;
     }
-    rx_buf->length = dlc_len_tbl[(rx_header.DataLength >> 16) & 0x0F];
+    // rx_buf->length = dlc_len_tbl[(rx_header.DataLength >> 16) & 0x0F];
+    rx_buf->length = dlc_len_tbl[(rx_header.DataLength) & 0x0F];
     rx_buf->dlc = canGetDlc(rx_buf->length);
 
     if (rx_header.FDFormat == FDCAN_FD_CAN)
@@ -771,7 +772,7 @@ void canInfoPrint(uint8_t ch)
       canPrintf("250\r\n");
       break;
     case CAN_500K:
-      canPrintf("250\r\n");
+      canPrintf("500\r\n");
       break;
     case CAN_1M:
       canPrintf("1M\r\n");
@@ -798,7 +799,6 @@ void canInfoPrint(uint8_t ch)
     case CAN_1M:
       canPrintf("1M\r\n");
       break;
-
     case CAN_2M:
       canPrintf("2M\r\n");
       break;  
@@ -1108,6 +1108,8 @@ void cliCan(cli_args_t *args)
     uint8_t ch;
     CanFrame_t frame;
 
+    uint32_t count = 0;
+
     ch = constrain(args->getData(1), 0, CAN_MAX_CH - 1); 
 
     if (args->isStr(2, "can"))
@@ -1118,6 +1120,7 @@ void cliCan(cli_args_t *args)
     err_code = can_tbl[_DEF_CAN1].err_code;
 
     pre_time = millis();
+    
     while(cliKeepLoop())
     {
       can_msg_t msg;
@@ -1128,11 +1131,17 @@ void cliCan(cli_args_t *args)
 
         msg.frame   = frame;
         msg.id_type = CAN_EXT;
-        msg.dlc     = CAN_DLC_2;
+        msg.dlc     = CAN_DLC_8;
         msg.id      = 0x314;
-        msg.length  = 2;
-        msg.data[0] = 1;
-        msg.data[1] = 2;
+        msg.length  = 8;
+
+        for (uint32_t i = 0; i < msg.length; i++)
+        {
+          msg.data[i] = i + count;
+        }
+        
+        // msg.data[0] = 1;
+        // msg.data[1] = 2;
         if (canMsgWrite(ch, &msg, 10) > 0)
         {
           index %= 1000;
@@ -1160,6 +1169,7 @@ void cliCan(cli_args_t *args)
             cliPrintf("0x%02X ", msg.data[i]);
           }
           cliPrintf("\r\n");
+          count++;
         }
 
         if (canGetRxErrCount(ch) > 0 || canGetTxErrCount(ch) > 0)

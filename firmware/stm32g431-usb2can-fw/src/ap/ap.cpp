@@ -5,7 +5,10 @@ void cliUpdate(void);
 void apInit(void)
 {
   // threadInit();
+  
   cliOpen(HW_LOG_CH, 115200);
+  canOpen(_DEF_CAN1, CAN_NORMAL, CAN_FD_NO_BRS, CAN_500K, CAN_2M);
+  i2cOpen(_DEF_I2C2, I2C_FREQ_100KHz);
   logBoot(false);
 }
 
@@ -23,10 +26,12 @@ void apMain(void)
       if(usbIsOpen() == true)
       {
         ledToggle(_DEF_LED1);
+        ledToggle(_DEF_LED2);
       }
       else 
       {
         ledOff(_DEF_LED1);
+        ledOff(_DEF_LED2);
       }
       // ledToggle(_DEF_LED2);
     }

@@ -19,6 +19,7 @@ extern "C" {
 #include "swtimer.h"
 
 #include "can.h"
+#include "i2c.h"
 
 #include "gpio.h"
 #include "spi.h"

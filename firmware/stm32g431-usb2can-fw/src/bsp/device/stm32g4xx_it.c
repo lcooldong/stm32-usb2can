@@ -20,7 +20,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "bsp.h"
 #include "stm32g4xx_it.h"
-#include "hw_def.h"
+// #include "hw_def.h"
+#include "fault.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -47,7 +48,6 @@ void NMI_Handler(void)
   */
 void HardFault_Handler(void)
 {
-
   while (1)
   {
 

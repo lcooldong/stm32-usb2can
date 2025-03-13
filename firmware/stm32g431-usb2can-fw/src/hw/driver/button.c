@@ -49,8 +49,8 @@ static bool buttonGetPin(uint8_t ch);
 
 static const button_pin_t button_pin[BUTTON_MAX_CH] =
     {
-        {GPIOB, GPIO_PIN_12, GPIO_PIN_RESET},  // 0. BOOT
-        {GPIOC, GPIO_PIN_13, GPIO_PIN_RESET},  // 1. TEST
+        {GPIOB, GPIO_PIN_15, GPIO_PIN_RESET},  // 0. BOOT
+        {GPIOB, GPIO_PIN_12, GPIO_PIN_RESET},  // 1. TEST
         {GPIOB, GPIO_PIN_1,  GPIO_PIN_RESET},  // 2. KEY
     };
 

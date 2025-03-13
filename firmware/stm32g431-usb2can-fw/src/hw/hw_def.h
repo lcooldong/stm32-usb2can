@@ -89,7 +89,7 @@
 
 
 #define _USE_HW_I2C
-#define      HW_I2C_MAX_CH          1
+#define      HW_I2C_MAX_CH          2
 
 
 #define FLASH_SIZE_TAG              0x400
