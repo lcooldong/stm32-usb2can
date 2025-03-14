@@ -98,16 +98,8 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/*.cpp")
 set(OLD_GLOB
   "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/ap.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/cmd_thread.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/driver/cmd_uart.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/cmd/process/cmd_boot.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/cli_thread.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/event.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/common/led.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/can.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/mode.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/manage/rs485.cpp"
-  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/thread/thread.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/mode/can_mode.cpp"
+  "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/src/ap/mode/cli_mode.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

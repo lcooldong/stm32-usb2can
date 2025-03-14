@@ -17,7 +17,10 @@
 			"utility": "cpp",
 			"random": "cpp",
 			"hw_def.h": "c",
-			"bsp.h": "c"
+			"bsp.h": "c",
+			"string_view": "cpp",
+			"string": "cpp",
+			"cli.h": "c"
 		}
 	}
 }

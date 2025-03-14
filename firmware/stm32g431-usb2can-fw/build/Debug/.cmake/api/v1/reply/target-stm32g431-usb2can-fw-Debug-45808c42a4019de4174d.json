@@ -227,6 +227,14 @@
 				5,
 				6,
 				7,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
 				21,
 				22,
 				23,
@@ -331,15 +339,7 @@
 				122,
 				123,
 				124,
-				125,
-				126,
-				127,
-				128,
-				129,
-				130,
-				131,
-				132,
-				133
+				125
 			]
 		},
 		{
@@ -505,15 +505,7 @@
 				8,
 				9,
 				10,
-				11,
-				12,
-				13,
-				14,
-				15,
-				16,
-				17,
-				18,
-				19
+				11
 			]
 		},
 		{
@@ -668,7 +660,7 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				20
+				12
 			]
 		}
 	],
@@ -808,7 +800,6 @@
 				9,
 				10,
 				11,
-				12,
 				13,
 				14,
 				15,
@@ -816,6 +807,7 @@
 				17,
 				18,
 				19,
+				20,
 				21,
 				22,
 				23,
@@ -920,22 +912,14 @@
 				122,
 				123,
 				124,
-				125,
-				126,
-				127,
-				128,
-				129,
-				130,
-				131,
-				132,
-				133
+				125
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				20
+				12
 			]
 		}
 	],
@@ -1004,61 +988,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/cmd/cmd_thread.cpp",
+			"path" : "src/ap/mode/can_mode.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/cmd/driver/cmd_uart.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/cmd/process/cmd_boot.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/common/cli_thread.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/common/event.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/common/led.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/manage/can.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/manage/mode.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/manage/rs485.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/ap/thread/thread.cpp",
+			"path" : "src/ap/mode/cli_mode.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

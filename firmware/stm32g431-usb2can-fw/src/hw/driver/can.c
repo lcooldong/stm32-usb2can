@@ -1,5 +1,5 @@
 #include "can.h"
-#include "qbuffer.h"
+
 #include "cli.h"
 
 
@@ -75,40 +75,12 @@ static const uint32_t mode_tbl[] =
     };
 
 
-typedef struct
-{
-  bool is_init;
-  bool is_open;
 
-  uint32_t err_code;
-  uint8_t  state;
-  uint32_t recovery_cnt;
 
-  uint32_t q_rx_full_cnt;
-  uint32_t q_tx_full_cnt;
-  uint32_t fifo_full_cnt;
-  uint32_t fifo_lost_cnt;
+// static can_tbl_t can_tbl[CAN_MAX_CH];
+can_tbl_t can_tbl[CAN_MAX_CH];
+volatile uint32_t err_int_cnt = 0;
 
-  uint32_t fifo_idx;
-  uint32_t enable_int;
-  CanMode_t  mode;
-  CanFrame_t frame;
-  CanBaud_t  baud;
-  CanBaud_t  baud_data;
-
-  uint32_t rx_cnt;
-  uint32_t tx_cnt;
-
-  FDCAN_HandleTypeDef  hfdcan;
-  bool (*handler)(uint8_t ch, CanEvent_t evt, can_msg_t *arg);
-
-  qbuffer_t q_msg;
-  can_msg_t can_msg[CAN_MSG_RX_BUF_MAX];
-} can_tbl_t;
-
-static can_tbl_t can_tbl[CAN_MAX_CH];
-
-static volatile uint32_t err_int_cnt = 0;
 static CanFilterType_t can_filter_type = CAN_ID_MASK;
 
 #ifdef _USE_HW_CLI
@@ -918,6 +890,7 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* fdcanHandle)
     HAL_NVIC_EnableIRQ(FDCAN1_IT0_IRQn);
   }
 }
+#include "uart.h"
 
 void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef* fdcanHandle)
 {
@@ -1052,6 +1025,9 @@ void cliCan(cli_args_t *args)
 
     can_ret = canOpen(ch, mode, frame, baud, baud_data); 
     cliPrintf("canOpen() : %s\r\n", can_ret ? "True":"False");
+
+
+
     ret = true;
   }
 
@@ -1093,7 +1069,10 @@ void cliCan(cli_args_t *args)
         for (int i=0; i<msg.length; i++)
         {
           cliPrintf("0x%02X ", msg.data[i]);
+          // uartWrite(_DEF_UART2, &msg.data[i], 1);
         }
+        // uint8_t* endText = "\r\n";
+        // uartWrite(_DEF_UART2, endText, sizeof(endText));
         cliPrintf("\r\n");
       }
     }
@@ -1130,7 +1109,8 @@ void cliCan(cli_args_t *args)
         pre_time = millis();
 
         msg.frame   = frame;
-        msg.id_type = CAN_EXT;
+        // msg.id_type = CAN_EXT;
+        msg.id_type = CAN_STD;
         msg.dlc     = CAN_DLC_8;
         msg.id      = 0x314;
         msg.length  = 8;

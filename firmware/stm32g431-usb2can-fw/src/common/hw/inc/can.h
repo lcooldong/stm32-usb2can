@@ -15,6 +15,8 @@
 #define CAN_MSG_RX_BUF_MAX    HW_CAN_MSG_RX_BUF_MAX
 
 
+#include "qbuffer.h"
+
 typedef enum
 {
   CAN_100K,
@@ -113,7 +115,36 @@ typedef struct
   CanFrame_t    frame;
 } can_msg_t;
 
+typedef struct
+{
+  bool is_init;
+  bool is_open;
 
+  uint32_t err_code;
+  uint8_t  state;
+  uint32_t recovery_cnt;
+
+  uint32_t q_rx_full_cnt;
+  uint32_t q_tx_full_cnt;
+  uint32_t fifo_full_cnt;
+  uint32_t fifo_lost_cnt;
+
+  uint32_t fifo_idx;
+  uint32_t enable_int;
+  CanMode_t  mode;
+  CanFrame_t frame;
+  CanBaud_t  baud;
+  CanBaud_t  baud_data;
+
+  uint32_t rx_cnt;
+  uint32_t tx_cnt;
+
+  FDCAN_HandleTypeDef  hfdcan;
+  bool (*handler)(uint8_t ch, CanEvent_t evt, can_msg_t *arg);
+
+  qbuffer_t q_msg;
+  can_msg_t can_msg[CAN_MSG_RX_BUF_MAX];
+} can_tbl_t;
 
 
 

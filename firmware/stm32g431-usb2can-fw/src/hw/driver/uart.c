@@ -284,7 +284,7 @@ uint32_t uartWrite(uint8_t ch, uint8_t *p_data, uint32_t length)
       {
         ret = length;
       }
-      break;    
+      break;  
 
     case _DEF_UART4:
       ret = cdcWrite(p_data, length);
@@ -315,6 +315,7 @@ uint32_t uartVPrintf(uint8_t ch, const char *fmt, va_list arg)
 uint32_t uartPrintf(uint8_t ch, const char *fmt, ...)
 {
   char buf[256];
+
   va_list args;
   int len;
   uint32_t ret;

@@ -4,12 +4,13 @@
 
 #include "ap_def.h"
 
-#include "thread.h"
+typedef enum
+{
+  MODE_IDLE,
+  MODE_CLI,
+  MODE_CAN,
+} ap_mode_t;
 
-#include "cmd/cmd_thread.h"
-#include "manage/mode.h"
-#include "common/cli_thread.h"
-#include "common/led.h"
 
 
 void apInit(void);
