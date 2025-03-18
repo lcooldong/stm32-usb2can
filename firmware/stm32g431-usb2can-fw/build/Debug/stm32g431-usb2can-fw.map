@@ -18222,7 +18222,7 @@ LOAD C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/
  .igot.plt      0x20000384        0x0 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 0x20000384                        . = ALIGN (0x4)
 
-.bss            0x20000384     0x4538 load address 0x08012024
+.bss            0x20000384     0x5138 load address 0x08012024
                 0x20000384                        _sbss = .
                 0x20000384                        __bss_start__ = _sbss
  *(.bss)
@@ -18297,97 +18297,97 @@ LOAD C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/
  *fill*         0x20001f5a        0x2 
  .bss.sw_timer_counter
                 0x20001f5c        0x4 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/swtimer.c.obj
- .bss.rx_buf_3  0x20001f60      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.rx_buf_2  0x20002360      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.rx_buf_1  0x20002760      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.rx_buf_3  0x20001f60      0x800 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.rx_buf_2  0x20002760      0x800 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.rx_buf_1  0x20002f60      0x800 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
  .bss.hdma_usart3_rx
-                0x20002b60       0x60 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+                0x20003760       0x60 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
  .bss.hdma_usart2_rx
-                0x20002bc0       0x60 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+                0x200037c0       0x60 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
  .bss.hdma_usart1_rx
-                0x20002c20       0x60 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.huart3    0x20002c80       0x94 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.huart2    0x20002d14       0x94 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.huart1    0x20002da8       0x94 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.uart_tbl  0x20002e3c       0xc0 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- .bss.is_init   0x20002efc        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
- *fill*         0x20002efd        0x3 
+                0x20003820       0x60 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.huart3    0x20003880       0x94 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.huart2    0x20003914       0x94 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.huart1    0x200039a8       0x94 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.uart_tbl  0x20003a3c       0xc0 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ .bss.is_init   0x20003afc        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/uart.c.obj
+ *fill*         0x20003afd        0x3 
  .bss.USBD_Device
-                0x20002f00      0x2d0 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj
-                0x20002f00                USBD_Device
+                0x20003b00      0x2d0 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj
+                0x20003b00                USBD_Device
  .bss.is_usb_mode
-                0x200031d0        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj
- .bss.is_init   0x200031d1        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj
- .bss.cdc_type  0x200031d2        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+                0x20003dd0        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj
+ .bss.is_init   0x20003dd1        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj
+ .bss.cdc_type  0x20003dd2        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
  .bss.is_rx_full
-                0x200031d3        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+                0x20003dd3        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
  .bss.is_opened
-                0x200031d4        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
- *fill*         0x200031d5        0x3 
- .bss.q_tx_buf  0x200031d8      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
- .bss.q_rx_buf  0x200035d8      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
- .bss.q_tx      0x200039d8       0x14 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
- .bss.q_rx      0x200039ec       0x14 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+                0x20003dd4        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+ *fill*         0x20003dd5        0x3 
+ .bss.q_tx_buf  0x20003dd8      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+ .bss.q_rx_buf  0x200041d8      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+ .bss.q_tx      0x200045d8       0x14 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+ .bss.q_rx      0x200045ec       0x14 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
  .bss.UserTxBufferFS
-                0x20003a00      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
-                0x20003a00                UserTxBufferFS
+                0x20004600      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+                0x20004600                UserTxBufferFS
  .bss.UserRxBufferFS
-                0x20003e00      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
-                0x20003e00                UserRxBufferFS
+                0x20004a00      0x400 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+                0x20004a00                UserRxBufferFS
  .bss.CDC_Reset_Status
-                0x20004200        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
-                0x20004200                CDC_Reset_Status
- *fill*         0x20004201        0x3 
+                0x20004e00        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_cdc_if.c.obj
+                0x20004e00                CDC_Reset_Status
+ *fill*         0x20004e01        0x3 
  .bss.USBD_StrDesc
-                0x20004204       0x64 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_desc.c.obj
-                0x20004204                USBD_StrDesc
- .bss.mem.0     0x20004268      0x220 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usbd_conf.c.obj
+                0x20004e04       0x64 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb_cdc/usbd_desc.c.obj
+                0x20004e04                USBD_StrDesc
+ .bss.mem.0     0x20004e68      0x220 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usbd_conf.c.obj
  .bss.is_connected
-                0x20004488        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usbd_conf.c.obj
- *fill*         0x20004489        0x3 
+                0x20005088        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usbd_conf.c.obj
+ *fill*         0x20005089        0x3 
  .bss.hpcd_USB_FS
-                0x2000448c      0x2dc CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usbd_conf.c.obj
-                0x2000448c                hpcd_USB_FS
- .bss.uwTick    0x20004768        0x4 CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
-                0x20004768                uwTick
- .bss.cfgidx.0  0x2000476c        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj
- *fill*         0x2000476d        0x3 
- .bss.__sf      0x20004770      0x138 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
-                0x20004770                __sf
+                0x2000508c      0x2dc CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usbd_conf.c.obj
+                0x2000508c                hpcd_USB_FS
+ .bss.uwTick    0x20005368        0x4 CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
+                0x20005368                uwTick
+ .bss.cfgidx.0  0x2000536c        0x1 CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj
+ *fill*         0x2000536d        0x3 
+ .bss.__sf      0x20005370      0x138 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
+                0x20005370                __sf
  .bss.__stdio_exit_handler
-                0x200048a8        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
-                0x200048a8                __stdio_exit_handler
- .bss.errno     0x200048ac        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
-                0x200048ac                errno
+                0x200054a8        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
+                0x200054a8                __stdio_exit_handler
+ .bss.errno     0x200054ac        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
+                0x200054ac                errno
  .bss.__lock___malloc_recursive_mutex
-                0x200048b0        0x1 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
-                0x200048b0                __lock___malloc_recursive_mutex
+                0x200054b0        0x1 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+                0x200054b0                __lock___malloc_recursive_mutex
  .bss.__lock___sfp_recursive_mutex
-                0x200048b1        0x1 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
-                0x200048b1                __lock___sfp_recursive_mutex
- *fill*         0x200048b2        0x2 
+                0x200054b1        0x1 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+                0x200054b1                __lock___sfp_recursive_mutex
+ *fill*         0x200054b2        0x2 
  .bss.__malloc_sbrk_start
-                0x200048b4        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
-                0x200048b4                __malloc_sbrk_start
+                0x200054b4        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x200054b4                __malloc_sbrk_start
  .bss.__malloc_free_list
-                0x200048b8        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
-                0x200048b8                __malloc_free_list
+                0x200054b8        0x4 C:/ST/STM32CubeCLT_1.17.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x200054b8                __malloc_free_list
  *(COMMON)
-                0x200048bc                        . = ALIGN (0x4)
-                0x200048bc                        _ebss = .
-                0x200048bc                        __bss_end__ = _ebss
+                0x200054bc                        . = ALIGN (0x4)
+                0x200054bc                        _ebss = .
+                0x200054bc                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x200048bc      0x604 load address 0x08012024
-                0x200048c0                        . = ALIGN (0x8)
- *fill*         0x200048bc        0x4 
+                0x200054bc      0x604 load address 0x08012024
+                0x200054c0                        . = ALIGN (0x8)
+ *fill*         0x200054bc        0x4 
                 [!provide]                        PROVIDE (end = .)
-                0x200048c0                        PROVIDE (_end = .)
-                0x20004ac0                        . = (. + _Min_Heap_Size)
- *fill*         0x200048c0      0x200 
-                0x20004ec0                        . = (. + _Min_Stack_Size)
- *fill*         0x20004ac0      0x400 
-                0x20004ec0                        . = ALIGN (0x8)
+                0x200054c0                        PROVIDE (_end = .)
+                0x200056c0                        . = (. + _Min_Heap_Size)
+ *fill*         0x200054c0      0x200 
+                0x20005ac0                        . = (. + _Min_Stack_Size)
+ *fill*         0x200056c0      0x400 
+                0x20005ac0                        . = ALIGN (0x8)
 
 .noinit         0x20007800       0x4c
                 0x20007800                        . = ALIGN (0x4)

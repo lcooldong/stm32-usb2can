@@ -6,7 +6,7 @@
 #ifdef _USE_HW_UART
 
 
-#define UART_RX_BUF_LENGTH        1024
+#define UART_RX_BUF_LENGTH        2048
 
 
 
