@@ -1,7 +1,8 @@
 #include "can.h"
-
 #include "cli.h"
 
+//TEST
+#include "uart.h"
 
 #ifdef _USE_HW_CAN
 
@@ -87,7 +88,7 @@ static CanFilterType_t can_filter_type = CAN_ID_MASK;
 static void cliCan(cli_args_t *args);
 #endif
 
-static void canErrUpdate(uint8_t ch);
+
 
 
 
@@ -549,28 +550,32 @@ bool canUpdate(void)
   };
   bool ret = false;
   can_tbl_t *p_can;
-
+  
 
   for (int i=0; i<CAN_MAX_CH; i++)
   {
     p_can = &can_tbl[i];
 
-
+    // uartPrintf(HW_UART_CH_RS485, "CAN : %d | %d\r\n", p_can->err_code, p_can->state);
     switch(p_can->state)
     {
+      
       case CAN_STATE_IDLE:
         if (p_can->err_code & CAN_ERR_BUS_OFF)
         {
           canRecovery(i);
           p_can->state = CAN_STATE_WAIT;
+          uartPrintf(HW_UART_CH_RS485, "==========Recovery\r\n");
           ret = true;
         }
+        
         break;
 
       case CAN_STATE_WAIT:
         if ((p_can->err_code & CAN_ERR_BUS_OFF) == 0)
         {
           p_can->state = CAN_STATE_IDLE;
+          
         }
         break;
     }
@@ -655,6 +660,10 @@ void canErrPrint(uint8_t ch)
   if (err_code & CAN_ERR_PASSIVE) logPrintf("  ERR : CAN_ERR_PASSIVE\r\n");
   if (err_code & CAN_ERR_WARNING) logPrintf("  ERR : CAN_ERR_WARNING\r\n");
   if (err_code & CAN_ERR_BUS_OFF) logPrintf("  ERR : CAN_ERR_BUS_OFF\r\n");
+
+  // if (err_code & CAN_ERR_PASSIVE) uartPrintf(HW_UART_CH_RS485,"  ERR : CAN_ERR_PASSIVE\r\n");
+  // if (err_code & CAN_ERR_WARNING) uartPrintf(HW_UART_CH_RS485,"  ERR : CAN_ERR_WARNING\r\n");
+  // if (err_code & CAN_ERR_BUS_OFF) uartPrintf(HW_UART_CH_RS485,"  ERR : CAN_ERR_BUS_OFF\r\n");
 }
 
 void canErrUpdate(uint8_t ch)
@@ -701,7 +710,8 @@ void canErrUpdate(uint8_t ch)
     {
       (*can_tbl[ch].handler)(ch, can_evt, NULL);
     }
-  }   
+  } 
+  canErrPrint(ch);
 }
 
 void canInfoPrint(uint8_t ch)

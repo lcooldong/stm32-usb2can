@@ -80,7 +80,8 @@ typedef enum
   CAN_ERR_NONE      = 0x00000000,
   CAN_ERR_PASSIVE   = 0x00000001,
   CAN_ERR_WARNING   = 0x00000002,
-  CAN_ERR_BUS_OFF   = 0x00000004,
+  CAN_ERR_BUS_OFF   = 0x00000003,
+  // CAN_ERR_BUS_OFF   = 0x00000004,
   CAN_ERR_BUS_FAULT = 0x00000008,
   CAN_ERR_ETC       = 0x00000010,
 } CanErr_t;
@@ -171,6 +172,7 @@ uint32_t canGetTxCount(uint8_t ch);
 uint32_t canGetError(uint8_t ch);
 uint32_t canGetState(uint8_t ch);
 
+void     canErrUpdate(uint8_t ch);
 void     canErrClear(uint8_t ch);
 void     canErrPrint(uint8_t ch);
 bool     canUpdate(void);
@@ -180,6 +182,7 @@ void     canDetachRxInterrupt(uint8_t ch);
 
 bool     canLock(void);
 bool     canUnLock(void);
+
 
 #endif
 

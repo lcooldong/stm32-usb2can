@@ -3,6 +3,7 @@
 // #define UART2_DEBUG
 
 uint32_t can_index = 0;
+uint32_t count = 0;
 
 bool canModeInit(void)
 {
@@ -10,9 +11,9 @@ bool canModeInit(void)
   // canOpen(_DEF_CAN1, CAN_NORMAL, CAN_FD_NO_BRS, CAN_500K, CAN_2M);
 
 
-  canOpen(_DEF_CAN1, CAN_NORMAL, CAN_CLASSIC, CAN_125K, CAN_125K);  // Sync to uart 115200
+  canOpen(_DEF_CAN1, CAN_NORMAL, CAN_CLASSIC, CAN_500K, CAN_2M);  // Sync to uart 115200
   
-  canConfigFilter(_DEF_CAN1, 0, CAN_STD, 0x0123, 0x0000);
+  canConfigFilter(_DEF_CAN1, 0, CAN_STD, 0x0123, 0x0000); // TODO
   return true;
 }
 
@@ -23,9 +24,12 @@ void canModeMain(mode_args_t *args)
   uint32_t can_pre_time[2] = {0,};
   can_msg_t msg;
   uint32_t err_code;
-
+  // uint8_t ch;
+  // CanFrame_t frame;
+  
   
 
+  err_code = can_tbl[_DEF_CAN1].err_code;
 
   while (args->keepLoop())
   {
@@ -44,12 +48,17 @@ void canModeMain(mode_args_t *args)
       err_code = can_tbl[_DEF_CAN1].err_code;
     }
 
+
+    canErrUpdate(_DEF_CAN1);
     if(canUpdate())
     {
       uartPrintf(HW_UART_CH_RS485, "BusOff Recovery\r\n");
       // logPrintf("BusOff Recovery\r\n");
     }
-
+    else
+    {
+      
+    }
     
 
     if(canMsgAvailable(_DEF_CAN1))
@@ -100,17 +109,17 @@ bool canHeartBeat(void)
 { 
   can_msg_t state_msg;
 
-  state_msg.frame   = CAN_CLASSIC;
-  state_msg.id_type = CAN_STD;
+  state_msg.frame   = CAN_FD_NO_BRS;
+  // state_msg.id_type = CAN_STD;
+  state_msg.id_type = CAN_EXT;
   state_msg.dlc     = CAN_DLC_8;
   state_msg.id      = 0x001;
   state_msg.length  = 8;
 
   for (int i = 0; i < state_msg.length; i++)
   {
-    state_msg.data[i] = i;
+    state_msg.data[i] = i + can_index;
   }
-  
 
   if(canMsgWrite(_DEF_CAN1, &state_msg, 10) > 0)
   {
@@ -129,13 +138,14 @@ bool canHeartBeat(void)
     {
       uartPrintf(HW_UART_CH_RS485, "0x%02X ", state_msg.data[i]);
     }
-    uartPrintf(HW_UART_CH_RS485, "\r\n");
+    uartPrintf(HW_UART_CH_RS485, " | %d %d\r\n", can_tbl[_DEF_CAN1].err_code, can_tbl[_DEF_CAN1].state);
   }
 
   if (canGetRxErrCount(_DEF_CAN1) > 0 || canGetTxErrCount(_DEF_CAN1) > 0)
   {
     uartPrintf(HW_UART_CH_RS485, "ErrCnt : %d, %d\r\n", canGetRxErrCount(_DEF_CAN1), canGetTxErrCount(_DEF_CAN1));
   }
+
 
   if (err_int_cnt > 0)
   {
