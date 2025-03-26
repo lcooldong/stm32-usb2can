@@ -5,14 +5,25 @@
 uint32_t can_index = 0;
 uint32_t count = 0;
 
+
+uint8_t         can_ch = _DEF_CAN1;
+CanFilterType_t can_mode_filter_type = CAN_ID_MASK;
+CanIdType_t     can_mode_filter_id_type = CAN_STD;
+uint32_t        can_mode_filter_id1 = 0x0000'0000;
+uint32_t        can_mode_filter_id2 = 0x0000'0000;
+
+extern can_tbl_t can_tbl[CAN_MAX_CH];
+// extern volatile uint32_t err_int_cnt;
+
 bool canModeInit(void)
 {
   uartOpen(HW_UART_CH_RS485, 115200);
   // canOpen(_DEF_CAN1, CAN_NORMAL, CAN_FD_NO_BRS, CAN_500K, CAN_2M);
-
-
+  
+  
   canOpen(_DEF_CAN1, CAN_NORMAL, CAN_CLASSIC, CAN_500K, CAN_2M);  // Sync to uart 115200
   
+
   canConfigFilter(_DEF_CAN1, 0, CAN_STD, 0x0123, 0x0000); // TODO
   return true;
 }
@@ -110,10 +121,10 @@ bool canHeartBeat(void)
   can_msg_t state_msg;
 
   state_msg.frame   = CAN_FD_NO_BRS;
-  // state_msg.id_type = CAN_STD;
-  state_msg.id_type = CAN_EXT;
+  state_msg.id_type = CAN_STD;
+  // state_msg.id_type = CAN_EXT;
   state_msg.dlc     = CAN_DLC_8;
-  state_msg.id      = 0x001;
+  state_msg.id      = 0x123;
   state_msg.length  = 8;
 
   for (int i = 0; i < state_msg.length; i++)
@@ -147,11 +158,11 @@ bool canHeartBeat(void)
   }
 
 
-  if (err_int_cnt > 0)
-  {
-    uartPrintf(HW_UART_CH_RS485, "Cnt : %d\n",err_int_cnt);
-    err_int_cnt = 0;
-  }
+  // if (err_int_cnt > 0)
+  // {
+  //   uartPrintf(HW_UART_CH_RS485, "Cnt : %d\n",err_int_cnt);
+  //   err_int_cnt = 0;
+  // }
 
 
   return true;

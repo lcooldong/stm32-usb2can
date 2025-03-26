@@ -3,8 +3,8 @@
 
 #include "ap_def.h"
 
-extern volatile uint32_t err_int_cnt;
-extern can_tbl_t can_tbl[CAN_MAX_CH];
+// extern volatile uint32_t err_int_cnt;
+// extern can_tbl_t can_tbl[CAN_MAX_CH];
 
 bool canModeInit(void);
 void canModeMain(mode_args_t *args);

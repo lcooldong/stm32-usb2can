@@ -80,7 +80,7 @@ static const uint32_t mode_tbl[] =
 
 // static can_tbl_t can_tbl[CAN_MAX_CH];
 can_tbl_t can_tbl[CAN_MAX_CH];
-volatile uint32_t err_int_cnt = 0;
+static volatile uint32_t err_int_cnt = 0;
 
 static CanFilterType_t can_filter_type = CAN_ID_MASK;
 
@@ -565,7 +565,7 @@ bool canUpdate(void)
         {
           canRecovery(i);
           p_can->state = CAN_STATE_WAIT;
-          uartPrintf(HW_UART_CH_RS485, "==========Recovery\r\n");
+          
           ret = true;
         }
         
@@ -575,7 +575,8 @@ bool canUpdate(void)
         if ((p_can->err_code & CAN_ERR_BUS_OFF) == 0)
         {
           p_can->state = CAN_STATE_IDLE;
-          
+          // uartPrintf(HW_UART_CH_RS485, "==========Recovery DONE\r\n");
+          cliPrintf("==========Recovery DONE\r\n");
         }
         break;
     }
@@ -990,8 +991,8 @@ void cliCan(cli_args_t *args)
     uint8_t ch;
     CanMode_t mode = CAN_NORMAL;
     CanFrame_t frame = CAN_CLASSIC;
-    CanBaud_t baud = CAN_1M;
-    CanBaud_t baud_data = CAN_1M;
+    CanBaud_t baud = CAN_500K;
+    CanBaud_t baud_data = CAN_2M;
     const char *mode_str[]  = {"CAN_NORMAL", "CAN_MONITOR", "CAN_LOOPBACK"};
     const char *frame_str[] = {"CAN_CLASSIC", "CAN_FD_NO_BRS", "CAN_FD_BRS"};
     const char *baud_str[]  = {"CAN_100K", "CAN_125K", "CAN_250K", "CAN_500K", "CAN_1M", "CAN_2M", "CAN_4M", "CAN_5M"};
@@ -1101,10 +1102,10 @@ void cliCan(cli_args_t *args)
 
     ch = constrain(args->getData(1), 0, CAN_MAX_CH - 1); 
 
-    if (args->isStr(2, "can"))
+    if (args->isStr(2, "can"))  // normal can
       frame = CAN_CLASSIC;
     else
-      frame = CAN_FD_BRS;
+      frame = CAN_FD_BRS;       // can fd
 
     err_code = can_tbl[_DEF_CAN1].err_code;
 
@@ -1114,7 +1115,7 @@ void cliCan(cli_args_t *args)
     {
       can_msg_t msg;
 
-      if (millis()-pre_time >= 1)
+      if (millis()-pre_time >= 100)
       {
         pre_time = millis();
 
@@ -1167,6 +1168,8 @@ void cliCan(cli_args_t *args)
           cliPrintf("ch %d ErrCnt : %d, %d\r\n", ch, canGetRxErrCount(ch), canGetTxErrCount(ch));
         }
 
+
+        // Error callback Count
         if (err_int_cnt > 0)
         {
           cliPrintf("ch %d Cnt : %d\r\n", ch, err_int_cnt);

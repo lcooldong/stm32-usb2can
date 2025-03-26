@@ -20,7 +20,8 @@
 			"bsp.h": "c",
 			"string_view": "cpp",
 			"string": "cpp",
-			"cli.h": "c"
+			"cli.h": "c",
+			"times.h": "c"
 		}
 	}
 }
