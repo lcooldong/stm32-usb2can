@@ -36,3 +36,6 @@ D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\bin\Debug\net8.0-windows\runtimes\unix
 D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.IO.Ports.dll
 D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\obj\Debug\net8.0-windows\UA_CAN.csproj.AssemblyReference.cache
 D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\obj\Debug\net8.0-windows\UA_CAN.csproj.Up2Date
+D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\bin\Debug\net8.0-windows\System.CodeDom.dll
+D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\bin\Debug\net8.0-windows\System.Management.dll
+D:\Github\stm32-usb2can\GUI\UA_CAN\UA_CAN\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Management.dll

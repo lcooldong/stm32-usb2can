@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Mem9ayqRFZk=",
+  "dgSpecHash": "I844ntzoXRY=",
   "success": true,
   "projectFilePath": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\UA_CAN.csproj",
   "expectedPackageFiles": [
@@ -21,7 +21,9 @@
     "C:\\Users\\n_coo\\.nuget\\packages\\runtime.native.system.io.ports\\9.0.4\\runtime.native.system.io.ports.9.0.4.nupkg.sha512",
     "C:\\Users\\n_coo\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\9.0.4\\runtime.osx-arm64.runtime.native.system.io.ports.9.0.4.nupkg.sha512",
     "C:\\Users\\n_coo\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\9.0.4\\runtime.osx-x64.runtime.native.system.io.ports.9.0.4.nupkg.sha512",
-    "C:\\Users\\n_coo\\.nuget\\packages\\system.io.ports\\9.0.4\\system.io.ports.9.0.4.nupkg.sha512"
+    "C:\\Users\\n_coo\\.nuget\\packages\\system.codedom\\9.0.4\\system.codedom.9.0.4.nupkg.sha512",
+    "C:\\Users\\n_coo\\.nuget\\packages\\system.io.ports\\9.0.4\\system.io.ports.9.0.4.nupkg.sha512",
+    "C:\\Users\\n_coo\\.nuget\\packages\\system.management\\9.0.4\\system.management.9.0.4.nupkg.sha512"
   ],
   "logs": []
 }
