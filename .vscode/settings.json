@@ -1,0 +1,4 @@
+{
+  "stm32-for-vscode.openOCDPath": false,
+  "cmake.sourceDirectory": "D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw"
+}

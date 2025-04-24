@@ -18,13 +18,13 @@ extern can_tbl_t can_tbl[CAN_MAX_CH];
 bool canModeInit(void)
 {
   uartOpen(HW_UART_CH_RS485, 115200);
-  // canOpen(_DEF_CAN1, CAN_NORMAL, CAN_FD_NO_BRS, CAN_500K, CAN_2M);
+  canOpen(_DEF_CAN1, CAN_NORMAL, CAN_FD_NO_BRS, CAN_500K, CAN_2M);
   
   
-  canOpen(_DEF_CAN1, CAN_NORMAL, CAN_CLASSIC, CAN_500K, CAN_2M);  // Sync to uart 115200
+  // canOpen(_DEF_CAN1, CAN_NORMAL, CAN_CLASSIC, CAN_500K, CAN_2M);  // Sync to uart 115200
   
 
-  canConfigFilter(_DEF_CAN1, 0, CAN_STD, 0x0123, 0x0000); // TODO
+  // canConfigFilter(_DEF_CAN1, 0, CAN_STD, 0x0123, 0x0000); // TODO
   return true;
 }
 
