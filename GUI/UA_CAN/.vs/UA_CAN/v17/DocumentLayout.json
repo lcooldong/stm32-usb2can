@@ -11,16 +11,16 @@
       "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\queuebuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\queuebuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\queuebuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\queuebuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,19 +30,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "QueueBuffer.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\QueueBuffer.cs",
-              "RelativeDocumentMoniker": "UA_CAN\\QueueBuffer.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\QueueBuffer.cs",
-              "RelativeToolTip": "UA_CAN\\QueueBuffer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA1AAAAAAAAAA==",
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\Form1.Designer.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.Designer.cs",
+              "RelativeToolTip": "UA_CAN\\Form1.Designer.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAxwDEAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T01:46:06.565Z",
+              "WhenOpened": "2025-04-30T09:47:19.013Z",
               "EditorCaption": ""
             },
             {
@@ -53,9 +53,22 @@
               "RelativeDocumentMoniker": "UA_CAN\\Form1.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
               "RelativeToolTip": "UA_CAN\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAgwH0AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T07:59:00.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "QueueBuffer.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\QueueBuffer.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\QueueBuffer.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\QueueBuffer.cs",
+              "RelativeToolTip": "UA_CAN\\QueueBuffer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T01:46:06.565Z",
               "EditorCaption": ""
             },
             {
@@ -66,22 +79,9 @@
               "RelativeDocumentMoniker": "UA_CAN\\USB2CAN.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\USB2CAN.cs",
               "RelativeToolTip": "UA_CAN\\USB2CAN.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAYwGAAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAgwJgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T07:52:22.248Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Program.cs",
-              "RelativeDocumentMoniker": "UA_CAN\\Program.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Program.cs",
-              "RelativeToolTip": "UA_CAN\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T07:07:11.144Z",
               "EditorCaption": ""
             },
             {
@@ -95,10 +95,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T07:04:58.904Z",
               "EditorCaption": " [\uB514\uC790\uC778]"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

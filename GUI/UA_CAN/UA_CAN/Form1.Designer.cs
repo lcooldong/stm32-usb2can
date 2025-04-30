@@ -28,67 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            components = new System.ComponentModel.Container();
+            btnConnect = new Button();
             portBox = new ComboBox();
             baudBox = new ComboBox();
-            label1 = new Label();
-            label2 = new Label();
+            lblPort = new Label();
+            lblBaud = new Label();
+            rtbConsole = new RichTextBox();
+            timer1 = new System.Windows.Forms.Timer(components);
+            btnTimer = new Button();
             SuspendLayout();
             // 
-            // button1
+            // btnConnect
             // 
-            button1.Location = new Point(449, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnConnect.Location = new Point(635, 11);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(75, 23);
+            btnConnect.TabIndex = 0;
+            btnConnect.Text = "connect";
+            btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += btnConnect_Click;
             // 
             // portBox
             // 
             portBox.FormattingEnabled = true;
             portBox.Location = new Point(92, 11);
             portBox.Name = "portBox";
-            portBox.Size = new Size(121, 23);
+            portBox.Size = new Size(308, 23);
             portBox.TabIndex = 1;
             // 
             // baudBox
             // 
             baudBox.FormattingEnabled = true;
-            baudBox.Location = new Point(296, 11);
+            baudBox.Location = new Point(482, 11);
             baudBox.Name = "baudBox";
             baudBox.Size = new Size(121, 23);
             baudBox.TabIndex = 2;
             // 
-            // label1
+            // lblPort
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(57, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(29, 15);
-            label1.TabIndex = 3;
-            label1.Text = "Port";
+            lblPort.AutoSize = true;
+            lblPort.Location = new Point(57, 15);
+            lblPort.Name = "lblPort";
+            lblPort.Size = new Size(29, 15);
+            lblPort.TabIndex = 3;
+            lblPort.Text = "Port";
             // 
-            // label2
+            // lblBaud
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(244, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(34, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Baud";
+            lblBaud.AutoSize = true;
+            lblBaud.Location = new Point(442, 15);
+            lblBaud.Name = "lblBaud";
+            lblBaud.Size = new Size(34, 15);
+            lblBaud.TabIndex = 4;
+            lblBaud.Text = "Baud";
+            // 
+            // rtbConsole
+            // 
+            rtbConsole.Location = new Point(57, 127);
+            rtbConsole.Name = "rtbConsole";
+            rtbConsole.Size = new Size(543, 225);
+            rtbConsole.TabIndex = 6;
+            rtbConsole.Text = "";
+            // 
+            // btnTimer
+            // 
+            btnTimer.Location = new Point(57, 72);
+            btnTimer.Name = "btnTimer";
+            btnTimer.Size = new Size(75, 23);
+            btnTimer.TabIndex = 7;
+            btnTimer.Text = "Timer";
+            btnTimer.UseVisualStyleBackColor = true;
+            btnTimer.Click += btnTimer_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(btnTimer);
+            Controls.Add(rtbConsole);
+            Controls.Add(lblBaud);
+            Controls.Add(lblPort);
             Controls.Add(baudBox);
             Controls.Add(portBox);
-            Controls.Add(button1);
+            Controls.Add(btnConnect);
             Name = "Form1";
             Text = "F";
             Load += Form1_Load;
@@ -98,10 +122,13 @@
 
         #endregion
 
-        private Button button1;
+        private Button btnConnect;
         private ComboBox portBox;
         private ComboBox baudBox;
-        private Label label1;
-        private Label label2;
+        private Label lblPort;
+        private Label lblBaud;
+        private RichTextBox rtbConsole;
+        private System.Windows.Forms.Timer timer1;
+        private Button btnTimer;
     }
 }

@@ -48,7 +48,7 @@ void canModeMain(mode_args_t *args)
     if(can_cur_time - can_pre_time[0] >= 100)
     {
       can_pre_time[0] = can_cur_time;
-      canHeartBeat();
+      // canHeartBeat();
     }
 
     
@@ -75,24 +75,44 @@ void canModeMain(mode_args_t *args)
     if(canMsgAvailable(_DEF_CAN1))
     {
       canMsgRead(_DEF_CAN1, &msg);
-
+      uartWrite(HW_UART_CH_RS485, (uint8_t *)&msg, sizeof(msg));
+      
       can_index %= 10000;
-      uartPrintf(HW_UART_CH_RS485, "%03d(R) <- id ", can_index++);
+      uartPrintf(HW_UART_CH_USB, "%03d(R) <- id ", can_index++);
       if (msg.id_type == CAN_STD)
       {
-        uartPrintf(HW_UART_CH_RS485, "std ");
+        uartPrintf(HW_UART_CH_USB, "std ");
       }
       else
       {
-        uartPrintf(HW_UART_CH_RS485, "ext ");
+        uartPrintf(HW_UART_CH_USB, "ext ");
       }
-      uartPrintf(HW_UART_CH_RS485, ": 0x%08X, L:%02d, ", msg.id, msg.length);
+      uartPrintf(HW_UART_CH_USB, ": 0x%08X, L:%02d, ", msg.id, msg.length);
 
       for (int i = 0; i < msg.length; i++)
       {
-        uartPrintf(HW_UART_CH_RS485, "0x%02X ", msg.data[i]);
+        uartPrintf(HW_UART_CH_USB, "0x%02X ", msg.data[i]);
       }
-      uartPrintf(HW_UART_CH_RS485, "\r\n");
+      uartPrintf(HW_UART_CH_USB, "\r\n");
+
+
+      // can_index %= 10000;
+      // uartPrintf(HW_UART_CH_RS485, "%03d(R) <- id ", can_index++);
+      // if (msg.id_type == CAN_STD)
+      // {
+      //   uartPrintf(HW_UART_CH_RS485, "std ");
+      // }
+      // else
+      // {
+      //   uartPrintf(HW_UART_CH_RS485, "ext ");
+      // }
+      // uartPrintf(HW_UART_CH_RS485, ": 0x%08X, L:%02d, ", msg.id, msg.length);
+
+      // for (int i = 0; i < msg.length; i++)
+      // {
+      //   uartPrintf(HW_UART_CH_RS485, "0x%02X ", msg.data[i]);
+      // }
+      // uartPrintf(HW_UART_CH_RS485, "\r\n");
     }
 
     if(can_cur_time - can_pre_time[1] >= 1000)
