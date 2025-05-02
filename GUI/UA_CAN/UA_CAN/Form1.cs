@@ -44,7 +44,7 @@ namespace UA_CAN
             portBox.DropDown += PortBox_DropDown;
             
 
-            //Serial.autoConnect();   // 
+            //Serial.autoConnect();   // Connect to last COM Port.
         }
 
         private void PortBox_DropDown(object? sender, EventArgs e)
@@ -70,9 +70,7 @@ namespace UA_CAN
                     if (Serial.begin(port, baudrate))
                     {
                         Log($"[O] Connected to {port} @ {baudBox.SelectedItem} baud");
-                        isConnected = true;
-
-                        btnConnect.Text = "Disconnect";
+                        btnConnect_Open();
                     }
                     else
                     {
@@ -82,18 +80,17 @@ namespace UA_CAN
                 else 
                 {
                     Serial.close();
-                    isConnected= false;
-                    btnConnect.Text = "Connect";
+                    btnConnect_Close();
                     Log($"[ ] Disconnected from {port}");
                 }
             }
             else
             {
                 Log($"Please set port or baudrate");
-            }
-
-           
+            }           
         }
+
+
 
         private void btnTimer_Click(object sender, EventArgs e)
         {
@@ -114,27 +111,48 @@ namespace UA_CAN
                 timerFlag = false;
             }
 
+           
+
+           
+
+            
 
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
 
-
-
             //Log($"{count++}");
             if (Serial.isUSBConnected())
             {
+                
+                if (Serial.sp.IsOpen) 
+                {
+                    btnConnect_Open();
+
+
+                }
                 Log($" {count++} {Serial.sp.PortName} {Serial.sp.IsOpen} - {Serial.lastPort}");
             }
             else
             {
+
+                btnConnect_Close();
                 Log($" {count--} {Serial.sp.PortName} {Serial.sp.IsOpen} - {Serial.lastPort}");
-                isConnected = false;
-                btnConnect.Text = "Connect";
             }
+        }
 
 
+        private void btnConnect_Open()
+        {
+            isConnected = true;
+            btnConnect.Text = "Disconnect";
+        }
+
+        private void btnConnect_Close() 
+        {
+            isConnected = false;
+            btnConnect.Text = "Connect";
         }
 
         private void Log(string message)

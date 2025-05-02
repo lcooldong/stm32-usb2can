@@ -42,8 +42,7 @@
               "RelativeToolTip": "UA_CAN\\Form1.Designer.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAxwDEAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T09:47:19.013Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T09:47:19.013Z"
             },
             {
               "$type": "Document",
@@ -53,7 +52,7 @@
               "RelativeDocumentMoniker": "UA_CAN\\Form1.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
               "RelativeToolTip": "UA_CAN\\Form1.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAgwH0AAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAUwHMAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T07:59:00.371Z",
               "EditorCaption": ""
@@ -68,8 +67,7 @@
               "RelativeToolTip": "UA_CAN\\QueueBuffer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T01:46:06.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T01:46:06.565Z"
             },
             {
               "$type": "Document",
@@ -79,7 +77,7 @@
               "RelativeDocumentMoniker": "UA_CAN\\USB2CAN.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\USB2CAN.cs",
               "RelativeToolTip": "UA_CAN\\USB2CAN.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAgwJgAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAQwFwAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T07:52:22.248Z",
               "EditorCaption": ""
@@ -93,8 +91,7 @@
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "UA_CAN\\Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T07:04:58.904Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2025-04-18T07:04:58.904Z"
             }
           ]
         }

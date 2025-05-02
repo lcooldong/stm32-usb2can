@@ -3,6 +3,7 @@
 // #define UART2_DEBUG
 
 uint32_t can_index = 0;
+uint8_t uart_rx_index = 0;
 uint32_t count = 0;
 
 
@@ -71,11 +72,11 @@ void canModeMain(mode_args_t *args)
       
     }
     
-
+    // CAN -> RS485
     if(canMsgAvailable(_DEF_CAN1))
     {
       canMsgRead(_DEF_CAN1, &msg);
-      uartWrite(HW_UART_CH_RS485, (uint8_t *)&msg, sizeof(msg));
+      uartWrite(HW_UART_CH_RS485, (uint8_t *)&msg, sizeof(msg));  
       
       can_index %= 10000;
       uartPrintf(HW_UART_CH_USB, "%03d(R) <- id ", can_index++);
@@ -121,6 +122,27 @@ void canModeMain(mode_args_t *args)
       ledToggle(_DEF_LED2);
     }
 
+    // RS485 -> CAN
+    if (uartAvailable(HW_UART_CH_RS485) > 0)
+    {
+      
+      uint8_t byteData = uartRead(HW_UART_CH_RS485); // 1byte
+      
+      if(uart_rx_index >= sizeof(msg.data))
+      {
+        canMsgWrite(_DEF_CAN1, &msg, 10); //
+        uart_rx_index = 0;
+      }
+      
+
+      for (int i = 0; i < msg.length; i++)
+      {
+        
+      }
+      
+      
+      canMsgWrite(_DEF_CAN1, &msg, 10); // 
+    }
 #ifdef UART2_DEBUG
     if(uartAvailable(_DEF_UART2) > 0)
     {

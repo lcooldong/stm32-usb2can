@@ -13,7 +13,7 @@ namespace UA_CAN
     {
         public SerialPort sp = new SerialPort();
         public bool startFlag = false;
-        public string lastPort = "";
+        public string lastPort = "COM1";
 
         private CancellationTokenSource _cts_request = new CancellationTokenSource();
         private CancellationTokenSource _cts_response = new CancellationTokenSource();
@@ -75,6 +75,9 @@ namespace UA_CAN
             }
         }
 
+        
+
+
         public void close() 
         {
             sp.Close();
@@ -83,8 +86,31 @@ namespace UA_CAN
 
         public void reset() 
         {
-
+            
         }
+
+
+        public void write(byte[] buffer, int length) 
+        {
+            try
+            {
+                if (sp.IsOpen) 
+                {
+                    sp.Write(buffer, 0, length);
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+
+            
+        }
+
+
 
         public void autoConnect() 
         {
@@ -133,7 +159,7 @@ namespace UA_CAN
 
                 foreach (var device in devices)
                 {
-                    if (sp.PortName == device.Key)
+                    if (lastPort == device.Key)
                     {
                         ret = true;
                         break;
