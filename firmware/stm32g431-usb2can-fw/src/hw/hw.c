@@ -36,6 +36,12 @@ bool hwInit(void)
 
 
   logOpen(HW_LOG_CH, 115200);
+  for (size_t i = 0; i < 4; i++)
+  {
+    uartOpen(i, 115200);
+  }
+  
+
   logPrintf("[ Firmware Begin... ]\r\n");
   logPrintf("Booting..Name \t\t: %s\r\n", _DEF_BOARD_NAME);
   logPrintf("Booting..Ver  \t\t: %s\r\n", _DEF_FIRMWARE_VERSION);

@@ -73,7 +73,8 @@ bool uartInit(void)
   for (int i=0; i<UART_MAX_CH; i++)
   {
     uart_tbl[i].is_open = false;
-    uart_tbl[i].baud = 57600;
+    // uart_tbl[i].baud = 57600;
+    uart_tbl[i].baud = 115200;
     uart_tbl[i].rx_cnt = 0;
     uart_tbl[i].tx_cnt = 0;    
   }

@@ -15,8 +15,6 @@ namespace UA_CAN
         public bool startFlag = false;
         public string lastPort = "COM1";
 
-        private CancellationTokenSource _cts_request = new CancellationTokenSource();
-        private CancellationTokenSource _cts_response = new CancellationTokenSource();
         private CancellationTokenSource _cts_connection = new CancellationTokenSource();
 
         //public Dictionary<string, string> usbDevices;
@@ -24,16 +22,7 @@ namespace UA_CAN
         public int[] baudRates = new int[] { 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 };
 
 
-        enum GripperState 
-        {
-            
-        }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct canPacket 
-        {
-            
-        }
 
 
         public bool begin(string port, int baudrate = 115200) 
@@ -110,6 +99,8 @@ namespace UA_CAN
             
         }
 
+
+  
 
 
         public void autoConnect() 
@@ -193,50 +184,7 @@ namespace UA_CAN
         
         }
 
-        public void start(int interval) 
-        {
-            _cts_request.Cancel();
-            _cts_request = new CancellationTokenSource();
 
-            Task.Run(async () => 
-            {
-                await requestTask(_cts_request, interval);
-            });
-        }
-
-        // Request to board
-        private async Task requestTask(CancellationTokenSource cts, int delay) 
-        {
-            while (!cts.IsCancellationRequested) 
-            {
-                
-
-                await Task.Delay(delay);
-            }
-            
-        }
-
-        // Receive data continuously
-        public void getStatus() 
-        {
-            _cts_response.Cancel();
-            _cts_response = new CancellationTokenSource();
-
-            Task.Run(async () =>
-            {
-                await responseTask(_cts_request);
-            });
-        }
-
-        private async Task responseTask(CancellationTokenSource cts) 
-        {
-            while (!_cts_response.IsCancellationRequested) 
-            {
-
-                await Task.Delay(1);
-            }
-            
-        }
 
         public List<string> GetUSBDevicesList()
         {

@@ -31,6 +31,7 @@ void apMain(void)
 {
   while(1)
   {
+  
     switch (mode)
     {
       case MODE_CLI:

@@ -8,7 +8,8 @@ namespace UA_CAN
 {
     public partial class Form1 : Form
     {
-        USB2CAN Serial = new USB2CAN();
+        static USB2CAN Serial = new USB2CAN();
+        Gripper gripper = new Gripper(Serial);
 
         private bool isConnected = false;
         private bool timerFlag = false;
@@ -133,6 +134,7 @@ namespace UA_CAN
 
                 }
                 Log($" {count++} {Serial.sp.PortName} {Serial.sp.IsOpen} - {Serial.lastPort}");
+                gripper.sendPacket();
             }
             else
             {

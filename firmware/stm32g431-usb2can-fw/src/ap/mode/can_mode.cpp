@@ -76,7 +76,10 @@ void canModeMain(mode_args_t *args)
     if(canMsgAvailable(_DEF_CAN1))
     {
       canMsgRead(_DEF_CAN1, &msg);
-      uartWrite(HW_UART_CH_RS485, (uint8_t *)&msg, sizeof(msg));  
+      // uint8_t byteData[1] = {0x50}; // 1byte
+      // uartWrite(HW_UART_CH_RS485, byteData, 1); // Send Test
+      
+      uartWrite(HW_UART_CH_RS485, msg.data, msg.length);
       
       can_index %= 10000;
       uartPrintf(HW_UART_CH_USB, "%03d(R) <- id ", can_index++);
@@ -89,13 +92,14 @@ void canModeMain(mode_args_t *args)
         uartPrintf(HW_UART_CH_USB, "ext ");
       }
       uartPrintf(HW_UART_CH_USB, ": 0x%08X, L:%02d, ", msg.id, msg.length);
-
+      
+      // Receive Can Message
       for (int i = 0; i < msg.length; i++)
       {
         uartPrintf(HW_UART_CH_USB, "0x%02X ", msg.data[i]);
       }
       uartPrintf(HW_UART_CH_USB, "\r\n");
-
+      
 
       // can_index %= 10000;
       // uartPrintf(HW_UART_CH_RS485, "%03d(R) <- id ", can_index++);
@@ -116,21 +120,43 @@ void canModeMain(mode_args_t *args)
       // uartPrintf(HW_UART_CH_RS485, "\r\n");
     }
 
-    if(can_cur_time - can_pre_time[1] >= 1000)
+    if(can_cur_time - can_pre_time[1] >= 500)
     {
       can_pre_time[1] = can_cur_time;
+      count++;
+
+      // Terminal 에 작성 해야만 uartAvailable(HW_UART_CH_USB) 가 +가 된다.
+      uartPrintf(HW_UART_CH_USB, "[%d]:%d %d\r\n", count, uartAvailable(HW_UART_CH_USB), uartAvailable(HW_UART_CH_RS485));
+      uartFlush(HW_UART_CH_USB);  // Queue Clear = uartAvailable(HW_UART_CH_USB) -> 0
+      // uartPrintf(HW_UART_CH_RS485, "LED2 : %d\r\n", count);  // Transmit OK
       ledToggle(_DEF_LED2);
     }
+    
+    // uartAvailable USB Not Work
+    if(uartAvailable(HW_UART_CH_RS485) > 0)
+    {
+      uartPrintf(HW_UART_CH_RS485, "LED2 : %d\r\n", count);
+    }
+    // RS485 -> USB
+    uint8_t byteData1 = uartRead(HW_UART_CH_RS485); // 1byte
+    if(byteData1 != 0x00)
+    {
+      // uartPrintf(HW_UART_CH_RS485, "RETURN : 0x%02X\r\n", byteData1);
+      uartPrintf(HW_UART_CH_USB, "RECEIVED : 0x%02X\r\n", byteData1);
+      uartWrite(HW_UART_CH_RS485, &byteData1, 1); // Send Test
+    }
+
 
     // RS485 -> CAN
     if (uartAvailable(HW_UART_CH_RS485) > 0)
     {
       
-      uint8_t byteData = uartRead(HW_UART_CH_RS485); // 1byte
+      // uint8_t byteData = uartRead(HW_UART_CH_RS485); // 1byte
+      // uartPrintf(HW_UART_CH_USB, "0x%02X\r\n", byteData);
       
       if(uart_rx_index >= sizeof(msg.data))
       {
-        canMsgWrite(_DEF_CAN1, &msg, 10); //
+        // canMsgWrite(_DEF_CAN1, &msg, 10); //
         uart_rx_index = 0;
       }
       
@@ -139,21 +165,30 @@ void canModeMain(mode_args_t *args)
       {
         
       }
+      // uartPrintf(HW_UART_CH_DEBUG, "D Hello\r\n");
+      // uartPrintf(HW_UART_CH_EXT, "E Hello\r\n");
+      // uartPrintf(HW_UART_CH_USB, "U Hello\r\n");
       
       
-      canMsgWrite(_DEF_CAN1, &msg, 10); // 
+
+      // delay(1000);
+      
+      
     }
+
+    
 #ifdef UART2_DEBUG
-    if(uartAvailable(_DEF_UART2) > 0)
+    if(uartAvailable(HW_UART_CH_RS485) > 0)
     {
-      uartPrintf(_DEF_UART2, "RX : 0x%X\r\n", uartRead(_DEF_UART2));
+      // uartPrintf(HW_UART_CH_RS485, "RX : 0x%X\r\n", uartRead(HW_UART_CH_RS485));
+      uint8_t byteData = uartRead(HW_UART_CH_RS485); // 1byte
+      uartPrintf(HW_UART_CH_USB, "RX : 0x%02X\r\n", byteData);  // RS485 -> USB
     }
     else
     {
       delay(1);
     }
 #endif
-
   }
   logPrintf("canMode out\r\n");
 }
