@@ -1,14 +1,14 @@
 # ninja log v5
-11	32	0	D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs	936d5f1764637e01
+21	41	0	D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs	936d5f1764637e01
 1012	1733	7684554948794068	CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj	ff910704b981b0d8
 529	1264	7684554944135471	CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/hw.c.obj	af749213c9de8473
 34	808	7684554939503652	CMakeFiles/stm32g431-usb2can-fw.dir/src/bsp/bsp.c.obj	d29f3e8af0e32066
 284	1048	7684554941498258	CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/swtimer.c.obj	d805cccfa070fa55
 1229	1803	7684554949365680	CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_nand.c.obj	6b5ed19d414f185f
-306	1125	7684554942038265	CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj	6d3c20fb0aead42a
 207	348	7684554935025623	CMakeFiles/stm32g431-usb2can-fw.dir/src/bsp/startup/startup_stm32g431cbux.s.obj	b160f851301c96b9
-273	1120	7684554941998267	CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/spi.c.obj	90a6ee112f256064
+306	1125	7684554942038265	CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/usb/usb.c.obj	6d3c20fb0aead42a
 1105	1822	7684554949530848	CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj	83610644445c163e
+273	1120	7684554941998267	CMakeFiles/stm32g431-usb2can-fw.dir/src/hw/driver/spi.c.obj	90a6ee112f256064
 113	451	7684554936095089	CMakeFiles/stm32g431-usb2can-fw.dir/src/bsp/device/sysmem.c.obj	8c7e34b85e07026e
 819	1309	7684554944610631	CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_comp.c.obj	e85fc5386a4ab745
 214	524	7684554936780245	CMakeFiles/stm32g431-usb2can-fw.dir/src/common/core/util.c.obj	d60cf82ee340f56d
@@ -128,4 +128,3 @@
 2172	2536	7684554956944853	CMakeFiles/stm32g431-usb2can-fw.dir/src/lib/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj	d1d2fdc97f249112
 2621	3242	7684554962242337	stm32g431-usb2can-fw.elf	dcffd57f5eabe41
 62	108	0	clean	529518bdb38c021b
-21	41	0	D:/Github/stm32-usb2can/firmware/stm32g431-usb2can-fw/build/Debug/CMakeFiles/cmake.verify_globs	936d5f1764637e01

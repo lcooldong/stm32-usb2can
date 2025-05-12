@@ -10,6 +10,7 @@ namespace UA_CAN
     {
         static USB2CAN Serial = new USB2CAN();
         Gripper gripper = new Gripper(Serial);
+        CANablePro can0 = new CANablePro(Serial);
 
         private bool isConnected = false;
         private bool timerFlag = false;
@@ -46,6 +47,7 @@ namespace UA_CAN
             
 
             //Serial.autoConnect();   // Connect to last COM Port.
+            
         }
 
         private void PortBox_DropDown(object? sender, EventArgs e)
@@ -72,6 +74,7 @@ namespace UA_CAN
                     {
                         Log($"[O] Connected to {port} @ {baudBox.SelectedItem} baud");
                         btnConnect_Open();
+                        can0.read();    // read CAN After UART Open
                     }
                     else
                     {
@@ -134,7 +137,17 @@ namespace UA_CAN
 
                 }
                 Log($" {count++} {Serial.sp.PortName} {Serial.sp.IsOpen} - {Serial.lastPort}");
-                gripper.sendPacket();
+
+                Log($"{can0._packet.id} | {can0._packet.dlc}");
+                for (int i = 0; i < can0._packet.dlc; i++)
+                {
+                    Log($"{can0._packet.data[i]} ", false);
+                }
+                Log("");
+                //Log($"{can0._raw}");
+
+
+                //gripper.sendPacket();
             }
             else
             {
@@ -157,9 +170,9 @@ namespace UA_CAN
             btnConnect.Text = "Connect";
         }
 
-        private void Log(string message)
+        private void Log(string format, params object[] args)
         {
-
+            string message = string.Format(format, args);
             string time = DateTime.Now.ToString("HH:mm::ss");
 
 
@@ -169,12 +182,12 @@ namespace UA_CAN
             {
                 rtbConsole.Invoke(new Action(() =>
                 {
-                    rtbConsole.AppendText(message + Environment.NewLine);
+                    rtbConsole.AppendText(message);
                 }));
             }
             else
             {
-                rtbConsole.AppendText(message + Environment.NewLine);
+                rtbConsole.AppendText(message);
             }
             rtbConsole.ScrollToCaret();
         }

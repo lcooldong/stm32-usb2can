@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Console_CanablePro_Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14d29f60a6fd907614af86570a4499907bc9dc49")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c712362ae381fa50d1af04622f7c031d83c9016")]
 [assembly: System.Reflection.AssemblyProductAttribute("Console_CanablePro_Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Console_CanablePro_Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

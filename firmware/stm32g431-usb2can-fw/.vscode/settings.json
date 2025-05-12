@@ -1,6 +1,7 @@
 {
   "files.associations": {
-    "compare": "cpp"
+    "compare": "cpp",
+    "can.h": "c"
   },
   "stm32-for-vscode.openOCDPath": false
 }
