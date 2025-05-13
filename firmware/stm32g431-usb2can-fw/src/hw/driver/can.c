@@ -1115,16 +1115,16 @@ void cliCan(cli_args_t *args)
     {
       can_msg_t msg;
 
-      if (millis()-pre_time >= 100)
+      if (millis()-pre_time >= 50)
       {
         pre_time = millis();
 
         msg.frame   = frame;
         // msg.id_type = CAN_EXT;
         msg.id_type = CAN_STD;
-        msg.dlc     = CAN_DLC_8;
-        msg.id      = 0x314;
-        msg.length  = 8;
+        msg.dlc     = CAN_DLC_32;
+        msg.id      = 0x123;
+        msg.length  = 32;
 
         for (uint32_t i = 0; i < msg.length; i++)
         {

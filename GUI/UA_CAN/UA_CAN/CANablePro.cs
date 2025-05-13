@@ -5,32 +5,125 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace UA_CAN
 {
+    // 구조체 대신에 클래스로
+    internal class packet_t
+    {
+        public int id;
+        public int dlc;
+        public List<byte> data = new List<byte>();
+    }
+    public enum CAN_TYPE
+    {
+        CAN_FD = 0,
+        CAN_CLASSIC = 1
+    }
+
+
+
+    public enum CAN_DLC 
+    {
+        FDCAN_DLC_BYTE_0,
+        FDCAN_DLC_BYTE_1,
+        FDCAN_DLC_BYTE_2,
+        FDCAN_DLC_BYTE_3,
+        FDCAN_DLC_BYTE_4,
+        FDCAN_DLC_BYTE_5,
+        FDCAN_DLC_BYTE_6,
+        FDCAN_DLC_BYTE_7,
+        FDCAN_DLC_BYTE_8,
+        FDCAN_DLC_BYTE_12,
+        FDCAN_DLC_BYTE_16,
+        FDCAN_DLC_BYTE_20,
+        FDCAN_DLC_BYTE_24,
+        FDCAN_DLC_BYTE_32,
+        FDCAN_DLC_BYTE_48,
+        FDCAN_DLC_BYTE_64,
+    }
+
+
     
 
-    internal class CANablePro
+    internal class CANablePro(USB2CAN serial)
     {
-        private USB2CAN _serial;
+        private USB2CAN _serial = serial;
+        public packet_t _sendPacekt = new packet_t();
+
         private CancellationTokenSource _cts_read = new CancellationTokenSource();
 
-        public packet_t _packet;
         public int _targetId = 0x314;    // ID
         public string _raw = "";
 
-        public CANablePro(USB2CAN serial) 
+        public CircularQueue<packet_t> packetQueue = new CircularQueue<packet_t>(256);
+
+        CAN_TYPE canType = new CAN_TYPE();
+
+        public readonly int[] CAN_LEN = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24, 32, 48, 64 };
+
+
+
+        public void write(CAN_TYPE type, int id, CAN_DLC dlc, byte[] packet) 
         {
-            _serial = serial;
-            _packet.data = new List<int>();
+            _sendPacekt.data.Clear();
+            //_sendPacekt.id = id;
+            //_sendPacekt.dlc = (int)dlc;
+
+            var localPacket = new packet_t
+            {
+                id = id,
+                //dlc = CAN_LEN[(int)dlc],
+                dlc = (int)dlc,
+                //data = packet.Take((int)dlc).ToList()
+                data = packet.Take(CAN_LEN[(int)dlc]).ToList()
+            };
+
+
+            Task.Run(() => {
+
+                
+
+                //for (int i = 0; i < _sendPacekt.dlc; i++)
+                //{
+                //    _sendPacekt.data.Add(packet[i]);
+                //}
+
+                WriteTask(type, localPacket);
+            });
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct packet_t
+
+        private Task WriteTask(CAN_TYPE type, packet_t pacekt) 
         {
-            public int id;
-            public int dlc;
-            public List<int> data;
+
+            string toSend = type == CAN_TYPE.CAN_FD ? "d" : "t";
+            toSend += pacekt.id.ToString("X");
+            toSend += pacekt.dlc.ToString("X");
+
+            for (int i = 0; i< pacekt.data.Count; i++)
+            {
+                toSend += pacekt.data[i].ToString("X2");
+                
+            }
+            toSend += "\r";
+
+            if (toSend.Length > 0)
+            {
+                
+                Console.WriteLine($"OK -> {toSend}");
+            }
+            else 
+            {
+                Console.WriteLine("Nothing To Send");    
+            }
+            //await _serial.sp.BaseStream.WriteAsync(Encoding.ASCII.GetBytes(toSend)).ConfigureAwait(false);
+            _serial.sp.BaseStream.Write(Encoding.ASCII.GetBytes(toSend));
+
+
+            return Task.CompletedTask;
         }
 
         public void read()
@@ -40,21 +133,26 @@ namespace UA_CAN
 
             Task.Run( async () =>
             {
-                await readTask();
+                await ReadTask();
             });
         }
 
-        private async Task readTask() 
+        public void stopRead() 
+        {
+            _cts_read?.Cancel();
+        }
+
+        private async Task ReadTask()
         {
             string response = "";
-            //while (!_cts_read.IsCancellationRequested)
-            while (true) 
+            while (!_cts_read.IsCancellationRequested)
             {
-                
-                response = await ReadExistsStream(_serial.sp).ConfigureAwait(false);
+                //response = await ReadExistsStream(_serial.sp).ConfigureAwait(false);
+                response = await ReadStreamBlockAsync(_serial.sp, 68, 1).ConfigureAwait(false); // 32 bytes
                 if (response.Length > 0)
                 {
                     _raw = response;
+                    //Console.WriteLine(response);
 
                     if (response.StartsWith("d") )
                     {
@@ -62,15 +160,17 @@ namespace UA_CAN
 
                         GetPacket(byteStr);
 
-                        //if (_targetId == _packet.id) 
-                        //{
-                        //    Console.WriteLine("String ->Byte Value ID : 0x{0:X} [{1}]", _packet.id, _packet.dlc);
+                        //var last = packetQueue.GetLast();
 
-                        //    for (int i = 0; i < _packet.dlc; i++)
+                        //if (_targetId == last?.id && last != null)
+                        //{
+                        //    Console.WriteLine("String ->Byte Value ID : 0x{0:X} [{1}]", last.id, last.dlc);
+
+                        //    for (int i = 0; i < last.dlc; i++)
                         //    {
-                        //        Console.WriteLine("{0:X2}", _packet.data[i]);
+                        //        Console.WriteLine("{0:X2}", last.data[i]);
                         //    }
-                        //} 
+                        //}
 
                     }
                     else
@@ -79,13 +179,17 @@ namespace UA_CAN
                     }
                 }
             }
-            
-
         }
 
+
+        // read under 64 bytes
         private async Task<string> ReadExistsStream(SerialPort _sp)
         {
             int length = _sp.BytesToRead;
+            //if (length > 0)
+            //{
+            //    Console.WriteLine("LENG " + length);
+            //}
             if (length == 0) return "";
 
             byte[] buffer = new byte[length];
@@ -93,40 +197,111 @@ namespace UA_CAN
             return Encoding.UTF8.GetString(buffer.ToArray());
         }
 
+
+        private async Task<string> ReadStreamBlockAsync(SerialPort _sp, int maxBytes = 1024, int readDelayMs = 10)
+        {
+            List<byte> bufferList = new List<byte>();
+            byte[] tempBuffer = new byte[256]; // read in 256-byte chunks
+
+            var stream = _sp.BaseStream;
+
+            int attempts = 0;
+            while (_sp.BytesToRead > 0 || attempts < 3)
+            {
+                int bytesRead = await stream.ReadAsync(tempBuffer, 0, tempBuffer.Length).ConfigureAwait(false);
+                if (bytesRead > 0)
+                {
+                    bufferList.AddRange(tempBuffer.Take(bytesRead));
+                    attempts = 0; // reset on successful read
+                }
+                else
+                {
+                    attempts++;
+                    await Task.Delay(readDelayMs);
+                }
+
+                if (bufferList.Count >= maxBytes) break;
+            }
+
+            return Encoding.UTF8.GetString(bufferList.ToArray());
+        }
+
         private void GetPacket(byte[] packet) 
         {
             int id = 0, hex;
             int high, low;
+            
 
             for (int i = 1; i <= 3; i++)
             {
                 hex = packet[i] > '9' ? packet[i] - 'A' + 10 : packet[i] - '0';
-                //Console.WriteLine(hex);
                 id += hex << (4 * (3 - i)); // hex 1개씩
             }
+            int dlc = packet[4] > '9' ? packet[4] - 'A' + 10 : packet[4] - '0'; // D -> 13
 
-            _packet.id = id;
-            _packet.dlc = packet[4] > '9' ? packet[4] - 'A' + 10 : packet[4] - '0';
+            packet_t pkt = new packet_t() { id = id, dlc = dlc };
 
-            int[] hexArray = new int[_packet.dlc];       
 
-            for (int i = 5; i < 5 + _packet.dlc * 2; i += 2)
-            {
-                high = packet[i] > '9' ? packet[i] - 'A' + 10 : packet[i] - '0';
-                low = packet[i + 1] > '9' ? packet[i + 1] - 'A' + 10 : packet[i + 1] - '0';
-
-                hexArray[(i - 5) / 2] = (high << 4) | low;
-                
-                //Console.WriteLine( $"{high} | {low}");
-            }
-
-            for (int i = 0; i < _packet.dlc; i++)
-            {
-                _packet.data[i] = hexArray[i];
-            }
-
+            int[] hexArray = new int[CAN_LEN[pkt.dlc]];  // 13 -> 32 bytes
             
+
+            if (hexArray.Length > 0) 
+            {
+                for (int i = 5; i < 5 + hexArray.Length * 2; i += 2)
+                {
+                    high = packet[i] > '9' ? packet[i] - 'A' + 10 : packet[i] - '0';
+                    low = packet[i + 1] > '9' ? packet[i + 1] - 'A' + 10 : packet[i + 1] - '0';
+
+                    hexArray[(i - 5) / 2] = (high << 4) | low;  // dlc = 8 -> 0~7 range
+
+                    //Console.WriteLine( $"{high} | {low}");
+                    pkt.data.Add((byte)hexArray[(i - 5) / 2]);
+                }
+
+                packetQueue.Enqueue(pkt);
+            }
+                   
         }
+
+        public packet_t? GetLastPacket()
+        {
+            return packetQueue.GetLast();
+        }
+
+        public void clearPacket() 
+        {
+            packetQueue.Clear();
+        }
+
+        // TODO: Read 에서 사용할 예정
+        private void ConvertLittlrEndian(byte[] packet) 
+        {
+            int high, low;
+
+            int[] hexArray = new int[32];
+            if (hexArray.Length > 0)
+            {
+                for (int i = 5; i < 5 + hexArray.Length * 2; i += 2)
+                {
+                    high = packet[i] > '9' ? packet[i] - 'A' + 10 : packet[i] - '0';
+                    low = packet[i + 1] > '9' ? packet[i + 1] - 'A' + 10 : packet[i + 1] - '0';
+
+                    hexArray[(i - 5) / 2] = (high << 4) | low;  // dlc = 8 -> 0~7 range
+
+                    //Console.WriteLine( $"{high} | {low}");
+                    //pkt.data.Add((byte)hexArray[(i - 5) / 2]);
+                }
+
+                //packetQueue.Enqueue(pkt);
+            }
+
+            return;
+
+
+        }
+
+
+
 
 
     }

@@ -9,21 +9,50 @@ namespace UA_CAN
 {
     internal class Gripper
     {
-        private USB2CAN _serial;
+        internal USB2CAN _serial = new USB2CAN();
+        internal CANablePro _can;
 
         private CancellationTokenSource _cts_request = new CancellationTokenSource();
         private CancellationTokenSource _cts_response = new CancellationTokenSource();
 
-        public Gripper(USB2CAN serial) 
+        public Gripper() 
         {
-            _serial = serial;        
+            _can = new CANablePro(_serial);
         }
 
 
+        public void Init() 
+        {
+            _can.packetQueue.Clear();
+        }
+
+        
 
         enum GripperState
         {
+            REQUEST           = 0x01, 
+            RESPONSE          = 0x02,
+            MOTOR_DXL_RUN     = 0x03,
+            MOTOR_DXL_ARRIVED = 0x04,
+            STOP              = 0x05
+        }
 
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct dxl_t
+        {
+            byte   id;
+            UInt16 position;
+            UInt16 velocity;
+            bool   status;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct lsv_t
+        {
+            byte id;
+            UInt16 position;
+            UInt16 velocity;
+            int status;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -38,7 +67,10 @@ namespace UA_CAN
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct color_t
         {
-
+            byte red;
+            byte green;
+            byte blue;
+            byte brightness;
         }
 
 

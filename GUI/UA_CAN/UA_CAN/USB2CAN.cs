@@ -47,6 +47,8 @@ namespace UA_CAN
                 lastPort = sp.PortName;
                 startFlag = true;
 
+               
+
                 sp.Open();
                 Console.WriteLine($"[Connected] : {sp.PortName} @ {sp.BaudRate}");
                 

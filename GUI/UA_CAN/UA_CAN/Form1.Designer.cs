@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             btnConnect = new Button();
             portBox = new ComboBox();
             baudBox = new ComboBox();
             lblPort = new Label();
             lblBaud = new Label();
             rtbConsole = new RichTextBox();
-            timer1 = new System.Windows.Forms.Timer(components);
             btnTimer = new Button();
+            lblMotorLock = new Label();
+            lblPusher = new Label();
+            lblHall = new Label();
+            btnCANTest = new Button();
             SuspendLayout();
             // 
             // btnConnect
@@ -87,7 +89,7 @@
             // 
             rtbConsole.Location = new Point(57, 127);
             rtbConsole.Name = "rtbConsole";
-            rtbConsole.Size = new Size(543, 225);
+            rtbConsole.Size = new Size(954, 225);
             rtbConsole.TabIndex = 6;
             rtbConsole.Text = "";
             // 
@@ -101,11 +103,52 @@
             btnTimer.UseVisualStyleBackColor = true;
             btnTimer.Click += btnTimer_Click;
             // 
+            // lblMotorLock
+            // 
+            lblMotorLock.AutoSize = true;
+            lblMotorLock.Location = new Point(57, 396);
+            lblMotorLock.Name = "lblMotorLock";
+            lblMotorLock.Size = new Size(32, 15);
+            lblMotorLock.TabIndex = 8;
+            lblMotorLock.Text = "Lock";
+            // 
+            // lblPusher
+            // 
+            lblPusher.AutoSize = true;
+            lblPusher.Location = new Point(56, 428);
+            lblPusher.Name = "lblPusher";
+            lblPusher.Size = new Size(33, 15);
+            lblPusher.TabIndex = 9;
+            lblPusher.Text = "Push";
+            // 
+            // lblHall
+            // 
+            lblHall.AutoSize = true;
+            lblHall.Location = new Point(58, 460);
+            lblHall.Name = "lblHall";
+            lblHall.Size = new Size(28, 15);
+            lblHall.TabIndex = 10;
+            lblHall.Text = "Hall";
+            // 
+            // btnCANTest
+            // 
+            btnCANTest.Location = new Point(57, 501);
+            btnCANTest.Name = "btnCANTest";
+            btnCANTest.Size = new Size(75, 23);
+            btnCANTest.TabIndex = 11;
+            btnCANTest.Text = "CANTest";
+            btnCANTest.UseVisualStyleBackColor = true;
+            btnCANTest.Click += btnCANTest_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1122, 609);
+            Controls.Add(btnCANTest);
+            Controls.Add(lblHall);
+            Controls.Add(lblPusher);
+            Controls.Add(lblMotorLock);
             Controls.Add(btnTimer);
             Controls.Add(rtbConsole);
             Controls.Add(lblBaud);
@@ -128,7 +171,10 @@
         private Label lblPort;
         private Label lblBaud;
         private RichTextBox rtbConsole;
-        private System.Windows.Forms.Timer timer1;
         private Button btnTimer;
+        private Label lblMotorLock;
+        private Label lblPusher;
+        private Label lblHall;
+        private Button btnCANTest;
     }
 }
