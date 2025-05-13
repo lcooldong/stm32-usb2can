@@ -14,19 +14,70 @@ namespace UA_CAN
 
         private CancellationTokenSource _cts_request = new CancellationTokenSource();
         private CancellationTokenSource _cts_response = new CancellationTokenSource();
+        public GripperPacket gripperPacket = new GripperPacket();
+        public int[] baudrates;
+        public string? portName;
+        public string? lastPort;
+        public packet_t? lastSendPacket;
 
         public Gripper() 
         {
             _can = new CANablePro(_serial);
+            baudrates = _serial.baudRates.ToArray();    // Deep Copy
         }
 
 
-        public void Init() 
+        public Dictionary<string, string> GetUSBDevices() 
+        {
+            return _serial.GetUSBDevices();
+        }
+
+        public bool begin(string port, int baudrate = 115200) 
         {
             _can.packetQueue.Clear();
+
+            bool ret = _serial.begin(port, baudrate);
+            if (ret) 
+            {
+                portName = _serial.sp.PortName;
+                lastPort = _serial.lastPort;
+            }
+
+            return ret;
         }
 
+        public void portClose() 
+        {
+            _serial.close();
+        }
+
+        public packet_t? GetLast() 
+        {
         
+            return _can?.GetLastPacket();
+        }
+
+        public void receivingPacket() 
+        {
+            _can.read();
+        }
+
+        public void receivingStop() 
+        {
+            _can.stopRead();
+        }
+
+        public bool isUSBConnected() 
+        {
+            return _serial.isUSBConnected();
+        }
+
+        public bool isUSBOpen() 
+        {
+            return _serial.sp.IsOpen;
+        }
+
+
 
         enum GripperState
         {
@@ -73,28 +124,47 @@ namespace UA_CAN
             byte brightness;
         }
 
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct led_t
+        {
+            byte ledSwitch;
+            color_t colors;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct cmd_t
+        {
+            byte count;
+            byte command;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct crc_t
+        {
+            byte h_crc;
+            byte l_crc;
+        }
+
 
         // 32 bytes
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct canPacket
+        public struct GripperPacket
         {
-
+            cmd_t cmd;
+            dxl_t dxl;
+            lsv_t lsv;
+            ads_t hallSensor;
+            led_t led;
+            crc_t crc;
         }
 
 
 
-        public void sendPacket()
+        public void sendPacket(CAN_TYPE type, int id, CAN_DLC dlc, byte[] packet)
         {
-            //byte[] testData = new byte[32];
+            _can.write(type, id, dlc, packet);
+            lastSendPacket = _can._sendPacekt;
 
-            //for (int i = 0; i < 32; i++) 
-            //{
-            //    testData[i] = (byte)i;
-            //    _serial.write(testData, 1);
-            //}
-            byte[] data = new byte[1];
-            data[0] = 0x49;
-            _serial.write(data, 1);
         }
 
         public void start(int interval)

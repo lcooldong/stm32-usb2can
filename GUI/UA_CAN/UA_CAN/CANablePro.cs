@@ -60,7 +60,7 @@ namespace UA_CAN
 
         public CircularQueue<packet_t> packetQueue = new CircularQueue<packet_t>(256);
 
-        CAN_TYPE canType = new CAN_TYPE();
+        //CAN_TYPE canType = new CAN_TYPE();
 
         public readonly int[] CAN_LEN = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24, 32, 48, 64 };
 
@@ -69,28 +69,21 @@ namespace UA_CAN
         public void write(CAN_TYPE type, int id, CAN_DLC dlc, byte[] packet) 
         {
             _sendPacekt.data.Clear();
-            //_sendPacekt.id = id;
-            //_sendPacekt.dlc = (int)dlc;
 
             var localPacket = new packet_t
             {
                 id = id,
-                //dlc = CAN_LEN[(int)dlc],
                 dlc = (int)dlc,
-                //data = packet.Take((int)dlc).ToList()
                 data = packet.Take(CAN_LEN[(int)dlc]).ToList()
-            };
 
+            };
+            _sendPacekt = localPacket;
 
             Task.Run(() => {
 
                 
-
-                //for (int i = 0; i < _sendPacekt.dlc; i++)
-                //{
-                //    _sendPacekt.data.Add(packet[i]);
-                //}
-
+                
+   
                 WriteTask(type, localPacket);
             });
         }
