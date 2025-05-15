@@ -12,6 +12,7 @@ namespace UA_CAN
         //CANablePro can0 = new CANablePro(Serial);
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
+        private bool hallFlag = false;
         private bool timerFlag = false;
         int count = 0;
 
@@ -85,7 +86,7 @@ namespace UA_CAN
                         btnConnect_Open();
 
                         //can0.clearPacket();
-                        
+
                     }
                     else
                     {
@@ -99,6 +100,10 @@ namespace UA_CAN
                     gripper.portClose();
                     btnConnect_Close();
                     Log($"[ ] Disconnected from {port}\r\n", true);
+
+                    timer.Elapsed -= Timer_Elapsed;
+                    timer.Stop();
+                    gripper.receivingStop();
                 }
             }
             else
@@ -111,9 +116,9 @@ namespace UA_CAN
 
         private void btnTimer_Click(object sender, EventArgs e)
         {
-            
+
             timer.Interval = 100;
-            
+
             if (!timerFlag)
             {
                 timer.Elapsed += Timer_Elapsed;
@@ -192,7 +197,7 @@ namespace UA_CAN
             btnConnect.Text = "Connect";
         }
 
-        
+
 
         private void Log(string format, bool tFlag, params object?[] args)
         {
@@ -219,12 +224,12 @@ namespace UA_CAN
                 }
                 rtbConsole.ScrollToCaret();
             }));
-          
+
         }
 
         private void btnCANTest_Click(object sender, EventArgs e)
         {
-            byte[] testData = {0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6};
+            byte[] testData = { 0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6 };
             byte[] testFD = new byte[32];
 
             for (int i = 0; i < testFD.Length; i++)
@@ -235,8 +240,8 @@ namespace UA_CAN
             //can0.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);  
             //Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, can0._sendPacekt.id, can0._sendPacekt.dlc, can0._sendPacekt.data.Count);
             //gripper._can.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);  
-            gripper.sendPacket(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);
-            
+            gripper.sendCANPacket(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);
+
 
 
             //Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, gripper._can._sendPacekt.id, gripper._can._sendPacekt.dlc, gripper._can._sendPacekt.data.Count);
@@ -251,7 +256,68 @@ namespace UA_CAN
                 Log($"|{gripper.lastSendPacket?.data[i]:X2}", false);
             }
             Log("\r\n", false);
-            
+
+        }
+
+        private void btnHall_Click(object sender, EventArgs e)
+        {
+            if (hallFlag)
+            {
+                gripper.switchHall(Hall.OFF);
+                hallFlag = false;
+            }
+            else
+            {
+                gripper.switchHall(Hall.ON);
+                hallFlag = true;
+            }
+
+
+        }
+
+        private void btnLED_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void txb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+
+            txbRed.MaxLength = 3;
+            txbGreen.MaxLength = 3;
+            txbBlue.MaxLength = 3;
+            txbBrightness.MaxLength = 3;
+
+            if (!('0' <= e.KeyChar && e.KeyChar <= '9') && e.KeyChar != (char)8) e.Handled = true;
+
+
+        }
+
+        private void txb_Changed(object sender, EventArgs e)
+        {
+            if (int.TryParse(txbRed.Text, out int vRed) && vRed >= 255)
+            {
+                txbRed.Text = "255";
+            }
+            if (int.TryParse(txbGreen.Text, out int vGreen) && vGreen >= 255)
+            {
+                txbGreen.Text = "255";
+            }
+            if (int.TryParse(txbBlue.Text, out int vBlue) && vBlue >= 255)
+            {
+                txbBlue.Text = "255";
+            }
+            if (int.TryParse(txbBrightness.Text, out int vBrightness) && vBrightness >= 255)
+            {
+                txbBrightness.Text = "255";
+            }
+        }
+
+        private void btnPkt_Click(object sender, EventArgs e)
+        {
+            gripper.getData();
         }
     }
 }

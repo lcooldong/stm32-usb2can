@@ -39,6 +39,17 @@
             lblPusher = new Label();
             lblHall = new Label();
             btnCANTest = new Button();
+            btnHall = new Button();
+            btnLED = new Button();
+            txbRed = new TextBox();
+            txbGreen = new TextBox();
+            txbBlue = new TextBox();
+            txbBrightness = new TextBox();
+            lblRed = new Label();
+            lblGreen = new Label();
+            lblBlue = new Label();
+            lblBrightness = new Label();
+            btnPkt = new Button();
             SuspendLayout();
             // 
             // btnConnect
@@ -140,11 +151,124 @@
             btnCANTest.UseVisualStyleBackColor = true;
             btnCANTest.Click += btnCANTest_Click;
             // 
+            // btnHall
+            // 
+            btnHall.Location = new Point(160, 501);
+            btnHall.Name = "btnHall";
+            btnHall.Size = new Size(75, 23);
+            btnHall.TabIndex = 12;
+            btnHall.Text = "HALL";
+            btnHall.UseVisualStyleBackColor = true;
+            btnHall.Click += btnHall_Click;
+            // 
+            // btnLED
+            // 
+            btnLED.Location = new Point(684, 522);
+            btnLED.Name = "btnLED";
+            btnLED.Size = new Size(171, 23);
+            btnLED.TabIndex = 13;
+            btnLED.Text = "ChangeColor";
+            btnLED.UseVisualStyleBackColor = true;
+            btnLED.Click += btnLED_Click;
+            // 
+            // txbRed
+            // 
+            txbRed.Location = new Point(755, 397);
+            txbRed.Name = "txbRed";
+            txbRed.Size = new Size(100, 23);
+            txbRed.TabIndex = 14;
+            txbRed.TextChanged += txb_Changed;
+            txbRed.KeyPress += txb_KeyPress;
+            // 
+            // txbGreen
+            // 
+            txbGreen.Location = new Point(755, 426);
+            txbGreen.Name = "txbGreen";
+            txbGreen.Size = new Size(100, 23);
+            txbGreen.TabIndex = 15;
+            txbGreen.TextChanged += txb_Changed;
+            txbGreen.KeyPress += txb_KeyPress;
+            // 
+            // txbBlue
+            // 
+            txbBlue.Location = new Point(755, 455);
+            txbBlue.Name = "txbBlue";
+            txbBlue.Size = new Size(100, 23);
+            txbBlue.TabIndex = 16;
+            txbBlue.TextChanged += txb_Changed;
+            txbBlue.KeyPress += txb_KeyPress;
+            // 
+            // txbBrightness
+            // 
+            txbBrightness.Location = new Point(755, 484);
+            txbBrightness.Name = "txbBrightness";
+            txbBrightness.Size = new Size(100, 23);
+            txbBrightness.TabIndex = 17;
+            txbBrightness.TextChanged += txb_Changed;
+            txbBrightness.KeyPress += txb_KeyPress;
+            // 
+            // lblRed
+            // 
+            lblRed.AutoSize = true;
+            lblRed.Location = new Point(684, 400);
+            lblRed.Name = "lblRed";
+            lblRed.Size = new Size(27, 15);
+            lblRed.TabIndex = 18;
+            lblRed.Text = "Red";
+            // 
+            // lblGreen
+            // 
+            lblGreen.AutoSize = true;
+            lblGreen.Location = new Point(684, 429);
+            lblGreen.Name = "lblGreen";
+            lblGreen.Size = new Size(38, 15);
+            lblGreen.TabIndex = 19;
+            lblGreen.Text = "Green";
+            // 
+            // lblBlue
+            // 
+            lblBlue.AutoSize = true;
+            lblBlue.Location = new Point(684, 459);
+            lblBlue.Name = "lblBlue";
+            lblBlue.Size = new Size(30, 15);
+            lblBlue.TabIndex = 20;
+            lblBlue.Text = "Blue";
+            // 
+            // lblBrightness
+            // 
+            lblBrightness.AutoSize = true;
+            lblBrightness.Location = new Point(684, 490);
+            lblBrightness.Name = "lblBrightness";
+            lblBrightness.Size = new Size(62, 15);
+            lblBrightness.TabIndex = 21;
+            lblBrightness.Text = "Brightness";
+            // 
+            // btnPkt
+            // 
+            btnPkt.Location = new Point(56, 543);
+            btnPkt.Name = "btnPkt";
+            btnPkt.Size = new Size(75, 23);
+            btnPkt.TabIndex = 22;
+            btnPkt.Text = "RecvPacket";
+            btnPkt.UseVisualStyleBackColor = true;
+            btnPkt.Click += btnPkt_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1122, 609);
+            Controls.Add(btnPkt);
+            Controls.Add(lblBrightness);
+            Controls.Add(lblBlue);
+            Controls.Add(lblGreen);
+            Controls.Add(lblRed);
+            Controls.Add(txbBrightness);
+            Controls.Add(txbBlue);
+            Controls.Add(txbGreen);
+            Controls.Add(txbRed);
+            Controls.Add(btnLED);
+            Controls.Add(btnHall);
             Controls.Add(btnCANTest);
             Controls.Add(lblHall);
             Controls.Add(lblPusher);
@@ -176,5 +300,16 @@
         private Label lblPusher;
         private Label lblHall;
         private Button btnCANTest;
+        private Button btnHall;
+        private Button btnLED;
+        private TextBox txbRed;
+        private TextBox txbGreen;
+        private TextBox txbBlue;
+        private TextBox txbBrightness;
+        private Label lblRed;
+        private Label lblGreen;
+        private Label lblBlue;
+        private Label lblBrightness;
+        private Button btnPkt;
     }
 }
