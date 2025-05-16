@@ -26,11 +26,12 @@ namespace UA_CAN
         public string? portName;
         public string? lastPort;
         public packet_t? lastSendPacket;
+        public byte count = 0;
 
         private CAN_TYPE myType = CAN_TYPE.CAN_FD;
         private int CAN_ID = 0x124;
         private int DXL_ID = 0x00;
-
+        
 
         public Gripper() 
         {
@@ -41,11 +42,18 @@ namespace UA_CAN
 
         enum CmdState
         {
-            REQUEST           = 0x01, 
-            RESPONSE          = 0x02,
-            MOTOR_DXL_RUN     = 0x03,
+            REQUEST = 0x01,
+            RESPONSE = 0x02,
+            MOTOR_DXL_RUN = 0x03,
             MOTOR_DXL_ARRIVED = 0x04,
-            STOP              = 0x05
+            MOTOR_LSV_RUN = 0x05,
+            MOTOR_LSV_ARRIVED = 0x06,
+            HALL_SENSOR_RUN = 0x07,
+            HALL_SENSOR_STOP = 0x08,
+            LED_ON = 0x09,
+            LED_OFF = 0x0A,
+            CAN_START = 0x1F,
+            CAN_STOP = 0x0F
         }
 
         enum GripperState 
@@ -74,7 +82,7 @@ namespace UA_CAN
             public byte id;
             public UInt16 position;
             public UInt16 velocity;
-            public int status;
+            public byte status;
         }
 
 
@@ -82,10 +90,9 @@ namespace UA_CAN
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct ads_t
         {
-            public byte status;         // bool to byte
             public byte toggleSwitch;   // bool to byte
-            public float voltage;
             public Int16 raw;
+            public byte status;         // bool to byte
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -111,14 +118,6 @@ namespace UA_CAN
             public byte command;
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct crc_t
-        {
-            public byte h_crc;
-            public byte l_crc;
-        }
-
-
         // 32 bytes
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct GripperPacket
@@ -128,7 +127,7 @@ namespace UA_CAN
             public lsv_t lsv;
             public ads_t hallSensor;
             public led_t led;
-            public crc_t crc;
+            public byte crc;
         }
 
         public Dictionary<string, string> GetUSBDevices()
@@ -146,6 +145,8 @@ namespace UA_CAN
             {
                 portName = _serial.sp.PortName;
                 lastPort = _serial.lastPort;
+
+                _can.openChannel();
             }
 
             return ret;
@@ -153,6 +154,7 @@ namespace UA_CAN
 
         public void portClose()
         {
+            _can.closeChannel();
             _serial.close();
         }
 
@@ -183,16 +185,126 @@ namespace UA_CAN
         }
 
 
-        public void send(byte[] packet) 
-        {   
-            sendCANPacket(myType, CAN_ID, CAN_DLC.FDCAN_DLC_BYTE_32, packet);
-            //int[] sizes = new int[6];
+
+
+        public void request() 
+        {
+            GripperPacket tempPacket = new GripperPacket();
+
+            tempPacket.cmd.count = count++;
+            tempPacket.cmd.command = (byte)CmdState.REQUEST;
+
+            canSend(0x126, tempPacket);
+            Thread.Sleep(100);
+        }
+
+        public void canStart() 
+        {
+            GripperPacket tempPacket = new GripperPacket();
+
+            tempPacket.cmd.command = (byte)CmdState.CAN_START;
+
+            request();
+            
+            getData();
+
+            if(recvPacket.cmd.command == (byte)CmdState.RESPONSE) 
+            {
+                Console.WriteLine("Ready to can Start");
+                canSend(0x123, tempPacket);
+            }
+            recvPacket.cmd.command = 0;
+
+        }
+
+        public void canStop() 
+        {
+            GripperPacket tempPacket = new GripperPacket();
+
+            tempPacket.cmd.command = (byte)CmdState.CAN_STOP;
+
+            request();
+            
+            getData();
+
+            if (recvPacket.cmd.command == (byte)CmdState.RESPONSE)
+            {
+                Console.WriteLine("CAN Reading Stop");
+                canSend(0x123, tempPacket);
+            }
+            recvPacket.cmd.command = 0;
+        }
+
+        public void switchHall(Hall hall)
+        {
+
+            GripperPacket tempPacket = new GripperPacket();
+
+            request();
+            getData();
+
+
+            if (recvPacket.cmd.command == (byte)CmdState.RESPONSE)
+            {
+                if (hall == Hall.ON)
+                {
+                    tempPacket.cmd.command = (byte)CmdState.HALL_SENSOR_RUN;
+                    tempPacket.hallSensor.toggleSwitch = 0x01;
+                }
+                else
+                {
+                    tempPacket.cmd.command = (byte)CmdState.HALL_SENSOR_STOP;
+                    tempPacket.hallSensor.toggleSwitch = 0x00;
+                }
+
+                Console.WriteLine("Ready to can Start");
+                canSend(0x123, tempPacket);
+            }
+        }
+
+        public void rotate(ushort value) 
+        {
+            GripperPacket tempPacket = new GripperPacket();
+
+            tempPacket.cmd.command = (byte)CmdState.MOTOR_DXL_RUN;
+            tempPacket.dxl.position = value;
+            canSend(0x123, tempPacket);
+
+        }
+
+        public void push(ushort value) 
+        {
+            GripperPacket tempPacket = new GripperPacket();
+
+            tempPacket.cmd.command = (byte)CmdState.MOTOR_LSV_RUN;
+            tempPacket.lsv.position = value;
+            Console.WriteLine("Push LSV");
+            canSend(0x123, tempPacket);
+        }
+
+
+
+
+
+        public void canSend(int id, GripperPacket gripper) 
+        {
+            byte[] packet = preparePacekt(gripper);
+            sendCANPacket(myType, id, CAN_DLC.FDCAN_DLC_BYTE_24, packet);
+        }
+        
+
+        public void sendCANPacket(CAN_TYPE type, int id, CAN_DLC dlc, byte[] packet) 
+        {
+            _can.write(type, id, dlc, packet);
+            lastSendPacket = _can._sendPacekt;
+
+            //int[] sizes = new int[5];
             //sizes[0] = Marshal.SizeOf(typeof(cmd_t));
             //sizes[1] = Marshal.SizeOf(typeof(dxl_t));
             //sizes[2] = Marshal.SizeOf(typeof(lsv_t));
             //sizes[3] = Marshal.SizeOf(typeof(ads_t));
             //sizes[4] = Marshal.SizeOf(typeof(led_t));
-            //sizes[5] = Marshal.SizeOf(typeof(crc_t));
+            
 
 
             //for (int i = 0; i < sizes.Length; i++)
@@ -202,29 +314,25 @@ namespace UA_CAN
 
 
             //Console.Write(" Length:{0} |", packet.Length);
-            //for (int i = 0; i < packet.Length; i++) 
+            //for (int i = 0; i < packet.Length; i++)
             //{
             //    Console.Write($" {packet[i]:X2}");
             //}
             //Console.WriteLine();
         }
 
-        public void sendCANPacket(CAN_TYPE type, int id, CAN_DLC dlc, byte[] packet)
-        {
-            
-            _can.write(type, id, dlc, packet);
-            lastSendPacket = _can._sendPacekt;
 
-        }
+        public byte[] getData()
+        {   
 
-        public void getData()
-        {
             var last = this.GetLast();
-            // CRC
-            //if()
+
+            byte[] data = new byte[ _can.CAN_LEN[(int)CAN_DLC.FDCAN_DLC_BYTE_24]];
 
             if (last != null) 
             {
+                //data = new byte[last.data.Count];
+
                 recvPacket.cmd.count = last.data[0];
                 recvPacket.cmd.command = last.data[1];
 
@@ -234,31 +342,28 @@ namespace UA_CAN
                 recvPacket.dxl.status = last.data[7];
 
                 recvPacket.lsv.id = last.data[8];
-                recvPacket.lsv.position = (ushort)(last.data[10] << 2 | last.data[9]);
-                recvPacket.lsv.velocity = (ushort)(last.data[12] << 2 | last.data[11]);
+                recvPacket.lsv.position = (ushort)(last.data[10] << 8 | last.data[9]);
+                recvPacket.lsv.velocity = (ushort)(last.data[12] << 8 | last.data[11]);
                 recvPacket.lsv.status = last.data[13];
 
+                recvPacket.hallSensor.toggleSwitch = last.data[14];
+                //byte[] voltageArray = { last.data[19], last.data[20], last.data[21], last.data[22] };
+                //recvPacket.hallSensor.voltage = BitConverter.ToSingle(voltageArray, 0);
+                recvPacket.hallSensor.raw = (Int16)(last.data[15] | last.data[16] << 8);
                 recvPacket.hallSensor.status = last.data[17];
-                recvPacket.hallSensor.toggleSwitch = last.data[18];
 
-                byte[] voltageArray = { last.data[19], last.data[20], last.data[21], last.data[22] };
-                recvPacket.hallSensor.voltage = BitConverter.ToSingle(voltageArray, 0);
-                recvPacket.hallSensor.raw = (Int16)(last.data[23] | last.data[24] << 8);
+                recvPacket.led.ledSwitch = last.data[18];
+                recvPacket.led.colors.red = last.data[19];
+                recvPacket.led.colors.green = last.data[20];
+                recvPacket.led.colors.blue = last.data[21];
+                recvPacket.led.colors.brightness = last.data[22];
 
-                recvPacket.led.ledSwitch = last.data[25];
-                recvPacket.led.colors.red = last.data[26];
-                recvPacket.led.colors.green = last.data[27];
-                recvPacket.led.colors.blue = last.data[28];
-                recvPacket.led.colors.brightness = last.data[29];
+                recvPacket.crc = last.data[23];
 
-
-                recvPacket.crc.h_crc = last.data[30];
-                recvPacket.crc.l_crc = last.data[31];
-
-
-                Console.WriteLine("GET DXL POS    " + recvPacket.dxl.position);
-                Console.WriteLine("GET LSV POS    " + recvPacket.lsv.position);
-                Console.WriteLine("GET HALLSENSOR {0} {1}",recvPacket.hallSensor.raw, recvPacket.hallSensor.voltage);
+                Console.Write($"{recvPacket.cmd.command:X2}=>");
+                Console.Write("DXL POS :" + recvPacket.dxl.position);
+                Console.Write(" LSV POS    " + recvPacket.lsv.position);
+                Console.Write(" HALLSENSOR {0} ",recvPacket.hallSensor.raw);
                 Console.WriteLine("GET LED COLOR  {0} {1} {2} {3}" , 
                     recvPacket.led.colors.red,
                     recvPacket.led.colors.green,
@@ -266,10 +371,10 @@ namespace UA_CAN
                     recvPacket.led.colors.brightness);
 
 
-
+                data = preparePacekt(recvPacket);
             }
 
-            
+            return data;
         }
 
 
@@ -288,26 +393,7 @@ namespace UA_CAN
             
         }
 
-        public void switchHall(Hall hall) 
-        {
-            GripperPacket tempPacket = new GripperPacket();
-
-            tempPacket.cmd.command = 0x01;
-
-            if (hall == Hall.ON)
-            {
-                tempPacket.hallSensor.toggleSwitch = 0x01;
-            }
-            else 
-            {
-                tempPacket.hallSensor.toggleSwitch = 0x00;
-            }
-
-
-            byte[] packet = preparePacekt(tempPacket);
-            send(packet);
-        }
-
+     
 
         public void switchLED() 
         {

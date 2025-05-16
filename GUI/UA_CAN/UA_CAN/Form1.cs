@@ -7,9 +7,11 @@ namespace UA_CAN
 {
     public partial class Form1 : Form
     {
-        //static USB2CAN Serial = new USB2CAN();
         Gripper gripper = new Gripper();
-        //CANablePro can0 = new CANablePro(Serial);
+
+        static USB2CAN Serial = new USB2CAN();
+        CANablePro can0 = new CANablePro(Serial);
+
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
         private bool hallFlag = false;
@@ -45,6 +47,8 @@ namespace UA_CAN
             rtbConsole.Multiline = true;
             rtbConsole.ScrollBars = RichTextBoxScrollBars.Vertical;
             rtbConsole.SelectionAlignment = HorizontalAlignment.Left;
+
+            this.ActiveControl = null;
 
 
             portBox.DropDown += PortBox_DropDown;
@@ -117,7 +121,7 @@ namespace UA_CAN
         private void btnTimer_Click(object sender, EventArgs e)
         {
 
-            timer.Interval = 100;
+            timer.Interval = 50;
 
             if (!timerFlag)
             {
@@ -125,7 +129,12 @@ namespace UA_CAN
                 timer.Start();
                 //can0.read();     // read CAN After UART Open
                 //gripper._can.read();     // read CAN After UART Open
+
+
                 gripper.receivingPacket();
+                gripper.canStart();
+                btnTimer.Text = "STOP";
+                Log("Start Reading\r\n", true);
                 timerFlag = true;
             }
             else
@@ -134,7 +143,12 @@ namespace UA_CAN
                 timer.Stop();
                 //can0.stopRead();
                 //gripper._can.stopRead();
+
+                gripper.canStop();
                 gripper.receivingStop();
+
+                btnTimer.Text = "READ";
+                Log("Stop Reading\r\n", true);
                 timerFlag = false;
             }
 
@@ -157,18 +171,29 @@ namespace UA_CAN
                 count++;
                 //Log(" {0:D2} {1} {2} - {3} |", true, count, Serial.sp.PortName, Serial.sp.IsOpen, Serial.lastPort);
                 //Log(" {0:D2} {1} {2} - {3} |", true, count, gripper._serial.sp.PortName, gripper._serial.sp.IsOpen, gripper._serial.lastPort);
-                Log(" {0:D3} {1} {2} - {3} |", true, count, gripper.portName, gripper.isUSBOpen(), gripper.lastPort);
+                //Log(" {0:D3} {1} {2} - {3} |", true, count, gripper.portName, gripper.isUSBOpen(), gripper.lastPort);
 
                 //var last = can0.packetQueue.GetLast();
                 //var last = gripper._can.packetQueue.GetLast();
-                var last = gripper.GetLast();
-                if (last != null)
-                {
-                    string hex = string.Join(" ", last.data.Select(b => b.ToString("X2")));
-                    Log("0x{0:X2} {1:X} {2}", false, last.id, last.dlc, hex);
-                }
+                byte[] last = gripper.getData();
+                txbHall.Text = gripper.recvPacket.hallSensor.raw.ToString();
+                txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
+                txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
+                txbCount.Text = gripper.count.ToString();
 
-                Log("\r\n", false);
+                //var last = gripper.GetLast();
+                //if (last != null)
+                //{
+                //    string hex = string.Join(" ", last.data.Select(b => b.ToString("X2")));
+                //    Log("0x{0:X2} {1:X} {2}", false, last.id, last.dlc, hex);
+                //}
+                //if (last != null)
+                //{
+                //    Log("{0:X2} ", false, gripper.recvPacket.cmd.command);
+                //}
+
+
+                //Log("\r\n", false);
 
 
                 //Log($"{can0._raw}", false);
@@ -230,17 +255,17 @@ namespace UA_CAN
         private void btnCANTest_Click(object sender, EventArgs e)
         {
             byte[] testData = { 0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6 };
-            byte[] testFD = new byte[32];
+            byte[] testFD = new byte[24];
 
             for (int i = 0; i < testFD.Length; i++)
             {
                 testFD[i] = (byte)i;
             }
 
-            //can0.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);  
+            //can0.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_24, testFD);  
             //Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, can0._sendPacekt.id, can0._sendPacekt.dlc, can0._sendPacekt.data.Count);
             //gripper._can.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);  
-            gripper.sendCANPacket(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);
+            gripper.sendCANPacket(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_24, testFD);
 
 
 
@@ -265,11 +290,14 @@ namespace UA_CAN
             {
                 gripper.switchHall(Hall.OFF);
                 hallFlag = false;
+                Log("Stop reading HallSensor\r\n", true);
+
             }
             else
             {
                 gripper.switchHall(Hall.ON);
                 hallFlag = true;
+                Log("Start reading HallSensor\r\n", true);
             }
 
 
@@ -291,8 +319,6 @@ namespace UA_CAN
             txbBrightness.MaxLength = 3;
 
             if (!('0' <= e.KeyChar && e.KeyChar <= '9') && e.KeyChar != (char)8) e.Handled = true;
-
-
         }
 
         private void txb_Changed(object sender, EventArgs e)
@@ -318,6 +344,43 @@ namespace UA_CAN
         private void btnPkt_Click(object sender, EventArgs e)
         {
             gripper.getData();
+        }
+
+        private void btnReq_Click(object sender, EventArgs e)
+        {
+            gripper.request();
+        }
+
+        private void motorValue_KeyPressed(object sender, KeyPressEventArgs e)
+        {
+            txbLSV.MaxLength = 4;
+            txbDXL.MaxLength = 4;
+
+            if (!('0' <= e.KeyChar && e.KeyChar <= '9') && e.KeyChar != (char)8) e.Handled = true;
+        }
+
+        private void motorValue_Changed(object sender, EventArgs e)
+        {
+
+            if (int.TryParse(txbDXL.Text, out int dxlValue) && dxlValue >= 4095)
+            {
+                txbDXL.Text = "4095";
+            }
+
+            if (int.TryParse(txbLSV.Text, out int lsvValue) && lsvValue >= 4095)
+            {
+                txbLSV.Text = "4095";
+            }
+        }
+
+        private void btnRotate_Click(object sender, EventArgs e)
+        {
+            gripper.rotate(ushort.Parse(txbDXL.Text));
+        }
+
+        private void btnPush_Click(object sender, EventArgs e)
+        {
+            gripper.push(ushort.Parse(txbLSV.Text));
         }
     }
 }

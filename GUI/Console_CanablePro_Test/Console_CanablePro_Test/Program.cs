@@ -27,7 +27,7 @@ namespace ConsoleApp_COM_CANable_V2
 
             SerialPort sp = new SerialPort();
 
-            Begin(sp, "COM8");
+            Begin(sp, "COM7");
 
             int targetId = 0x314;    // 11 bit 
             int dlc = 0;

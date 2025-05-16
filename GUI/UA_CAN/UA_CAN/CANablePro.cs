@@ -11,7 +11,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace UA_CAN
 {
     // 구조체 대신에 클래스로
-    internal class packet_t
+    public class packet_t
     {
         public int id;
         public int dlc;
@@ -25,7 +25,7 @@ namespace UA_CAN
 
 
 
-    public enum CAN_DLC 
+    public enum CAN_DLC
     {
         FDCAN_DLC_BYTE_0,
         FDCAN_DLC_BYTE_1,
@@ -45,25 +45,78 @@ namespace UA_CAN
         FDCAN_DLC_BYTE_64,
     }
 
-
-    
-
-    internal class CANablePro(USB2CAN serial)
+    public enum CAN_BITRATE
     {
-        private USB2CAN _serial = serial;
+        CAN_100K,
+        CAN_125K,
+        CAN_250K,
+        CAN_500K,
+        CAN_1M,
+        CAN_2M,
+        CAN_4M,
+        CAN_5M,
+    }
+
+
+
+    internal class CANablePro
+    {
+        private USB2CAN _serial;
+        private CAN_BITRATE _canBitrate;
+        private CAN_BITRATE _canfdBitrate;
         public packet_t _sendPacekt = new packet_t();
 
-        private CancellationTokenSource _cts_read = new CancellationTokenSource();
+        
 
         public int _targetId = 0x314;    // ID
         public string _raw = "";
 
+        private CancellationTokenSource _cts_read = new CancellationTokenSource();
         public CircularQueue<packet_t> packetQueue = new CircularQueue<packet_t>(256);
 
         //CAN_TYPE canType = new CAN_TYPE();
 
         public readonly int[] CAN_LEN = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24, 32, 48, 64 };
 
+
+
+        public CANablePro(USB2CAN serial, CAN_BITRATE canBitrate = CAN_BITRATE.CAN_500K, CAN_BITRATE canfdBitrate = CAN_BITRATE.CAN_2M)
+        {
+            _serial = serial;
+            _canBitrate = canBitrate;
+            _canfdBitrate = canfdBitrate;
+
+        }
+
+
+        public void openChannel() 
+        {
+            string s_canBitrate = string.Format("S{0}\r",_canBitrate + 3);
+            string s_canfdBitrate = string.Format("f{0}\r", _canfdBitrate);
+
+
+            //_serial.sp.Write("S6\r");
+            //_serial.sp.Write("f4\r");
+
+
+            _serial.sp.Write(s_canBitrate);
+
+            // Set CAN FD Bitrate (2M = f4)
+            _serial.sp.Write(s_canfdBitrate);
+
+            // Enable CAN FD
+            _serial.sp.Write("F1\r");
+
+            // Open CAN Channel
+            _serial.sp.Write("O\r");
+
+            Thread.Sleep(10);
+        }
+
+        public void closeChannel() 
+        {
+            _serial.sp.Write("C\r");
+        }
 
 
         public void write(CAN_TYPE type, int id, CAN_DLC dlc, byte[] packet) 
@@ -103,15 +156,16 @@ namespace UA_CAN
             }
             toSend += "\r";
 
-            if (toSend.Length > 0)
-            {
+            //if (toSend.Length > 0)
+            //{
                 
-                Console.WriteLine($"OK -> {toSend}");
-            }
-            else 
-            {
-                Console.WriteLine("Nothing To Send");    
-            }
+            //    Console.WriteLine($"OK -> {toSend}");
+            //}
+            //else 
+            //{
+            //    Console.WriteLine("Nothing To Send");    
+            //}
+
             //await _serial.sp.BaseStream.WriteAsync(Encoding.ASCII.GetBytes(toSend)).ConfigureAwait(false);
             _serial.sp.BaseStream.Write(Encoding.ASCII.GetBytes(toSend));
 
@@ -140,8 +194,8 @@ namespace UA_CAN
             string response = "";
             while (!_cts_read.IsCancellationRequested)
             {
-                //response = await ReadExistsStream(_serial.sp).ConfigureAwait(false);
-                response = await ReadStreamBlockAsync(_serial.sp, 68, 1).ConfigureAwait(false); // 32 bytes
+                response = await ReadExistsStream(_serial.sp).ConfigureAwait(false);
+                //response = await ReadStreamBlockAsync(_serial.sp, 68, 1).ConfigureAwait(false); // 32 bytes
                 if (response.Length > 0)
                 {
                     _raw = response;

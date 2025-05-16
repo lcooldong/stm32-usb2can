@@ -35,8 +35,8 @@
             lblBaud = new Label();
             rtbConsole = new RichTextBox();
             btnTimer = new Button();
-            lblMotorLock = new Label();
-            lblPusher = new Label();
+            lblDXL = new Label();
+            lblLSV = new Label();
             lblHall = new Label();
             btnCANTest = new Button();
             btnHall = new Button();
@@ -50,6 +50,15 @@
             lblBlue = new Label();
             lblBrightness = new Label();
             btnPkt = new Button();
+            btnReq = new Button();
+            txbDXL = new TextBox();
+            txbLSV = new TextBox();
+            txbHall = new TextBox();
+            txbLSV_Read = new TextBox();
+            txbDXL_Read = new TextBox();
+            btnPush = new Button();
+            btnRotate = new Button();
+            txbCount = new TextBox();
             SuspendLayout();
             // 
             // btnConnect
@@ -110,32 +119,32 @@
             btnTimer.Name = "btnTimer";
             btnTimer.Size = new Size(75, 23);
             btnTimer.TabIndex = 7;
-            btnTimer.Text = "Timer";
+            btnTimer.Text = "READ";
             btnTimer.UseVisualStyleBackColor = true;
             btnTimer.Click += btnTimer_Click;
             // 
-            // lblMotorLock
+            // lblDXL
             // 
-            lblMotorLock.AutoSize = true;
-            lblMotorLock.Location = new Point(57, 396);
-            lblMotorLock.Name = "lblMotorLock";
-            lblMotorLock.Size = new Size(32, 15);
-            lblMotorLock.TabIndex = 8;
-            lblMotorLock.Text = "Lock";
+            lblDXL.AutoSize = true;
+            lblDXL.Location = new Point(58, 410);
+            lblDXL.Name = "lblDXL";
+            lblDXL.Size = new Size(42, 15);
+            lblDXL.TabIndex = 8;
+            lblDXL.Text = "Locker";
             // 
-            // lblPusher
+            // lblLSV
             // 
-            lblPusher.AutoSize = true;
-            lblPusher.Location = new Point(56, 428);
-            lblPusher.Name = "lblPusher";
-            lblPusher.Size = new Size(33, 15);
-            lblPusher.TabIndex = 9;
-            lblPusher.Text = "Push";
+            lblLSV.AutoSize = true;
+            lblLSV.Location = new Point(58, 444);
+            lblLSV.Name = "lblLSV";
+            lblLSV.Size = new Size(43, 15);
+            lblLSV.TabIndex = 9;
+            lblLSV.Text = "Pusher";
             // 
             // lblHall
             // 
             lblHall.AutoSize = true;
-            lblHall.Location = new Point(58, 460);
+            lblHall.Location = new Point(58, 473);
             lblHall.Name = "lblHall";
             lblHall.Size = new Size(28, 15);
             lblHall.TabIndex = 10;
@@ -143,7 +152,7 @@
             // 
             // btnCANTest
             // 
-            btnCANTest.Location = new Point(57, 501);
+            btnCANTest.Location = new Point(156, 72);
             btnCANTest.Name = "btnCANTest";
             btnCANTest.Size = new Size(75, 23);
             btnCANTest.TabIndex = 11;
@@ -153,7 +162,7 @@
             // 
             // btnHall
             // 
-            btnHall.Location = new Point(160, 501);
+            btnHall.Location = new Point(378, 473);
             btnHall.Name = "btnHall";
             btnHall.Size = new Size(75, 23);
             btnHall.TabIndex = 12;
@@ -163,7 +172,7 @@
             // 
             // btnLED
             // 
-            btnLED.Location = new Point(684, 522);
+            btnLED.Location = new Point(513, 530);
             btnLED.Name = "btnLED";
             btnLED.Size = new Size(171, 23);
             btnLED.TabIndex = 13;
@@ -173,7 +182,7 @@
             // 
             // txbRed
             // 
-            txbRed.Location = new Point(755, 397);
+            txbRed.Location = new Point(584, 397);
             txbRed.Name = "txbRed";
             txbRed.Size = new Size(100, 23);
             txbRed.TabIndex = 14;
@@ -182,7 +191,7 @@
             // 
             // txbGreen
             // 
-            txbGreen.Location = new Point(755, 426);
+            txbGreen.Location = new Point(584, 426);
             txbGreen.Name = "txbGreen";
             txbGreen.Size = new Size(100, 23);
             txbGreen.TabIndex = 15;
@@ -191,7 +200,7 @@
             // 
             // txbBlue
             // 
-            txbBlue.Location = new Point(755, 455);
+            txbBlue.Location = new Point(584, 455);
             txbBlue.Name = "txbBlue";
             txbBlue.Size = new Size(100, 23);
             txbBlue.TabIndex = 16;
@@ -200,7 +209,7 @@
             // 
             // txbBrightness
             // 
-            txbBrightness.Location = new Point(755, 484);
+            txbBrightness.Location = new Point(584, 484);
             txbBrightness.Name = "txbBrightness";
             txbBrightness.Size = new Size(100, 23);
             txbBrightness.TabIndex = 17;
@@ -210,7 +219,7 @@
             // lblRed
             // 
             lblRed.AutoSize = true;
-            lblRed.Location = new Point(684, 400);
+            lblRed.Location = new Point(513, 400);
             lblRed.Name = "lblRed";
             lblRed.Size = new Size(27, 15);
             lblRed.TabIndex = 18;
@@ -219,7 +228,7 @@
             // lblGreen
             // 
             lblGreen.AutoSize = true;
-            lblGreen.Location = new Point(684, 429);
+            lblGreen.Location = new Point(513, 429);
             lblGreen.Name = "lblGreen";
             lblGreen.Size = new Size(38, 15);
             lblGreen.TabIndex = 19;
@@ -228,7 +237,7 @@
             // lblBlue
             // 
             lblBlue.AutoSize = true;
-            lblBlue.Location = new Point(684, 459);
+            lblBlue.Location = new Point(513, 459);
             lblBlue.Name = "lblBlue";
             lblBlue.Size = new Size(30, 15);
             lblBlue.TabIndex = 20;
@@ -237,7 +246,7 @@
             // lblBrightness
             // 
             lblBrightness.AutoSize = true;
-            lblBrightness.Location = new Point(684, 490);
+            lblBrightness.Location = new Point(513, 490);
             lblBrightness.Name = "lblBrightness";
             lblBrightness.Size = new Size(62, 15);
             lblBrightness.TabIndex = 21;
@@ -245,7 +254,7 @@
             // 
             // btnPkt
             // 
-            btnPkt.Location = new Point(56, 543);
+            btnPkt.Location = new Point(260, 72);
             btnPkt.Name = "btnPkt";
             btnPkt.Size = new Size(75, 23);
             btnPkt.TabIndex = 22;
@@ -253,11 +262,104 @@
             btnPkt.UseVisualStyleBackColor = true;
             btnPkt.Click += btnPkt_Click;
             // 
+            // btnReq
+            // 
+            btnReq.Location = new Point(360, 72);
+            btnReq.Name = "btnReq";
+            btnReq.Size = new Size(75, 23);
+            btnReq.TabIndex = 23;
+            btnReq.Text = "REQUEST";
+            btnReq.UseVisualStyleBackColor = true;
+            btnReq.Click += btnReq_Click;
+            // 
+            // txbDXL
+            // 
+            txbDXL.Location = new Point(260, 407);
+            txbDXL.Name = "txbDXL";
+            txbDXL.Size = new Size(100, 23);
+            txbDXL.TabIndex = 24;
+            txbDXL.TextChanged += motorValue_Changed;
+            txbDXL.KeyPress += motorValue_KeyPressed;
+            // 
+            // txbLSV
+            // 
+            txbLSV.Location = new Point(260, 444);
+            txbLSV.Name = "txbLSV";
+            txbLSV.Size = new Size(100, 23);
+            txbLSV.TabIndex = 25;
+            txbLSV.TextChanged += motorValue_Changed;
+            txbLSV.KeyPress += motorValue_KeyPressed;
+            // 
+            // txbHall
+            // 
+            txbHall.Location = new Point(140, 469);
+            txbHall.Name = "txbHall";
+            txbHall.ReadOnly = true;
+            txbHall.Size = new Size(100, 23);
+            txbHall.TabIndex = 26;
+            txbHall.TabStop = false;
+            // 
+            // txbLSV_Read
+            // 
+            txbLSV_Read.Location = new Point(140, 441);
+            txbLSV_Read.Name = "txbLSV_Read";
+            txbLSV_Read.ReadOnly = true;
+            txbLSV_Read.Size = new Size(100, 23);
+            txbLSV_Read.TabIndex = 27;
+            txbLSV_Read.TabStop = false;
+            // 
+            // txbDXL_Read
+            // 
+            txbDXL_Read.Location = new Point(140, 407);
+            txbDXL_Read.Name = "txbDXL_Read";
+            txbDXL_Read.ReadOnly = true;
+            txbDXL_Read.Size = new Size(100, 23);
+            txbDXL_Read.TabIndex = 28;
+            txbDXL_Read.TabStop = false;
+            // 
+            // btnPush
+            // 
+            btnPush.Location = new Point(378, 444);
+            btnPush.Name = "btnPush";
+            btnPush.Size = new Size(75, 23);
+            btnPush.TabIndex = 29;
+            btnPush.Text = "Push";
+            btnPush.UseVisualStyleBackColor = true;
+            btnPush.Click += btnPush_Click;
+            // 
+            // btnRotate
+            // 
+            btnRotate.Location = new Point(378, 410);
+            btnRotate.Name = "btnRotate";
+            btnRotate.Size = new Size(75, 23);
+            btnRotate.TabIndex = 30;
+            btnRotate.Text = "Rotate";
+            btnRotate.UseVisualStyleBackColor = true;
+            btnRotate.Click += btnRotate_Click;
+            // 
+            // txbCount
+            // 
+            txbCount.Location = new Point(57, 358);
+            txbCount.Name = "txbCount";
+            txbCount.ReadOnly = true;
+            txbCount.Size = new Size(44, 23);
+            txbCount.TabIndex = 31;
+            txbCount.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1122, 609);
+            Controls.Add(txbCount);
+            Controls.Add(btnRotate);
+            Controls.Add(btnPush);
+            Controls.Add(txbDXL_Read);
+            Controls.Add(txbLSV_Read);
+            Controls.Add(txbHall);
+            Controls.Add(txbLSV);
+            Controls.Add(txbDXL);
+            Controls.Add(btnReq);
             Controls.Add(btnPkt);
             Controls.Add(lblBrightness);
             Controls.Add(lblBlue);
@@ -271,8 +373,8 @@
             Controls.Add(btnHall);
             Controls.Add(btnCANTest);
             Controls.Add(lblHall);
-            Controls.Add(lblPusher);
-            Controls.Add(lblMotorLock);
+            Controls.Add(lblLSV);
+            Controls.Add(lblDXL);
             Controls.Add(btnTimer);
             Controls.Add(rtbConsole);
             Controls.Add(lblBaud);
@@ -296,8 +398,8 @@
         private Label lblBaud;
         private RichTextBox rtbConsole;
         private Button btnTimer;
-        private Label lblMotorLock;
-        private Label lblPusher;
+        private Label lblDXL;
+        private Label lblLSV;
         private Label lblHall;
         private Button btnCANTest;
         private Button btnHall;
@@ -311,5 +413,14 @@
         private Label lblBlue;
         private Label lblBrightness;
         private Button btnPkt;
+        private Button btnReq;
+        private TextBox txbDXL;
+        private TextBox txbLSV;
+        private TextBox txbHall;
+        private TextBox txbLSV_Read;
+        private TextBox txbDXL_Read;
+        private Button btnPush;
+        private Button btnRotate;
+        private TextBox txbCount;
     }
 }
