@@ -31,6 +31,8 @@ namespace UA_CAN
         private CAN_TYPE myType = CAN_TYPE.CAN_FD;
         private int CAN_ID = 0x124;
         private int DXL_ID = 0x00;
+        private ushort DXLInitPosition = 2000;
+        private ushort DXLTargetPosition = 3200;
         
 
         public Gripper() 
@@ -193,9 +195,10 @@ namespace UA_CAN
 
             tempPacket.cmd.count = count++;
             tempPacket.cmd.command = (byte)CmdState.REQUEST;
+            tempPacket.dxl.position = DXLInitPosition;
 
             canSend(0x126, tempPacket);
-            Thread.Sleep(100);
+            //Thread.Sleep(100);
         }
 
         public void canStart() 
@@ -206,60 +209,51 @@ namespace UA_CAN
 
             request();
             
-            getData();
+            //getData();
 
-            if(recvPacket.cmd.command == (byte)CmdState.RESPONSE) 
-            {
-                Console.WriteLine("Ready to can Start");
-                canSend(0x123, tempPacket);
-            }
-            recvPacket.cmd.command = 0;
+            //if(recvPacket.cmd.command == (byte)CmdState.RESPONSE) 
+            //{
+            //    Console.WriteLine("Ready to can Start");
+            //    canSend(0x123, tempPacket);
+            //}
+
+            //recvPacket.cmd.command = 0;
+            Console.WriteLine("Ready to can Start");
+            canSend(0x123, tempPacket);
+            //push(1000);
 
         }
 
         public void canStop() 
         {
             GripperPacket tempPacket = new GripperPacket();
-
             tempPacket.cmd.command = (byte)CmdState.CAN_STOP;
+            Console.WriteLine("CAN Reading Stop");
+            canSend(0x123, tempPacket);
 
-            request();
-            
-            getData();
-
-            if (recvPacket.cmd.command == (byte)CmdState.RESPONSE)
-            {
-                Console.WriteLine("CAN Reading Stop");
-                canSend(0x123, tempPacket);
-            }
-            recvPacket.cmd.command = 0;
         }
 
         public void switchHall(Hall hall)
         {
-
             GripperPacket tempPacket = new GripperPacket();
 
-            request();
-            getData();
-
-
-            if (recvPacket.cmd.command == (byte)CmdState.RESPONSE)
+            tempPacket.dxl.position = recvPacket.dxl.position;
+            tempPacket.lsv.position = recvPacket.lsv.position;
+            if (hall == Hall.ON)
             {
-                if (hall == Hall.ON)
-                {
-                    tempPacket.cmd.command = (byte)CmdState.HALL_SENSOR_RUN;
-                    tempPacket.hallSensor.toggleSwitch = 0x01;
-                }
-                else
-                {
-                    tempPacket.cmd.command = (byte)CmdState.HALL_SENSOR_STOP;
-                    tempPacket.hallSensor.toggleSwitch = 0x00;
-                }
-
-                Console.WriteLine("Ready to can Start");
-                canSend(0x123, tempPacket);
+                tempPacket.cmd.command = (byte)CmdState.HALL_SENSOR_RUN;
+                tempPacket.hallSensor.toggleSwitch = 0x01;
+                Console.WriteLine("Ready to HALL Start");
             }
+            else
+            {
+                tempPacket.cmd.command = (byte)CmdState.HALL_SENSOR_STOP;
+                tempPacket.hallSensor.toggleSwitch = 0x00;
+                Console.WriteLine("Stop reading HALL");
+            }
+         
+            canSend(0x123, tempPacket);
+
         }
 
         public void rotate(ushort value) 
@@ -378,26 +372,33 @@ namespace UA_CAN
         }
 
 
-        public void rotateDXL() 
+        public void rotateDXL(bool isLock) 
         {
-            
+            if (isLock) 
+            {
+                rotate(DXLTargetPosition);
+            }
+            else
+            {
+                rotate(DXLInitPosition);
+            }
         }
 
         public void pushLinear() 
         {
-            
+            push(800);
         }
 
         public void releaseLinear() 
         {
-            
+            push(300);
         }
 
      
 
         public void switchLED() 
         {
-            
+                           
         }
 
         public void setLEDColor()

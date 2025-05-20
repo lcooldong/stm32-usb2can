@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UA_CAN")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ec1517e64abc5554e83408ee1efe96ed6739747")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf9e832aa2b5dead1ac4f737818df8810fa87b8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("UA_CAN")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UA_CAN")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

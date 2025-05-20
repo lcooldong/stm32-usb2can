@@ -133,6 +133,7 @@ namespace UA_CAN
 
                 gripper.receivingPacket();
                 gripper.canStart();
+               
                 btnTimer.Text = "STOP";
                 Log("Start Reading\r\n", true);
                 timerFlag = true;
@@ -305,7 +306,7 @@ namespace UA_CAN
 
         private void btnLED_Click(object sender, EventArgs e)
         {
-
+            
         }
 
 
