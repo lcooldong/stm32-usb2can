@@ -154,13 +154,16 @@ namespace UA_CAN
                 {
                     if (lastPort == device.Key)
                     {
+                        
                         ret = true;
+                        //sp.Open();
                         break;
                     }
                     else 
                     {
                         ret = false;
-                        sp.PortName = "COM1";
+                        //sp.Close();
+                        //sp.PortName = "COM1";
                     }
                 }
 
@@ -213,6 +216,7 @@ namespace UA_CAN
             {
                 foreach (var obj in searcher.Get())
                 {
+                    Console.WriteLine(obj["Name"]?.ToString());
                     string? fullName = obj["Name"]?.ToString();
                     if (!string.IsNullOrEmpty(fullName))
                     {

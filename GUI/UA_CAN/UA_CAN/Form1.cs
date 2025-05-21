@@ -9,8 +9,8 @@ namespace UA_CAN
     {
         Gripper gripper = new Gripper();
 
-        static USB2CAN Serial = new USB2CAN();
-        CANablePro can0 = new CANablePro(Serial);
+        //static USB2CAN Serial = new USB2CAN();
+        //CANablePro can0 = new CANablePro(Serial);
 
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
@@ -54,7 +54,7 @@ namespace UA_CAN
             portBox.DropDown += PortBox_DropDown;
 
 
-            //Serial.autoConnect();   // Connect to last COM Port.
+           
 
         }
 
@@ -88,7 +88,7 @@ namespace UA_CAN
                     {
                         Log($"[O] Connected to {port} @ {baudBox.SelectedItem} baud\r\n", true);
                         btnConnect_Open();
-
+                        //gripper._serial.autoConnect();
                         //can0.clearPacket();
 
                     }
@@ -101,6 +101,8 @@ namespace UA_CAN
                 {
                     //Serial.close();
                     //gripper._serial.close();
+                    stopTimer();
+                    Thread.Sleep(100);  // ÁÖÀÇ
                     gripper.portClose();
                     btnConnect_Close();
                     Log($"[ ] Disconnected from {port}\r\n", true);
@@ -140,19 +142,25 @@ namespace UA_CAN
             }
             else
             {
-                timer.Elapsed -= Timer_Elapsed;
-                timer.Stop();
-                //can0.stopRead();
-                //gripper._can.stopRead();
-
-                gripper.canStop();
-                gripper.receivingStop();
-
-                btnTimer.Text = "READ";
-                Log("Stop Reading\r\n", true);
-                timerFlag = false;
+                stopTimer();
             }
 
+        }
+
+
+        private void stopTimer() 
+        {
+            timer.Elapsed -= Timer_Elapsed;
+            timer.Stop();
+            //can0.stopRead();
+            //gripper._can.stopRead();
+
+            gripper.canStop();
+            gripper.receivingStop();
+
+            btnTimer.Text = "READ";
+            Log("Stop Reading\r\n", true);
+            timerFlag = false;
         }
 
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
@@ -177,10 +185,40 @@ namespace UA_CAN
                 //var last = can0.packetQueue.GetLast();
                 //var last = gripper._can.packetQueue.GetLast();
                 byte[] last = gripper.getData();
-                txbHall.Text = gripper.recvPacket.hallSensor.raw.ToString();
-                txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
-                txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
-                txbCount.Text = gripper.count.ToString();
+
+                if (txbHall.InvokeRequired)
+                {
+                    txbHall.Invoke(new Action(() =>
+                    {
+                        txbHall.Text = gripper.recvPacket.hallSensor.raw.ToString();
+                    }));
+                }
+                if (txbHall.InvokeRequired)
+                {
+                    txbHall.Invoke(new Action(() =>
+                    {
+                        txbHall.Text = gripper.recvPacket.dxl.position.ToString();
+                    }));
+                }
+                if (txbLSV_Read.InvokeRequired)
+                {
+                    txbLSV_Read.Invoke(new Action(() =>
+                    {
+                        txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
+                    }));
+                }
+                if (txbCount.InvokeRequired)
+                {
+                    txbCount.Invoke(new Action(() =>
+                    {
+                        txbCount.Text = gripper.count.ToString();
+                    }));
+                }
+
+                //txbHall.Text = gripper.recvPacket.hallSensor.raw.ToString();
+                //txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
+                //txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
+                //txbCount.Text = gripper.count.ToString();
 
                 //var last = gripper.GetLast();
                 //if (last != null)
@@ -222,6 +260,8 @@ namespace UA_CAN
             isConnected = false;
             btnConnect.Text = "Connect";
         }
+        
+        
 
 
 

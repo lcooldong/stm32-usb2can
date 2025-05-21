@@ -91,26 +91,27 @@ namespace UA_CAN
 
         public void openChannel() 
         {
-            string s_canBitrate = string.Format("S{0}\r",_canBitrate + 3);
-            string s_canfdBitrate = string.Format("f{0}\r", _canfdBitrate);
+            string s_canBitrate = string.Format("S{0:D}\r",_canBitrate + 3);
+            string s_canfdBitrate = string.Format("Y{0:D}\r", _canfdBitrate - 3);
 
 
             //_serial.sp.Write("S6\r");
-            //_serial.sp.Write("f4\r");
+   
 
 
             _serial.sp.Write(s_canBitrate);
 
             // Set CAN FD Bitrate (2M = f4)
             _serial.sp.Write(s_canfdBitrate);
-
+            //Console.WriteLine("=> {0}", s_canBitrate);
+            //Console.WriteLine("=> {0}", s_canfdBitrate);
             // Enable CAN FD
-            _serial.sp.Write("F1\r");
+            //_serial.sp.Write("F1\r");
 
             // Open CAN Channel
             _serial.sp.Write("O\r");
 
-            Thread.Sleep(10);
+            //Thread.Sleep(10);
         }
 
         public void closeChannel() 
