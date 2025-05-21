@@ -31,9 +31,14 @@ namespace UA_CAN
         private CAN_TYPE myType = CAN_TYPE.CAN_FD;
         private int CAN_ID = 0x124;
         private int DXL_ID = 0x00;
+        
         private ushort DXLInitPosition = 2000;
         private ushort DXLTargetPosition = 3200;
-        
+        private ushort LSVInitPosition = 300;
+        private ushort LSVTargetPosition = 1000;
+
+
+
 
         public Gripper() 
         {
@@ -348,7 +353,7 @@ namespace UA_CAN
 
                 recvPacket.led.ledSwitch = last.data[18];
                 recvPacket.led.colors.red = last.data[19];
-                recvPacket.led.colors.green = last.data[20];
+                recvPacket.led.colors.green = last.data[20]; 
                 recvPacket.led.colors.blue = last.data[21];
                 recvPacket.led.colors.brightness = last.data[22];
 
@@ -386,19 +391,19 @@ namespace UA_CAN
 
         public void pushLinear() 
         {
-            push(800);
+            push(LSVTargetPosition);
         }
 
         public void releaseLinear() 
         {
-            push(300);
+            push(LSVInitPosition);
         }
 
      
 
         public void switchLED() 
         {
-                           
+            
         }
 
         public void setLEDColor()

@@ -53,7 +53,7 @@
               "RelativeDocumentMoniker": "UA_CAN\\Gripper.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Gripper.cs",
               "RelativeToolTip": "UA_CAN\\Gripper.cs",
-              "ViewState": "AgIAAFMBAAAAAAAAAAApwGsBAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAEwDMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-13T11:14:41.374Z",
               "EditorCaption": ""
@@ -68,8 +68,7 @@
               "RelativeToolTip": "UA_CAN\\CANablePro.cs",
               "ViewState": "AgIAAMYAAAAAAAAAAAASwLUAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T11:05:00.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-09T11:05:00.053Z"
             },
             {
               "$type": "Document",
@@ -81,8 +80,7 @@
               "RelativeToolTip": "UA_CAN\\USB2CAN.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T07:52:22.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-18T07:52:22.248Z"
             },
             {
               "$type": "Document",
@@ -93,8 +91,7 @@
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "UA_CAN\\Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T07:04:58.904Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2025-04-18T07:04:58.904Z"
             }
           ]
         }
