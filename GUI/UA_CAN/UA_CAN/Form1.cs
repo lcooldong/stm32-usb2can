@@ -9,9 +9,6 @@ namespace UA_CAN
     {
         Gripper gripper = new Gripper();
 
-        //static USB2CAN Serial = new USB2CAN();
-        //CANablePro can0 = new CANablePro(Serial);
-
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
         private bool hallFlag = false;
@@ -25,8 +22,7 @@ namespace UA_CAN
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            //var devices = Serial.GetUSBDevices();
-            //var devices = gripper._serial.GetUSBDevices();
+
             var devices = gripper.GetUSBDevices();
             foreach (var device in devices)
             {
@@ -34,14 +30,12 @@ namespace UA_CAN
             }
             portBox.SelectedIndex = 0;
 
-            //foreach (int rate in Serial.baudRates)
-            //foreach (int rate in gripper._serial.baudRates)
+
             foreach (int rate in gripper.baudrates)
             {
                 baudBox.Items.Add(rate.ToString());
             }
             baudBox.SelectedIndex = 4;
-
 
 
             rtbConsole.Multiline = true;
@@ -50,19 +44,14 @@ namespace UA_CAN
 
             this.ActiveControl = null;
 
-
             portBox.DropDown += PortBox_DropDown;
-
-
-           
 
         }
 
         private void PortBox_DropDown(object? sender, EventArgs e)
         {
             portBox.Items.Clear();
-            //var devices = Serial.GetUSBDevices();
-            //var devices = gripper._serial.GetUSBDevices();
+
             var devices = gripper.GetUSBDevices();
             foreach (var device in devices)
             {
@@ -70,10 +59,10 @@ namespace UA_CAN
             }
         }
 
+        // USB 시작
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            //var devices = Serial.GetUSBDevices();
-            //var devices = gripper._serial.GetUSBDevices();
+
             var devices = gripper.GetUSBDevices();
             string port = devices.ElementAt(portBox.SelectedIndex).Key;
 
@@ -82,15 +71,10 @@ namespace UA_CAN
                 if (!isConnected)
                 {
 
-                    //if (Serial.begin(port, baudrate))
-                    //if (gripper._serial.begin(port, baudrate))
                     if (gripper.begin(port, baudrate))
                     {
                         Log($"[O] Connected to {port} @ {baudBox.SelectedItem} baud\r\n", true);
                         btnConnect_Open();
-                        //gripper._serial.autoConnect();
-                        //can0.clearPacket();
-
                     }
                     else
                     {
@@ -99,17 +83,12 @@ namespace UA_CAN
                 }
                 else
                 {
-                    //Serial.close();
-                    //gripper._serial.close();
                     stopTimer();
-                    Thread.Sleep(100);  // 주의
+                    Thread.Sleep(10);  // 주의
                     gripper.portClose();
                     btnConnect_Close();
                     Log($"[ ] Disconnected from {port}\r\n", true);
 
-                    timer.Elapsed -= Timer_Elapsed;
-                    timer.Stop();
-                    gripper.receivingStop();
                 }
             }
             else
@@ -119,7 +98,7 @@ namespace UA_CAN
         }
 
 
-
+        // CAN 읽어오기
         private void btnTimer_Click(object sender, EventArgs e)
         {
 
@@ -129,9 +108,6 @@ namespace UA_CAN
             {
                 timer.Elapsed += Timer_Elapsed;
                 timer.Start();
-                //can0.read();     // read CAN After UART Open
-                //gripper._can.read();     // read CAN After UART Open
-
 
                 gripper.receivingPacket();
                 gripper.canStart();
@@ -152,8 +128,6 @@ namespace UA_CAN
         {
             timer.Elapsed -= Timer_Elapsed;
             timer.Stop();
-            //can0.stopRead();
-            //gripper._can.stopRead();
 
             gripper.canStop();
             gripper.receivingStop();
@@ -163,28 +137,22 @@ namespace UA_CAN
             timerFlag = false;
         }
 
+        // -> Task 로 만들어서 사용 데이터 출력 부분
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            //if (Serial.isUSBConnected())
-            //if (gripper._serial.isUSBConnected())
+
             if (gripper.isUSBConnected())
             {
 
-                //if (Serial.sp.IsOpen)
-                //if (gripper._serial.sp.IsOpen)
+
                 if (gripper.isUSBOpen())
                 {
                     btnConnect_Open();
 
                 }
                 count++;
-                //Log(" {0:D2} {1} {2} - {3} |", true, count, Serial.sp.PortName, Serial.sp.IsOpen, Serial.lastPort);
-                //Log(" {0:D2} {1} {2} - {3} |", true, count, gripper._serial.sp.PortName, gripper._serial.sp.IsOpen, gripper._serial.lastPort);
-                //Log(" {0:D3} {1} {2} - {3} |", true, count, gripper.portName, gripper.isUSBOpen(), gripper.lastPort);
 
-                //var last = can0.packetQueue.GetLast();
-                //var last = gripper._can.packetQueue.GetLast();
-                byte[] last = gripper.getData();
+                byte[] last = gripper.getData();    // 마지막 값 가져오기
 
                 if (txbHall.InvokeRequired)
                 {
@@ -219,31 +187,12 @@ namespace UA_CAN
                 //txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
                 //txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
                 //txbCount.Text = gripper.count.ToString();
-
-                //var last = gripper.GetLast();
-                //if (last != null)
-                //{
-                //    string hex = string.Join(" ", last.data.Select(b => b.ToString("X2")));
-                //    Log("0x{0:X2} {1:X} {2}", false, last.id, last.dlc, hex);
-                //}
-                //if (last != null)
-                //{
-                //    Log("{0:X2} ", false, gripper.recvPacket.cmd.command);
-                //}
-
-
-                //Log("\r\n", false);
-
-
-                //Log($"{can0._raw}", false);
-                //gripper.sendPacket();
+ 
             }
             else
             {
 
                 btnConnect_Close();
-                //Log($" {count--} {Serial.sp.PortName} {Serial.sp.IsOpen} - {Serial.lastPort}\r\n", true);
-                //Log($" {count--} {gripper._serial.sp.PortName} {gripper._serial.sp.IsOpen} - {gripper._serial.lastPort}\r\n", true);
                 Log($" {count--} {gripper.portName} {gripper.isUSBOpen()} - {gripper.lastPort}\r\n", true);
             }
         }
@@ -265,34 +214,8 @@ namespace UA_CAN
 
 
 
-        private void Log(string format, bool tFlag, params object?[] args)
-        {
-            this.Invoke(new Action(() =>
-            {
-                string message = string.Format(format, args);
-                if (tFlag)
-                {
-                    string time = DateTime.Now.ToString("HH:mm::ss");
-                    rtbConsole.AppendText($"{time}->");
-                }
-
-
-                if (rtbConsole.InvokeRequired)
-                {
-                    rtbConsole.Invoke(new Action(() =>
-                    {
-                        rtbConsole.AppendText(message);
-                    }));
-                }
-                else
-                {
-                    rtbConsole.AppendText(message); // Work on here
-                }
-                rtbConsole.ScrollToCaret();
-            }));
-
-        }
-
+  
+        // 캔데이터 참고용
         private void btnCANTest_Click(object sender, EventArgs e)
         {
             byte[] testData = { 0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6 };
@@ -303,28 +226,25 @@ namespace UA_CAN
                 testFD[i] = (byte)i;
             }
 
-            //can0.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_24, testFD);  
-            //Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, can0._sendPacekt.id, can0._sendPacekt.dlc, can0._sendPacekt.data.Count);
-            //gripper._can.write(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_32, testFD);  
+
             gripper.sendCANPacket(CAN_TYPE.CAN_FD, 0x124, CAN_DLC.FDCAN_DLC_BYTE_24, testFD);
 
 
 
-            //Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, gripper._can._sendPacekt.id, gripper._can._sendPacekt.dlc, gripper._can._sendPacekt.data.Count);
+            
             Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, gripper.lastSendPacket?.id, gripper.lastSendPacket?.dlc, gripper.lastSendPacket?.data.Count);
 
-            //for (int i = 0; i < can0._sendPacekt.data.Count; i++)
-            //for (int i = 0; i < gripper._can._sendPacekt.data.Count; i++)
+
             for (int i = 0; i < gripper.lastSendPacket?.data.Count; i++)
             {
-                //Log($"|{can0._sendPacekt.data[i]:X2}", false);
-                //Log($"|{gripper._can._sendPacekt.data[i]:X2}", false);
+
                 Log($"|{gripper.lastSendPacket?.data[i]:X2}", false);
             }
             Log("\r\n", false);
 
         }
 
+        // Hall 센서 제어
         private void btnHall_Click(object sender, EventArgs e)
         {
             if (hallFlag)
@@ -414,14 +334,43 @@ namespace UA_CAN
             }
         }
 
+
         private void btnRotate_Click(object sender, EventArgs e)
         {
-            gripper.rotate(ushort.Parse(txbDXL.Text));
+            gripper.rotate(ushort.Parse(txbDXL.Text));  // 모터 회전 권장값 2000 => 3400
         }
 
         private void btnPush_Click(object sender, EventArgs e)
         {
-            gripper.push(ushort.Parse(txbLSV.Text));
+            gripper.push(ushort.Parse(txbLSV.Text));    // 리니어 모터 회전 권장값 0 => 1000
+        }
+
+        private void Log(string format, bool tFlag, params object?[] args)
+        {
+            this.Invoke(new Action(() =>
+            {
+                string message = string.Format(format, args);
+                if (tFlag)
+                {
+                    string time = DateTime.Now.ToString("HH:mm::ss");
+                    rtbConsole.AppendText($"{time}->");
+                }
+
+
+                if (rtbConsole.InvokeRequired)
+                {
+                    rtbConsole.Invoke(new Action(() =>
+                    {
+                        rtbConsole.AppendText(message);
+                    }));
+                }
+                else
+                {
+                    rtbConsole.AppendText(message); // Work on here
+                }
+                rtbConsole.ScrollToCaret();
+            }));
+
         }
     }
 }

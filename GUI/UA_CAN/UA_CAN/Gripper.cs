@@ -33,7 +33,7 @@ namespace UA_CAN
         private int DXL_ID = 0x00;
         
         private ushort DXLInitPosition = 2000;
-        private ushort DXLTargetPosition = 3200;
+        private ushort DXLTargetPosition = 3400;
         private ushort LSVInitPosition = 300;
         private ushort LSVTargetPosition = 1000;
 

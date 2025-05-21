@@ -30,12 +30,13 @@ namespace UA_CAN
        
 
             try
-            {
+            {   
                 if (sp.IsOpen) 
                 {
                     Console.WriteLine($"[Already Connected] : {sp.PortName}");
                     return true;
                 }
+                sp.Close();
 
                 sp.PortName = port;     // Default COM1
                 sp.BaudRate = baudrate;
