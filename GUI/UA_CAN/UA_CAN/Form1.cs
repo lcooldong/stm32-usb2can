@@ -12,6 +12,8 @@ namespace UA_CAN
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
         private bool hallFlag = false;
+        private bool lockFlag = false;
+        private bool pushFlag = false;
         private bool timerFlag = false;
         int count = 0;
 
@@ -111,7 +113,7 @@ namespace UA_CAN
 
                 gripper.receivingPacket();
                 gripper.canStart();
-               
+
                 btnTimer.Text = "STOP";
                 Log("Start Reading\r\n", true);
                 timerFlag = true;
@@ -124,7 +126,7 @@ namespace UA_CAN
         }
 
 
-        private void stopTimer() 
+        private void stopTimer()
         {
             timer.Elapsed -= Timer_Elapsed;
             timer.Stop();
@@ -161,11 +163,11 @@ namespace UA_CAN
                         txbHall.Text = gripper.recvPacket.hallSensor.raw.ToString();
                     }));
                 }
-                if (txbHall.InvokeRequired)
+                if (txbDXL_Read.InvokeRequired)
                 {
-                    txbHall.Invoke(new Action(() =>
+                    txbDXL_Read.Invoke(new Action(() =>
                     {
-                        txbHall.Text = gripper.recvPacket.dxl.position.ToString();
+                        txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
                     }));
                 }
                 if (txbLSV_Read.InvokeRequired)
@@ -187,7 +189,7 @@ namespace UA_CAN
                 //txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
                 //txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
                 //txbCount.Text = gripper.count.ToString();
- 
+
             }
             else
             {
@@ -209,12 +211,44 @@ namespace UA_CAN
             isConnected = false;
             btnConnect.Text = "Connect";
         }
-        
-        
 
 
+        // 고정회전용 값 변경은 Gripper.cs 
+        private void btnLock_Click(object sender, EventArgs e)
+        {
 
-  
+            if (lockFlag)
+            {
+                gripper.rotateDXL(false);
+                lockFlag = false;
+                btnLock.Text = "Lock";
+            }
+            else
+            {
+                gripper.rotateDXL(true);
+                lockFlag = true;
+                btnLock.Text = "Unlock";
+            }
+        }
+
+        private void btnFixedPush_Click(object sender, EventArgs e)
+        {
+            if (pushFlag)
+            {
+                gripper.releaseLinear();
+                pushFlag = false;
+                btnFixedPush.Text = "Push";
+            }
+            else
+            {
+                
+                gripper.pushLinear();
+                pushFlag = true;
+                btnFixedPush.Text = "Release";
+            }
+        }
+
+
         // 캔데이터 참고용
         private void btnCANTest_Click(object sender, EventArgs e)
         {
@@ -231,7 +265,7 @@ namespace UA_CAN
 
 
 
-            
+
             Log("0x{0:X2} DLC:{1:D2} Length:{2} =>", true, gripper.lastSendPacket?.id, gripper.lastSendPacket?.dlc, gripper.lastSendPacket?.data.Count);
 
 
@@ -266,7 +300,7 @@ namespace UA_CAN
 
         private void btnLED_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -372,5 +406,7 @@ namespace UA_CAN
             }));
 
         }
+
+        
     }
 }

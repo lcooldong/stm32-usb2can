@@ -59,6 +59,8 @@
             btnPush = new Button();
             btnRotate = new Button();
             txbCount = new TextBox();
+            btnLock = new Button();
+            btnFixedPush = new Button();
             SuspendLayout();
             // 
             // btnConnect
@@ -346,11 +348,33 @@
             txbCount.TabIndex = 31;
             txbCount.TabStop = false;
             // 
+            // btnLock
+            // 
+            btnLock.Location = new Point(725, 397);
+            btnLock.Name = "btnLock";
+            btnLock.Size = new Size(145, 62);
+            btnLock.TabIndex = 32;
+            btnLock.Text = "Lock Button";
+            btnLock.UseVisualStyleBackColor = true;
+            btnLock.Click += btnLock_Click;
+            // 
+            // btnFixedPush
+            // 
+            btnFixedPush.Location = new Point(905, 397);
+            btnFixedPush.Name = "btnFixedPush";
+            btnFixedPush.Size = new Size(145, 62);
+            btnFixedPush.TabIndex = 33;
+            btnFixedPush.Text = "Push Button";
+            btnFixedPush.UseVisualStyleBackColor = true;
+            btnFixedPush.Click += btnFixedPush_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1122, 609);
+            Controls.Add(btnFixedPush);
+            Controls.Add(btnLock);
             Controls.Add(txbCount);
             Controls.Add(btnRotate);
             Controls.Add(btnPush);
@@ -383,7 +407,7 @@
             Controls.Add(portBox);
             Controls.Add(btnConnect);
             Name = "Form1";
-            Text = "F";
+            Text = "UA_TriGripper";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -422,5 +446,7 @@
         private Button btnPush;
         private Button btnRotate;
         private TextBox txbCount;
+        private Button btnLock;
+        private Button btnFixedPush;
     }
 }

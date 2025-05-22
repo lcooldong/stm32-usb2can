@@ -217,7 +217,7 @@ namespace UA_CAN
             {
                 foreach (var obj in searcher.Get())
                 {
-                    Console.WriteLine(obj["Name"]?.ToString());
+                    //Console.WriteLine(obj["Name"]?.ToString());
                     string? fullName = obj["Name"]?.ToString();
                     if (!string.IsNullOrEmpty(fullName))
                     {
