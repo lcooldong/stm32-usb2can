@@ -172,7 +172,6 @@ namespace UA_CAN
 
         public void receivingPacket()
         {   
-
             _can.read();
         }
 

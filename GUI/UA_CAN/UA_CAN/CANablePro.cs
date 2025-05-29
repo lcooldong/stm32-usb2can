@@ -202,7 +202,7 @@ namespace UA_CAN
                     _raw = response;
                     //Console.WriteLine(response);
 
-                    if (response.StartsWith("d") )
+                    if (response.StartsWith("d") || response.StartsWith("t"))
                     {
                         byte[] byteStr = Encoding.Default.GetBytes(response);
 
@@ -221,10 +221,7 @@ namespace UA_CAN
                         //}
 
                     }
-                    else
-                    {
-
-                    }
+                    
                 }
             }
         }

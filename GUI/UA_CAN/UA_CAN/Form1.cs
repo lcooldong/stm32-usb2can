@@ -8,6 +8,7 @@ namespace UA_CAN
     public partial class Form1 : Form
     {
         Gripper gripper = new Gripper();
+        Solenoid solenoid = new Solenoid();
 
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
@@ -15,6 +16,10 @@ namespace UA_CAN
         private bool lockFlag = false;
         private bool pushFlag = false;
         private bool timerFlag = false;
+
+        private bool solPushFlag = false;
+        private bool solPhotoFlag = false;
+
         int count = 0;
 
         public Form1()
@@ -47,6 +52,10 @@ namespace UA_CAN
             this.ActiveControl = null;
 
             portBox.DropDown += PortBox_DropDown;
+
+            // 솔레이노이드
+            solenoid.begin("COM7");
+            solenoid.receivingPacket();
 
         }
 
@@ -185,6 +194,8 @@ namespace UA_CAN
                     }));
                 }
 
+                
+
                 //txbHall.Text = gripper.recvPacket.hallSensor.raw.ToString();
                 //txbDXL_Read.Text = gripper.recvPacket.dxl.position.ToString();
                 //txbLSV_Read.Text = gripper.recvPacket.lsv.position.ToString();
@@ -197,6 +208,29 @@ namespace UA_CAN
                 btnConnect_Close();
                 Log($" {count--} {gripper.portName} {gripper.isUSBOpen()} - {gripper.lastPort}\r\n", true);
             }
+
+
+            if (solenoid.isUSBOpen())
+            {
+                byte[] solLast = solenoid.getData();
+
+                if (txbSolState.InvokeRequired)
+                {
+                    txbSolState.Invoke(new Action(() =>
+                    {
+                        txbSolState.Text = solenoid.recvPacket.SOLENOID_STATE.ToString();
+                    }));
+                }
+
+                if (txbPhoto.InvokeRequired)
+                {
+                    txbPhoto.Invoke(new Action(() =>
+                    {
+                        txbPhoto.Text = solenoid.recvPacket.PHOTO_TRIGGER.ToString();
+                    }));
+                }
+            }
+
         }
 
 
@@ -241,7 +275,7 @@ namespace UA_CAN
             }
             else
             {
-                
+
                 gripper.pushLinear();
                 pushFlag = true;
                 btnFixedPush.Text = "Release";
@@ -407,6 +441,37 @@ namespace UA_CAN
 
         }
 
-        
+        private void btnSolLED_Click(object sender, EventArgs e)
+        {
+            solenoid.setLED(int.Parse(txbSolLED.Text));
+        }
+
+        private void btnSol_Click(object sender, EventArgs e)
+        {
+            if (solPushFlag)
+            {
+                solenoid.release();
+                solPushFlag = false;
+            }
+            else 
+            {
+                solenoid.push();
+                solPushFlag = true;
+            }
+        }
+
+        private void btnPhoto_Click(object sender, EventArgs e)
+        {
+            if (solPhotoFlag)
+            {
+                solenoid.stopPhotoSensing();
+                solPhotoFlag = false;
+            }
+            else
+            {
+                solenoid.startPhotoSensing();
+                solPhotoFlag = true;
+            }
+        }
     }
 }

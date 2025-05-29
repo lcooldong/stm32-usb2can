@@ -61,6 +61,12 @@
             txbCount = new TextBox();
             btnLock = new Button();
             btnFixedPush = new Button();
+            btnSolLED = new Button();
+            txbSolLED = new TextBox();
+            btnSol = new Button();
+            btnPhoto = new Button();
+            txbSolState = new TextBox();
+            txbPhoto = new TextBox();
             SuspendLayout();
             // 
             // btnConnect
@@ -174,7 +180,7 @@
             // 
             // btnLED
             // 
-            btnLED.Location = new Point(513, 530);
+            btnLED.Location = new Point(505, 530);
             btnLED.Name = "btnLED";
             btnLED.Size = new Size(171, 23);
             btnLED.TabIndex = 13;
@@ -184,7 +190,7 @@
             // 
             // txbRed
             // 
-            txbRed.Location = new Point(584, 397);
+            txbRed.Location = new Point(576, 397);
             txbRed.Name = "txbRed";
             txbRed.Size = new Size(100, 23);
             txbRed.TabIndex = 14;
@@ -193,7 +199,7 @@
             // 
             // txbGreen
             // 
-            txbGreen.Location = new Point(584, 426);
+            txbGreen.Location = new Point(576, 426);
             txbGreen.Name = "txbGreen";
             txbGreen.Size = new Size(100, 23);
             txbGreen.TabIndex = 15;
@@ -202,7 +208,7 @@
             // 
             // txbBlue
             // 
-            txbBlue.Location = new Point(584, 455);
+            txbBlue.Location = new Point(576, 455);
             txbBlue.Name = "txbBlue";
             txbBlue.Size = new Size(100, 23);
             txbBlue.TabIndex = 16;
@@ -211,7 +217,7 @@
             // 
             // txbBrightness
             // 
-            txbBrightness.Location = new Point(584, 484);
+            txbBrightness.Location = new Point(576, 484);
             txbBrightness.Name = "txbBrightness";
             txbBrightness.Size = new Size(100, 23);
             txbBrightness.TabIndex = 17;
@@ -221,7 +227,7 @@
             // lblRed
             // 
             lblRed.AutoSize = true;
-            lblRed.Location = new Point(513, 400);
+            lblRed.Location = new Point(505, 400);
             lblRed.Name = "lblRed";
             lblRed.Size = new Size(27, 15);
             lblRed.TabIndex = 18;
@@ -230,7 +236,7 @@
             // lblGreen
             // 
             lblGreen.AutoSize = true;
-            lblGreen.Location = new Point(513, 429);
+            lblGreen.Location = new Point(505, 429);
             lblGreen.Name = "lblGreen";
             lblGreen.Size = new Size(38, 15);
             lblGreen.TabIndex = 19;
@@ -239,7 +245,7 @@
             // lblBlue
             // 
             lblBlue.AutoSize = true;
-            lblBlue.Location = new Point(513, 459);
+            lblBlue.Location = new Point(505, 459);
             lblBlue.Name = "lblBlue";
             lblBlue.Size = new Size(30, 15);
             lblBlue.TabIndex = 20;
@@ -248,7 +254,7 @@
             // lblBrightness
             // 
             lblBrightness.AutoSize = true;
-            lblBrightness.Location = new Point(513, 490);
+            lblBrightness.Location = new Point(505, 490);
             lblBrightness.Name = "lblBrightness";
             lblBrightness.Size = new Size(62, 15);
             lblBrightness.TabIndex = 21;
@@ -350,9 +356,9 @@
             // 
             // btnLock
             // 
-            btnLock.Location = new Point(725, 397);
+            btnLock.Location = new Point(58, 530);
             btnLock.Name = "btnLock";
-            btnLock.Size = new Size(145, 62);
+            btnLock.Size = new Size(139, 42);
             btnLock.TabIndex = 32;
             btnLock.Text = "Lock Button";
             btnLock.UseVisualStyleBackColor = true;
@@ -360,19 +366,80 @@
             // 
             // btnFixedPush
             // 
-            btnFixedPush.Location = new Point(905, 397);
+            btnFixedPush.Location = new Point(224, 530);
             btnFixedPush.Name = "btnFixedPush";
-            btnFixedPush.Size = new Size(145, 62);
+            btnFixedPush.Size = new Size(136, 42);
             btnFixedPush.TabIndex = 33;
             btnFixedPush.Text = "Push Button";
             btnFixedPush.UseVisualStyleBackColor = true;
             btnFixedPush.Click += btnFixedPush_Click;
+            // 
+            // btnSolLED
+            // 
+            btnSolLED.Location = new Point(997, 400);
+            btnSolLED.Name = "btnSolLED";
+            btnSolLED.Size = new Size(86, 32);
+            btnSolLED.TabIndex = 34;
+            btnSolLED.Text = "SOL LED";
+            btnSolLED.UseVisualStyleBackColor = true;
+            btnSolLED.Click += btnSolLED_Click;
+            // 
+            // txbSolLED
+            // 
+            txbSolLED.Location = new Point(891, 402);
+            txbSolLED.Name = "txbSolLED";
+            txbSolLED.Size = new Size(100, 23);
+            txbSolLED.TabIndex = 35;
+            // 
+            // btnSol
+            // 
+            btnSol.Location = new Point(997, 456);
+            btnSol.Name = "btnSol";
+            btnSol.Size = new Size(86, 32);
+            btnSol.TabIndex = 36;
+            btnSol.Text = "Push";
+            btnSol.UseVisualStyleBackColor = true;
+            btnSol.Click += btnSol_Click;
+            // 
+            // btnPhoto
+            // 
+            btnPhoto.Location = new Point(997, 506);
+            btnPhoto.Name = "btnPhoto";
+            btnPhoto.Size = new Size(86, 32);
+            btnPhoto.TabIndex = 37;
+            btnPhoto.Text = "StartSensing";
+            btnPhoto.UseVisualStyleBackColor = true;
+            btnPhoto.Click += btnPhoto_Click;
+            // 
+            // txbSolState
+            // 
+            txbSolState.Location = new Point(891, 459);
+            txbSolState.Name = "txbSolState";
+            txbSolState.ReadOnly = true;
+            txbSolState.Size = new Size(100, 23);
+            txbSolState.TabIndex = 38;
+            txbSolState.TabStop = false;
+            // 
+            // txbPhoto
+            // 
+            txbPhoto.Location = new Point(891, 512);
+            txbPhoto.Name = "txbPhoto";
+            txbPhoto.ReadOnly = true;
+            txbPhoto.Size = new Size(100, 23);
+            txbPhoto.TabIndex = 39;
+            txbPhoto.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1122, 609);
+            Controls.Add(txbPhoto);
+            Controls.Add(txbSolState);
+            Controls.Add(btnPhoto);
+            Controls.Add(btnSol);
+            Controls.Add(txbSolLED);
+            Controls.Add(btnSolLED);
             Controls.Add(btnFixedPush);
             Controls.Add(btnLock);
             Controls.Add(txbCount);
@@ -448,5 +515,11 @@
         private TextBox txbCount;
         private Button btnLock;
         private Button btnFixedPush;
+        private Button btnSolLED;
+        private TextBox txbSolLED;
+        private Button btnSol;
+        private Button btnPhoto;
+        private TextBox txbSolState;
+        private TextBox txbPhoto;
     }
 }
