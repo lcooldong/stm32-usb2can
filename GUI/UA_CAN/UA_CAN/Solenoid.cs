@@ -67,7 +67,6 @@ namespace UA_CAN
         public Solenoid()
         {
             _can = new CANablePro(_serial);
-
         }
 
         public Dictionary<string, string> GetUSBDevices()

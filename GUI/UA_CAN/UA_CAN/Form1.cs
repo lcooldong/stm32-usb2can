@@ -55,8 +55,16 @@ namespace UA_CAN
 
             // 솔레이노이드
             solenoid.begin("COM7");
-            solenoid.receivingPacket();
+            solenoid.receivingPacket(); // Solenoid 상시로 읽어오기
 
+            txbSolLED.Text = "0";
+            txbRed.Text = "0";
+            txbGreen.Text = "0";
+            txbBlue.Text = "0";
+            txbBrightness.Text = "0";
+
+            txbDXL.Text = "2000";
+            txbLSV.Text = "0";
         }
 
         private void PortBox_DropDown(object? sender, EventArgs e)
@@ -451,11 +459,13 @@ namespace UA_CAN
             if (solPushFlag)
             {
                 solenoid.release();
+                btnSol.Text = "Push";
                 solPushFlag = false;
             }
             else 
             {
                 solenoid.push();
+                btnSol.Text = "Release";
                 solPushFlag = true;
             }
         }
@@ -465,11 +475,13 @@ namespace UA_CAN
             if (solPhotoFlag)
             {
                 solenoid.stopPhotoSensing();
+                btnPhoto.Text = "PhotoOff";
                 solPhotoFlag = false;
             }
             else
             {
                 solenoid.startPhotoSensing();
+                btnPhoto.Text = "PhotoOn";
                 solPhotoFlag = true;
             }
         }

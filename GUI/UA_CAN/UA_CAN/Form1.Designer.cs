@@ -160,7 +160,7 @@
             // 
             // btnCANTest
             // 
-            btnCANTest.Location = new Point(156, 72);
+            btnCANTest.Location = new Point(221, 357);
             btnCANTest.Name = "btnCANTest";
             btnCANTest.Size = new Size(75, 23);
             btnCANTest.TabIndex = 11;
@@ -262,17 +262,17 @@
             // 
             // btnPkt
             // 
-            btnPkt.Location = new Point(260, 72);
+            btnPkt.Location = new Point(140, 358);
             btnPkt.Name = "btnPkt";
             btnPkt.Size = new Size(75, 23);
             btnPkt.TabIndex = 22;
-            btnPkt.Text = "RecvPacket";
+            btnPkt.Text = "GetData";
             btnPkt.UseVisualStyleBackColor = true;
             btnPkt.Click += btnPkt_Click;
             // 
             // btnReq
             // 
-            btnReq.Location = new Point(360, 72);
+            btnReq.Location = new Point(305, 358);
             btnReq.Name = "btnReq";
             btnReq.Size = new Size(75, 23);
             btnReq.TabIndex = 23;
