@@ -123,7 +123,7 @@ namespace UA_CAN
             return _serial.sp.IsOpen;
         }
 
-
+        
         public void setLED(int brightness) 
         {
             SolenoidPacket tempPacket = new SolenoidPacket();
