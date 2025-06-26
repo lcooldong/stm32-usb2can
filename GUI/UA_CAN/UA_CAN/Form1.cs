@@ -56,7 +56,7 @@ namespace UA_CAN
             // 솔레이노이드
             solenoid.begin("COM7");
             solenoid.receivingPacket(); // Solenoid 상시로 읽어오기
-
+            
             txbSolLED.Text = "0";
             txbRed.Text = "0";
             txbGreen.Text = "0";

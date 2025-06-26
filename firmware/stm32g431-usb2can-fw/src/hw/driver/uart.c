@@ -76,7 +76,7 @@ bool uartInit(void)
     // uart_tbl[i].baud = 57600;
     uart_tbl[i].baud = 115200;
     uart_tbl[i].rx_cnt = 0;
-    uart_tbl[i].tx_cnt = 0;    
+    uart_tbl[i].tx_cnt = 0;
   }
 
   uart_tbl[_DEF_UART1].rx_buf = rx_buf_1;
