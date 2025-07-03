@@ -194,9 +194,10 @@ namespace UA_CAN
         {
             string response = "";
             while (!_cts_read.IsCancellationRequested)
-            {
-                response = await ReadExistsStream(_serial.sp).ConfigureAwait(false);
+            {   
+                response = await ReadExistsStream(_serial.sp).ConfigureAwait(false);  // under 64 bytes (under DLC32 -> 8, 12, 16, 20, 24)
                 //response = await ReadStreamBlockAsync(_serial.sp, 70, 1).ConfigureAwait(false); // 32 bytes
+                Console.WriteLine(response.Length);
                 if (response.Length > 0)
                 {
                     _raw = response;
