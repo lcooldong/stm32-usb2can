@@ -54,7 +54,7 @@ namespace UA_CAN
             portBox.DropDown += PortBox_DropDown;
 
             // 솔레이노이드
-            solenoid.begin("COM7");
+            solenoid.begin("COM4");
             solenoid.receivingPacket(); // Solenoid 상시로 읽어오기
             
             txbSolLED.Text = "0";
