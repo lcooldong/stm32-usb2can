@@ -95,11 +95,8 @@ namespace UA_CAN
             }
             catch (Exception ex)
             {
-
-                
+   
             }
-
-            
         }
 
 

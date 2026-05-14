@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\canablepro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\canablepro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\gripper_v4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\gripper_v4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\gripper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\gripper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\usb2can.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,8 +31,8 @@
       "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\solenoid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|d:\\github\\stm32-usb2can\\gui\\ua_can\\ua_can\\canablepro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB9A8A9-30AC-48F6-AC68-4FB390F31F49}|UA_CAN\\UA_CAN.csproj|solutionrelative:ua_can\\canablepro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,57 +42,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 248,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CANablePro.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\CANablePro.cs",
-              "RelativeDocumentMoniker": "UA_CAN\\CANablePro.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\CANablePro.cs",
-              "RelativeToolTip": "UA_CAN\\CANablePro.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAwEEAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T07:56:42.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Solenoid.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Solenoid.cs",
-              "RelativeDocumentMoniker": "UA_CAN\\Solenoid.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Solenoid.cs",
-              "RelativeToolTip": "UA_CAN\\Solenoid.cs",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAUwEoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T06:43:12.652Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
-              "RelativeDocumentMoniker": "UA_CAN\\Form1.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
-              "RelativeToolTip": "UA_CAN\\Form1.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAwDgAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T05:54:29.322Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "USB2CAN.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\USB2CAN.cs",
-              "RelativeDocumentMoniker": "UA_CAN\\USB2CAN.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\USB2CAN.cs",
-              "RelativeToolTip": "UA_CAN\\USB2CAN.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAUwL0AAAAIAAAAAAAAAA==",
+              "Title": "Gripper_V4.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Gripper_V4.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\Gripper_V4.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Gripper_V4.cs",
+              "RelativeToolTip": "UA_CAN\\Gripper_V4.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAwCoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T07:52:22.248Z"
+              "WhenOpened": "2026-05-14T10:47:29.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Program.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\Program.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Program.cs",
+              "RelativeToolTip": "UA_CAN\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T04:16:02.018Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -88,14 +76,86 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
+              "Title": "CANablePro.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\CANablePro.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\CANablePro.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\CANablePro.cs",
+              "RelativeToolTip": "UA_CAN\\CANablePro.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAiwDYAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T07:56:42.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Solenoid.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Solenoid.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\Solenoid.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Solenoid.cs",
+              "RelativeToolTip": "UA_CAN\\Solenoid.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAAAEoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T06:43:12.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\Form1.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
+              "RelativeToolTip": "UA_CAN\\Form1.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAD4vx8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T05:54:29.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "USB2CAN.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\USB2CAN.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\USB2CAN.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\USB2CAN.cs",
+              "RelativeToolTip": "UA_CAN\\USB2CAN.cs",
+              "ViewState": "AgIAALIAAAAAAAAAAAAYwMkAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T07:52:22.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Form1.cs [\uB514\uC790\uC778]",
               "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs",
               "RelativeDocumentMoniker": "UA_CAN\\Form1.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Form1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "UA_CAN\\Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T07:04:58.904Z"
+              "WhenOpened": "2025-04-18T07:04:58.904Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 248,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Gripper.cs",
+              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Gripper.cs",
+              "RelativeDocumentMoniker": "UA_CAN\\Gripper.cs",
+              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\UA_CAN\\UA_CAN\\Gripper.cs",
+              "RelativeToolTip": "UA_CAN\\Gripper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T04:16:29.069Z",
+              "EditorCaption": ""
             }
           ]
         }

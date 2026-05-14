@@ -9,6 +9,7 @@ namespace UA_CAN
     {
         Gripper gripper = new Gripper();
         Solenoid solenoid = new Solenoid();
+        Gripper_V4 gripperV4 = new Gripper_V4(new USB2CAN());
 
         System.Timers.Timer timer = new System.Timers.Timer();
         private bool isConnected = false;
