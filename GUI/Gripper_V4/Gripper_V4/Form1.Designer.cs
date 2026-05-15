@@ -38,7 +38,6 @@
             lbl_Baudrate = new Label();
             lbl_Gripper = new Label();
             lbl_Pusher = new Label();
-            btn_CAN_Test = new Button();
             txtb_Gripper_pos = new TextBox();
             txtb_Pusher_pos = new TextBox();
             txtb_Pusher_target = new TextBox();
@@ -139,16 +138,6 @@
             lbl_Pusher.TabIndex = 9;
             lbl_Pusher.Text = "Pusher";
             // 
-            // btn_CAN_Test
-            // 
-            btn_CAN_Test.Location = new Point(698, 120);
-            btn_CAN_Test.Name = "btn_CAN_Test";
-            btn_CAN_Test.Size = new Size(75, 23);
-            btn_CAN_Test.TabIndex = 10;
-            btn_CAN_Test.Text = "CANTest";
-            btn_CAN_Test.UseVisualStyleBackColor = true;
-            btn_CAN_Test.Click += btn_CAN_Test_Click;
-            // 
             // txtb_Gripper_pos
             // 
             txtb_Gripper_pos.Location = new Point(94, 340);
@@ -231,7 +220,6 @@
             Controls.Add(txtb_Pusher_target);
             Controls.Add(txtb_Pusher_pos);
             Controls.Add(txtb_Gripper_pos);
-            Controls.Add(btn_CAN_Test);
             Controls.Add(lbl_Pusher);
             Controls.Add(lbl_Gripper);
             Controls.Add(lbl_Baudrate);
@@ -262,7 +250,6 @@
         private Label lbl_Baudrate;
         private Label lbl_Gripper;
         private Label lbl_Pusher;
-        private Button btn_CAN_Test;
         private TextBox txtb_Gripper_pos;
         private TextBox txtb_Pusher_pos;
         private TextBox txtb_Pusher_target;

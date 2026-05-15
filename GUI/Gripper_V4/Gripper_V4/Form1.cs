@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,21 +8,25 @@ namespace Gripper_V4
 {
     public partial class Form1 : Form
     {
+        // 내부 모니터링 루프가 포함된 Gripper 클래스 사용
         Gripper gripper = new Gripper(new USB2CAN());
 
-        // 백그라운드 작업을 제어하기 위한 토큰
-        private CancellationTokenSource _cts_receive;
-        private bool isReceiving = false;
+        // UI 갱신을 위한 전용 타이머 (데이터 수신은 Gripper 내부 Task가 담당)
+        private System.Windows.Forms.Timer uiRefreshTimer = new System.Windows.Forms.Timer();
         private bool isConnected = false;
 
         public Form1()
         {
             InitializeComponent();
 
-            // Gripper 클래스의 이벤트를 Form의 Log 메서드와 연결
+            // Gripper 클래스에서 올라오는 이벤트를 rtb_Console에 연결
             gripper.OnMessageReceived += (msg) => {
-                Log(msg + "\r\n", true);
+                Log("[GRIPPER]:"+ msg + "\r\n", true);
             };
+
+            // UI 갱신 타이머 설정
+            uiRefreshTimer.Interval = 50;
+            uiRefreshTimer.Tick += (s, e) => UpdateUIStatus();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,24 +40,6 @@ namespace Gripper_V4
             txtb_Pusher_target.Text = "0";
             cb_PortName.DropDown += (s, ev) => UpdatePortList();
         }
-
-
-        private void Log(string message, bool showTime)
-        {
-            if (rtb_Console.InvokeRequired)
-            {
-                rtb_Console.BeginInvoke(new Action(() => Log(message, showTime)));
-                return;
-            }
-
-            if (showTime)
-            {
-                rtb_Console.AppendText($"[{DateTime.Now:HH:mm:ss}] ");
-            }
-            rtb_Console.AppendText(message);
-            rtb_Console.ScrollToCaret();
-        }
-
 
         private void UpdatePortList()
         {
@@ -72,90 +57,35 @@ namespace Gripper_V4
                 string port = cb_PortName.SelectedItem.ToString().Split('[', ']')[1];
                 int baud = int.Parse(cb_Baudrate.SelectedItem.ToString());
 
+                // gripper.Connect 내부에서 자동으로 StartMonitoring()이 호출됨
                 if (gripper.Connect(port, baud))
                 {
                     isConnected = true;
                     btn_Connect.Text = "Disconnect";
                     btn_Connect.BackColor = Color.LightGreen;
 
-                    // 연결 시 자동으로 수신 시작을 원하면 아래 주석 해제
-                    // btn_Receive_Click(null, null);
+                    // UI 갱신 타이머 시작
+                    uiRefreshTimer.Start();
+                    Log($"[O] Connected to {port}\r\n", true);
                 }
             }
             else
             {
-                btn_Receive_Stop(); // 수신 중지 우선
+                // UI 타이머 중지 및 장치 해제 (Disconnect 내부에서 Task 종료 처리함)
+                uiRefreshTimer.Stop();
                 gripper.Disconnect();
+
                 isConnected = false;
                 btn_Connect.Text = "Connect";
                 btn_Connect.BackColor = SystemColors.Control;
                 lbl_Status.Text = "연결 끊김";
-            }
-        }
-
-        // --- Task.Run 기반 실시간 수신 버튼 ---
-        private void btn_Receive_Click(object sender, EventArgs e)
-        {
-            if (!isConnected) return;
-
-            if (!isReceiving)
-            {
-                // 수신 시작
-                _cts_receive = new CancellationTokenSource();
-                isReceiving = true;
-                btn_Receive.Text = "Stop Recv";
-                btn_Receive.BackColor = Color.Orange;
-
-                // 백그라운드 태스크 시작
-                Task.Run(() => ReceiveLoop(_cts_receive.Token));
-            }
-            else
-            {
-                btn_Receive_Stop();
-            }
-        }
-
-        private void btn_Receive_Stop()
-        {
-            _cts_receive?.Cancel();
-            isReceiving = false;
-            btn_Receive.Text = "Start Recv";
-            btn_Receive.BackColor = SystemColors.Control;
-        }
-
-
-        // 현재 데이터 가져오는 함수 (필수) - UI 쪽만 제거하면 됨, 위쪽 Task.Run() 사용
-        private async Task ReceiveLoop(CancellationToken token)
-        {
-            try
-            {
-                while (!token.IsCancellationRequested)
-                {
-                    // 1. 데이터 해석 (백그라운드 스레드에서 실행)
-                    gripper.ParseIncomingData();
-
-                    // 2. UI 갱신 (UI 스레드로 대리 호출)
-                    this.Invoke(new Action(() =>
-                    {
-                        UpdateUIStatus();
-                    }));
-
-                    // 3. 약 50ms 대기 (타이머 역할)
-                    await Task.Delay(50, token);
-                }
-            }
-            catch (TaskCanceledException) { /* 정상 종료 */ }
-            catch (Exception ex)
-            {
-                this.Invoke(new Action(() =>
-                {
-                    lbl_Status.Text = "에러: " + ex.Message;
-                }));
+                Log("[ ] Disconnected\r\n", true);
             }
         }
 
         private void UpdateUIStatus()
         {
+            // Gripper 내부 Task에 의해 실시간 갱신된 값을 화면에 뿌려주기만 함
             txtb_Gripper_pos.Text = gripper.CurrentGripperPos.ToString();
             txtb_Pusher_pos.Text = gripper.CurrentPusherPos.ToString();
 
@@ -171,7 +101,23 @@ namespace Gripper_V4
             }
         }
 
-        // --- 기존 제어 버튼 로직 ---
+        private void Log(string message, bool showTime)
+        {
+            if (rtb_Console.InvokeRequired)
+            {
+                rtb_Console.BeginInvoke(new Action(() => Log(message, showTime)));
+                return;
+            }
+
+            if (showTime)
+            {
+                rtb_Console.AppendText($"[{DateTime.Now:HH:mm:ss}] ");
+            }
+            rtb_Console.AppendText(message);
+            rtb_Console.ScrollToCaret();
+        }
+
+        // --- 모터 제어 버튼 (이전과 동일) ---
         private void btn_Gripper_Move_Click(object sender, EventArgs e)
         {
             if (ushort.TryParse(txtb_Gripper_target.Text, out ushort pos))
@@ -181,44 +127,52 @@ namespace Gripper_V4
         private void btn_Pusher_Move_Click(object sender, EventArgs e)
         {
             if (ushort.TryParse(txtb_Pusher_target.Text, out ushort pos))
-                gripper.MovePusher(pos, 100);
+                gripper.MovePusher(pos, 200);
         }
 
         private void btn_Gripper_Click(object sender, EventArgs e)
         {
-            if (btn_Gripper.Text == "Close") { gripper.MoveGripper(3400, 100); btn_Gripper.Text = "Open"; }
-            else { gripper.MoveGripper(2000, 100); btn_Gripper.Text = "Close"; }
+            if (btn_Gripper.Text == "Close") { gripper.MoveGripper(Gripper.gripper_close_limit, 100); btn_Gripper.Text = "Open"; }
+            else { gripper.MoveGripper(Gripper.gripper_open_limit, 100); btn_Gripper.Text = "Close"; }
         }
 
         private void btn_Pusher_Click(object sender, EventArgs e)
         {
-            if (btn_Pusher.Text == "Push") { gripper.MovePusher(1000, 100); btn_Pusher.Text = "Release"; }
-            else { gripper.MovePusher(0, 100); btn_Pusher.Text = "Push"; }
-        }
-
-        private void btn_CAN_Test_Click(object sender, EventArgs e)
-        {
-
-
-
+            if (btn_Pusher.Text == "Push") { gripper.MovePusher(Gripper.pusher_push_limit, 200); btn_Pusher.Text = "Release"; }
+            else { gripper.MovePusher(Gripper.pusher_release_limit, 200); btn_Pusher.Text = "Push"; }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isReceiving)
-            {
-                _cts_receive?.Cancel();
-                // 비동기 작업이 정리될 시간을 아주 짧게 부여
-                Thread.Sleep(50);
-            }
-
-            // 2. 시리얼 포트 및 CAN 채널 닫기
+            // 폼 종료 시 시리얼 포트 및 내부 Task 안전 종료
+            uiRefreshTimer.Stop();
             if (isConnected)
             {
                 gripper.Disconnect();
-                isConnected = false;
-                Console.WriteLine("System Safely Terminated.");
             }
         }
+
+        private void btn_Receive_Click(object sender, EventArgs e)
+        {
+            if (gripper.IsConnected)
+            {
+                // 1. PC에서 나가는 요청 패킷 로그 (0x10 = GET_STATE)
+                Log("[TX] Request State (CMD: 0x10)\r\n", true);
+
+                // 2. 아두이노에 요청
+                gripper.RequestState();
+            }
+            else
+            {
+                Log("[X] Not Connected\r\n", true);
+            }
+        }
+
+        //private void btn_CAN_Test_Click(object sender, EventArgs e)
+        //{
+
+
+
+        //}
     }
 }

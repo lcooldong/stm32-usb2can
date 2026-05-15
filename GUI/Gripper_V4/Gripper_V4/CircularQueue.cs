@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,12 @@ namespace Gripper_V4
         private int count;
 
         public int Capacity => buffer.Length;
-        public int Count => count;
+        public int Count
+        {
+            get { lock (_lock) return count; }
+        }
+
+        private readonly object _lock = new object();
 
         public CircularQueue(int capacity)
         {
@@ -28,13 +34,14 @@ namespace Gripper_V4
 
         public void Enqueue(T item)
         {
-            if (item == null) return; // Avoid inserting null
-            buffer[tail] = item;
-            tail = (tail + 1) % Capacity;
-            if (count == Capacity)
-                head = (head + 1) % Capacity;
-            else
-                count++;
+            lock (_lock)
+            {
+                if (item == null) return;
+                buffer[tail] = item;
+                tail = (tail + 1) % Capacity;
+                if (count == Capacity) head = (head + 1) % Capacity;
+                else count++;
+            }
         }
 
         public T Dequeue()
@@ -44,6 +51,18 @@ namespace Gripper_V4
             head = (head + 1) % Capacity;
             count--;
             return item;
+        }
+
+        public T? DequeueSafe()
+        {
+            lock (_lock)
+            {
+                if (count == 0) return default;
+                T item = buffer[head];
+                head = (head + 1) % Capacity;
+                count--;
+                return item;
+            }
         }
 
         public T Peek()
