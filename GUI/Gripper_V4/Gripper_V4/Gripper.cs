@@ -20,7 +20,7 @@ namespace Gripper_V4
         public const ushort gripper_close_limit  = 2040;
         public const ushort gripper_open_limit   = 1200;
 
-        public const ushort pusher_push_limit    = 2200;
+        public const ushort pusher_push_limit    = 2100;
         public const ushort pusher_release_limit = 3800;
 
 
