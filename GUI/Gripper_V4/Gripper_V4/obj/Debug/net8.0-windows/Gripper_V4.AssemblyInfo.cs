@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gripper_V4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e89a3444b00485657a8c253ec160a0ad72a5f255")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a1b7f349333eb54043601e70ccf614016bcf85d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Gripper_V4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Gripper_V4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

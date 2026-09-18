@@ -1821,23 +1821,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\n_coo\\.nuget\\packages\\": {},
+    "C:\\Users\\ncool\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper_V4.csproj",
+      "projectUniqueName": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper_V4.csproj",
       "projectName": "Gripper_V4",
-      "projectPath": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper_V4.csproj",
-      "packagesPath": "C:\\Users\\n_coo\\.nuget\\packages\\",
-      "outputPath": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\obj\\",
+      "projectPath": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper_V4.csproj",
+      "packagesPath": "C:\\Users\\ncool\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\n_coo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ncool\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1846,6 +1846,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1898,7 +1899,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\",
+  "WorkspaceRootPath": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|d:\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|d:\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\gripper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|c:\\users\\ncool\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\gripper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\gripper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|d:\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|c:\\users\\ncool\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|c:\\users\\ncool\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|d:\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\usb2can.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|c:\\users\\ncool\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\usb2can.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\usb2can.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|d:\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\circularqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|c:\\users\\ncool\\github\\stm32-usb2can\\gui\\gripper_v4\\gripper_v4\\circularqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2DF4EE3-2292-46F8-90EC-AD7E5BBCCDCC}|Gripper_V4\\Gripper_V4.csproj|solutionrelative:gripper_v4\\circularqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -40,9 +40,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "CircularQueue.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\CircularQueue.cs",
+              "DocumentMoniker": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\CircularQueue.cs",
               "RelativeDocumentMoniker": "Gripper_V4\\CircularQueue.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\CircularQueue.cs",
+              "ToolTip": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\CircularQueue.cs",
               "RelativeToolTip": "Gripper_V4\\CircularQueue.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAcwBsAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -52,9 +52,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "USB2CAN.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\USB2CAN.cs",
+              "DocumentMoniker": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\USB2CAN.cs",
               "RelativeDocumentMoniker": "Gripper_V4\\USB2CAN.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\USB2CAN.cs",
+              "ToolTip": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\USB2CAN.cs",
               "RelativeToolTip": "Gripper_V4\\USB2CAN.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAEwCMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -62,13 +62,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs",
               "RelativeDocumentMoniker": "Gripper_V4\\Form1.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs",
+              "ToolTip": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs",
               "RelativeToolTip": "Gripper_V4\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-14T11:24:35.221Z",
               "EditorCaption": ""
@@ -77,9 +77,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Gripper_V4\\Form1.Designer.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.Designer.cs",
               "RelativeToolTip": "Gripper_V4\\Form1.Designer.cs",
               "ViewState": "AgIAALEAAAAAAAAAAAApwMYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -89,10 +89,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Form1.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs",
               "RelativeDocumentMoniker": "Gripper_V4\\Form1.cs",
               "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Form1.cs [\uB514\uC790\uC778]",
-              "RelativeToolTip": "Gripper_V4\\Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-14T11:03:29.855Z"
             }
@@ -104,13 +103,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Gripper.cs",
-              "DocumentMoniker": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper.cs",
+              "DocumentMoniker": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper.cs",
               "RelativeDocumentMoniker": "Gripper_V4\\Gripper.cs",
-              "ToolTip": "D:\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper.cs",
+              "ToolTip": "C:\\Users\\ncool\\Github\\stm32-usb2can\\GUI\\Gripper_V4\\Gripper_V4\\Gripper.cs",
               "RelativeToolTip": "Gripper_V4\\Gripper.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAUwHMAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAADwvx8AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-14T11:29:23.325Z",
               "EditorCaption": ""
